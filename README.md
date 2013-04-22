@@ -1,4 +1,0 @@
-devsite
-=======
-
-Rackspace Developer Site
