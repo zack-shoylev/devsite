@@ -38,7 +38,7 @@ If any of these complaints ring true, _Supernova_ is for you. _Supernova_ manage
 **Installing Supernova**
 There is a few prerequisites to using _Supernova_, and one is having rackspace-novaclient already installed. If you have yet to set this up, feel free to jump back to this article to get that situated, then you can come back here and proceed with the _Supernova_ configuration.
 
-[box type="info"]This post is being written on OSX 10.8.1 using Python 2.7.3[/box]
+This post is being written on OSX 10.8.1 using Python 2.7.3
 
     
     [dubsquared@localshake ~]$ git clone git://github.com/rackerhacker/supernova.git
