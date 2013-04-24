@@ -2,10 +2,8 @@
 comments: true
 date: 2012-10-01 16:44:06
 layout: post
-slug: mailgun-and-python
 title: Using Mailgun and Python to parse email for your applications
 author: Hart Hoover
-wordpress_id: 408
 categories:
 - Cloud Servers
 - Mailgun

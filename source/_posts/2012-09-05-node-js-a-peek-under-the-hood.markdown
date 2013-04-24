@@ -3,10 +3,8 @@ comments: true
 sharing: true
 date: 2012-09-05 08:00:22
 layout: post
-slug: node-js-a-peek-under-the-hood
 title: node.js - a peek under the hood
 author: Wayne Walls
-wordpress_id: 114
 categories:
 - Cloud Servers
 ---

@@ -3,9 +3,7 @@ comments: true
 date: 2012-10-17 13:06:59
 layout: post
 author: "Hart Hoover"
-slug: video-openstack-summit-day-2
 title: 'Video: OpenStack Summit Day 2'
-wordpress_id: 562
 categories:
 - OpenStack
 ---

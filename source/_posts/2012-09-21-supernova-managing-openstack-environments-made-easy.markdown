@@ -2,10 +2,8 @@
 comments: true
 date: 2012-09-21 10:20:53
 layout: post
-slug: supernova-managing-openstack-environments-made-easy
 title: 'Supernova:  Managing OpenStack Environments Made Easy'
 author: Wayne Walls
-wordpress_id: 282
 categories:
 - Cloud Servers
 - OpenStack

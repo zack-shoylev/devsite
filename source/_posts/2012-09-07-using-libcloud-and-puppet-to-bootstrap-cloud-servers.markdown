@@ -3,10 +3,8 @@ comments: true
 sharing: true
 date: 2012-09-07 08:00:27
 layout: post
-slug: using-libcloud-and-puppet-to-bootstrap-cloud-servers
 title: Using libcloud and Puppet to bootstrap Cloud Servers
 author: Hart Hoover
-wordpress_id: 184
 categories:
 - Cloud Servers
 - Puppet

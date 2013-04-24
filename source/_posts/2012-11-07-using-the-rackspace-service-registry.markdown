@@ -4,7 +4,6 @@ title: "Using the Rackspace Service Registry"
 date: 2012-11-07 22:33
 comments: true
 author: "Hart Hoover"
-sharing: true
 categories: [Service Registry]
 ---
 {% img featured /images/rsr_logo.png Rackspace Service Registry %}

@@ -2,10 +2,8 @@
 comments: true
 date: 2012-10-09 14:35:59
 layout: post
-slug: puppetconf-2012
 title: PuppetConf 2012 videos are live!
 author: Hart Hoover
-wordpress_id: 454
 categories:
 - OpenStack
 - Puppet

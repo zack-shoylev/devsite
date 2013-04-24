@@ -2,10 +2,8 @@
 comments: true
 date: 2012-10-30 15:24:25
 layout: post
-slug: cn-api
 title: 'Cloud Networks: Example Architecture and API'
 author: Hart Hoover
-wordpress_id: 590
 categories:
 - Cloud Networks
 ---

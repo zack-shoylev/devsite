@@ -2,9 +2,7 @@
 comments: true
 date: 2012-10-16 13:00:14
 layout: post
-slug: rate-limiting-with-repose-the-restful-proxy-service-engine
 title: Rate Limiting with Repose, the Restful Proxy Service Engine
-wordpress_id: 459
 author: Chad Lung
 categories:
 - General

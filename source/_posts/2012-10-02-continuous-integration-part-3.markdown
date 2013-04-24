@@ -2,10 +2,8 @@
 comments: true
 date: 2012-10-02 08:00:41
 layout: post
-slug: continuous-integration-part-3
 title: Continuous Integration and Rackspace, part 3
 author: Jeff Ness
-wordpress_id: 394
 categories:
 - Cloud Servers
 ---

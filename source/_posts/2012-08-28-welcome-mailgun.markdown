@@ -3,10 +3,8 @@ comments: true
 sharing: true
 date: 2012-08-28 08:52:28
 layout: post
-slug: welcome-mailgun
 author: Hart Hoover
 title: Welcome, Mailgun!
-wordpress_id: 68
 categories:
 - Mailgun
 ---

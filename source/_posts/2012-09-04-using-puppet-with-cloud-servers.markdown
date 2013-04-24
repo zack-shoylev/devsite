@@ -3,10 +3,8 @@ comments: true
 sharing: true
 date: 2012-09-04 08:47:56
 layout: post
-slug: using-puppet-with-cloud-servers
 title: Using Puppet with Cloud Servers
 author: Hart Hoover
-wordpress_id: 91
 categories:
 - Cloud Servers
 - Puppet

@@ -2,10 +2,8 @@
 comments: true
 date: 2012-10-30 14:07:50
 layout: post
-slug: mailgun-capistrano
 title: Send emails using Mailgun from your Capistrano recipes
 author: Hart Hoover
-wordpress_id: 597
 categories:
 - Mailgun
 ---

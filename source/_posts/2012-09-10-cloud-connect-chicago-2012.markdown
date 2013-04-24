@@ -2,10 +2,8 @@
 comments: true
 date: 2012-09-10 08:00:36
 layout: post
-slug: cloud-connect-chicago-2012
 title: 'Cloud Connect 2012: Chicago'
 author: Hart Hoover
-wordpress_id: 222
 categories:
 - General
 ---

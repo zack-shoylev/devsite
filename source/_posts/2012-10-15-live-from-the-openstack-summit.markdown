@@ -2,10 +2,8 @@
 comments: true
 date: 2012-10-15 11:12:37
 layout: post
-slug: live-from-the-openstack-summit
 title: Live from the OpenStack Summit
 author: Hart Hoover
-wordpress_id: 527
 categories:
 - OpenStack
 ---

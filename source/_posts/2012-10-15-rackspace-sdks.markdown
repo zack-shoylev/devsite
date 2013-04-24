@@ -2,10 +2,8 @@
 comments: true
 date: 2012-10-15 14:18:51
 layout: post
-slug: rackspace-sdks
 title: Rackspace announces Open Cloud SDKs
 author: Wayne Walls
-wordpress_id: 523
 categories:
 - Cloud Files
 - Cloud Servers

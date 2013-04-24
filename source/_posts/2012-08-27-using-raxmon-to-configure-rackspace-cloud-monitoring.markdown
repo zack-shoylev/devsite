@@ -4,9 +4,7 @@ sharing: true
 date: 2012-08-27 15:02:25
 layout: post
 author: Wayne Walls
-slug: using-raxmon-to-configure-rackspace-cloud-monitoring
 title: Using raxmon to configure Rackspace Cloud Monitoring
-wordpress_id: 35
 categories:
 - Cloud Monitoring
 ---

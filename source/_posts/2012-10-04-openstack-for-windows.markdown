@@ -2,10 +2,8 @@
 comments: true
 date: 2012-10-04 09:00:17
 layout: post
-slug: openstack-for-windows
 title: 'OpenStack for Windows Users: So it begins…'
 author: Duan van der Westhuizen
-wordpress_id: 399
 categories:
 - OpenStack
 ---
