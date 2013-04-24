@@ -2,18 +2,16 @@
 comments: true
 date: 2012-09-26 08:00:43
 layout: post
-slug: openstack-folsom-looking-at-the-numbers
 title: 'OpenStack Folsom: Looking at the numbers'
 author: Hart Hoover
-wordpress_id: 372
 categories:
 - OpenStack
 ---
 
 [Bitergia](http://bitergia.com) has an excellent [post](http://bitergia.wordpress.com/2012/09/22/preview-of-the-analysis-of-the-upcoming-openstack-release/) on statistics for Folsom, the upcoming release for OpenStack. <!-- more -->The OpenStack [Summit](http://www.openstack.org/summit/san-diego-2012/) is only a few weeks away, and development has been accelerating toward release. Here is a comparison of a graph for Folsom from Bitergia to an Essex graph from [ReadWriteWeb](http://www.readwriteweb.com/cloud/2012/04/who-wrote-openstack-essex-a-de.php):
 
-![](a/2012-09-26-openstack-folsom-looking-at-the-numbers/essex.png)
-![](a/2012-09-26-openstack-folsom-looking-at-the-numbers/stat1.png)
+{% img center /blog/images/2012-09-26-openstack-folsom-looking-at-the-numbers/essex.png %}
+{% img center /blog/images/2012-09-26-openstack-folsom-looking-at-the-numbers/stat1.png %}
 
 While Rackspace still leads in committing code to OpenStack, Red Hat is surging as it looks to [productize](http://www.redhat.com/about/news/archive/2012/9/the-process-to-make-openstack-a-product) the OpenStack project. HP and Piston Cloud have standardized on earlier versions of OpenStack for their cloud offerings.
 

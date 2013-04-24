@@ -2,10 +2,8 @@
 comments: true
 date: 2012-10-09 08:00:51
 layout: post
-slug: openstack-for-windows-users-installing-linux
 title: 'OpenStack for Windows Users: Installing Linux'
 author: Duan van der Westhuizen
-wordpress_id: 438
 categories:
 - OpenStack
 ---
@@ -37,14 +35,14 @@ I created a VM in VirtualBox and assigned the VM 4 GB of RAM and gave it 8 GB of
 There are various steps you have to go through when installing Ubuntu. The screenshot below shows these steps:
 
 
-![](a/2012-10-09-openstack-for-windows-users-installing-linux/ubuntu_installer.jpg)
+{% img center blog/images/2012-10-09-openstack-for-windows-users-installing-linux/ubuntu_installer.jpg %}
 
 
 Most of the install options were fairly familiar. Some things that were foreign to me include:
 
 _Users and Passwords:_ Linux uses a user called ”root.” This is the user with full admin access to the server.
 
-[box style="blue"]This basically mirrors the ”Administrator” user for Windows. You need to create a separate user that you can use for day-to-day tasks as part of normal security best practice.[/box]
+This basically mirrors the ”Administrator” user for Windows. You need to create a separate user that you can use for day-to-day tasks as part of normal security best practice.
 
 _Home Directory:_ It prompts if you want to encrypt your home directory. Linux has a very different directory (folder) structure than Windows. One of these directories is called “/home” (note the forward slash instead of the back slash, which is the way Linux directories are named). The home directory is where a user can store their personal files, and also encrypt them if needed to ensure they remain secure. Every user on the server gets a separate directory under “/home.” In my case it is “/home/duanvdw.” I left off encryption.
 
@@ -107,7 +105,7 @@ ext2 and ext4 are file systems, similar to the native Windows FAT and NTFS file 
 
 Up to this point I only installed the core Ubuntu server. The following screen allowed me to select additional packages to install. I selected OpenSSH, Lamp Server and Virtual Machine Host.
 
-![](a/2012-10-09-openstack-for-windows-users-installing-linux/software_selection.jpg)
+{% img center blog/images/2012-10-09-openstack-for-windows-users-installing-linux/software_selection.jpg %}
 
 **OpenSSH**: This component runs on the server and listens for connections over the SSH protocol. With this component running you can remotely control your server as well as transfer files to the server. Similar to Terminal Server on Windows, which is needed to accept Remote Desktop Connections.
 
@@ -131,6 +129,6 @@ This was a trickier than expected. There’s no Windows GUI anymore, so I couldn
 
 I now had this screen in front of me:
 
-![](a/2012-10-09-openstack-for-windows-users-installing-linux/login.jpg)
+{% img center blog/images/2012-10-09-openstack-for-windows-users-installing-linux/login.jpg %}
 
 Next steps: figure out how to login, and then download and install OpenStack. No doubt there will be many more lessons to learn as I continue this project. Thanks for reading!

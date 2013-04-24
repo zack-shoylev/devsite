@@ -34,7 +34,7 @@ upgraded to 1.2 so we can, among other things, take an advantage of an
 optimized and more efficient [tombstone removal](http://www.datastax.com/dev/blog/tombstone-removal-improvement-in-1-2)
 and a great new feature called [virtual nodes](http://www.datastax.com/dev/blog/virtual-nodes-in-cassandra-1-2).
 
-<img src="a/2013-03-27-rackspace-service-registry-status-update/vnodes.png" style="display: block; margin-left: auto; margin-right: auto; "/>
+{% img center blog/images/2013-03-27-rackspace-service-registry-status-update/vnodes.png %}
 <p style="text-align: center">Virtual nodes among other things make operations
 such as bootstrap faster and allow users to more easily run Cassandra on
 heterogeneous hardware. Picture taken from http://www.datastax.com.</p>
