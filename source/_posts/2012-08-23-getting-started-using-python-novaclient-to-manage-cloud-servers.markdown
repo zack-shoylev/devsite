@@ -3,10 +3,8 @@ comments: true
 sharing: true
 date: 2012-08-23 08:47:54
 layout: post
-slug: getting-started-using-python-novaclient-to-manage-cloud-servers
-title: 'Getting Started: Using rackspace-novaclient to manage Cloud Servers'
+title: "Getting Started: Using rackspace-novaclient to manage Cloud Servers"
 author: Hart Hoover
-wordpress_id: 13
 categories:
 - Cloud Servers
 ---

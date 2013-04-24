@@ -3,10 +3,8 @@ comments: true
 sharing: true
 date: 2012-08-21 15:23:48
 layout: post
-slug: git-init
-title: git init
+title: "git init"
 author: Wayne Walls
-wordpress_id: 15
 categories:
 - General
 ---
@@ -23,23 +21,11 @@ Part of enabling developers and engineers to succeed on our [OpenStack](http://o
 
 So welcome to devops.rackspace.com, a central location where developers and engineers can find:
 
-
-
-	
-  * A technical focused blog that highlights major wins, cool uses of our products, partner integration, and success stories across the platform
-
-	
-  * CLI tools and SDKs (code snippets, documentation and sample applications)
-
-	
-  * Best practice reference architectures built around real-world solutions
-
-	
-  * An events calendar to help you get face time with the experts posting on this blog
-
-	
-  * Developer and Engineer moderated support forums to allow customers and developers to help each other succeed
-
+* A technical focused blog that highlights major wins, cool uses of our products, partner integration, and success stories across the platform
+* CLI tools and SDKs (code snippets, documentation and sample applications)
+* Best practice reference architectures built around real-world solutions
+* An events calendar to help you get face time with the experts posting on this blog
+* Developer and Engineer moderated support forums to allow customers and developers to help each other succeed
 
 We believe all of this meets the goal of full transparency. This is the first step of many, and it’s the birth of a full-fledged technically focused blog. We established devops.rackspace.com to help developers and engineers build amazing businesses and applications and to empower you to get the job done right.
 
