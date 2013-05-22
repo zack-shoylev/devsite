@@ -143,7 +143,7 @@ or let us know using our new
 
 ### 1. Download and install Vagrant 1.1
 
-Go to http://downloads.vagrantup.com/tags/v1.1.0, find an installer for your
+Go to <http://downloads.vagrantup.com/tags/v1.1.0>, find an installer for your
 operating system, download it and run it.
 
 ### 2. Install vagrant-rackspace Vagrant plugin

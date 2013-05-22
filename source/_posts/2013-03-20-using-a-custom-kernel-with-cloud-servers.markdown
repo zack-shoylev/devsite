@@ -7,6 +7,8 @@ author: Jordan Evans
 categories: 
 - Cloud Servers
 ---
+EDIT: This blog post has been edited! As it turns out, the preseed was stored in a location that didn't always work. Instead, we now decompress the initrd.gz, and add a preseed there. This is a better location, because the Ubuntu installer always looks for it there, even if not told to. We also moved installing the new kernel to the end of the preseed, to be sure it runs all the postinstall scripts. We changed how we remove the 2.6 kernel to specifically catch the version before removing it.
+
 Here at Rackspace on the Cloud Monitoring team, we use Ubuntu 10.04 LTS. We recently purchased some new Dell Poweredge R720 (our older standard hardware wasn't offered anymore) and we found out the new hardware is not supported by the 10.04 default kernel!
 
 Our original workaround was to build the new drivers against the 10.04 2.6 kernel, and load them at install time. At the end of the install, we would then manually install the new kernel, remove the 2.6 kernel, and then reboot. This worked, but it took an awful lot of time.
@@ -83,9 +85,13 @@ $ ls dest/netboot/mini.iso
 Unfortunately, we aren't yet done. We have created an iso that runs off this newer kernel, but it won't install the kernel when used. Lets add a preseed that installs the right kernel (and, remove the old kernel).
 
 ```bash
-$ mkdir tmp/iso
+$ mkdir -p tmp/iso tmp/initrd.d
 $ mount -o loop -t iso9660 dest/netboot/mini.iso tmp/iso
-$ vim tmp/iso/preseed.seed
+$ cp tmp/iso/initrd.gz tmp/
+$ gunzip tmp/initrd.gz
+$ cd tmp/initrd.d
+$ cpio -i --make-directories < ../initrd
+$ vim preseed.cfg
 ```
 
 The preseed file should look something like the following. Everything that is not adding our kernel or removing the 2.6 kernel is from a standard preseed most installers use, and can be customized as much as you like. In the form below, it closely resembles a regular alternate install.
@@ -98,8 +104,6 @@ d-i partman-auto/init_automatically_partition seen false
 d-i base-installer/kernel/override-image string linux-server
 # Only install basic language packs. Let tasksel ask about tasks.
 d-i pkgsel/language-pack-patterns string
-# Install 3.0 kernel 
-d-i pkgsel/include string linux-image-server-lts-backport-oneiric
 # No language support packages.
 d-i pkgsel/install-language-support boolean false
 # Only ask the UTC question if there are other operating systems installed.
@@ -112,13 +116,19 @@ d-i oem-config-udeb/frontend string debconf
 oem-config oem-config/steps multiselect language, timezone, keyboard, user, network, tasks
 # Remove 2.6 kernel 
 d-i preseed/late_command string \
-in-target apt-get remove linux-image-generic linux-generic linux-image-2.6.??-??-generic
+in-target apt-get install -y linux-image-server-lts-backport-oneiric && in-target apt-get remove -y $(echo `expr match "$(in-target dpkg --get-selections | grep linux-image-2.6)" '\(linux-image-2\.6\...-..-server\)'`)
 ```
 
-Lastly, we need to package up our iso so we can use it!
+Lastly, we need to package up our initrd and rebuild the iso so we can use it!
 
 ```bash
-$ mkisofs -o dest/netboot/10.04_custom_kernel.iso -r -J -no-emul-boot -boot-load-size 4 -boot-info-table -b isolinux.bin -c isolinux.cat tmp/iso
+$ find ./ | cpio -H newc -o > ../initrd.gz
+$ cd ..
+# We mounted the iso read only, so make a copy to add the new initrd.gz to
+$ mkdir new_iso
+$ cp -r iso/ new_iso/
+$ cp initrd.gz  new_iso/
+$ mkisofs -o dest/netboot/10.04_custom_kernel.iso -r -J -no-emul-boot -boot-load-size 4 -boot-info-table -b isolinux.bin -c isolinux.cat tmp/new_iso/
 ``` 
 
 And we're done! `dest/netboot/10.04_custom_kernel.iso` contains your new iso that runs off, and installs, a 3.0 kernel.
