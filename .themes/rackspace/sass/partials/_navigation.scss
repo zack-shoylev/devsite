@@ -1,4 +1,4 @@
-/* body > nav {
+body > nav {
   position: relative;
   background-color: $nav-bg;
   @include background($nav-bg-front, $nav-bg-back);
@@ -134,4 +134,3 @@
   a[rel=subscribe-rss]{ @include mask-subscription-nav('rss.png'); }
   a[rel=subscribe-email]{ @include mask-subscription-nav('email.png'); }
 }
-*/
