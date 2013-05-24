@@ -1,0 +1,59 @@
+
+h1,
+h2,
+h3,
+h4 {
+  font-family: 'RobotoRegular', 'HelveticaNeue', 'Helvetica Neue', Helvetica, Arial, san-serif !important;
+}
+
+.blog-index a {
+    color: #a80000 !important;
+    text-decoration: none !important;
+}
+
+article a {
+    color: #a80000 !important;
+    text-decoration: none !important;
+}
+
+aside > section a {
+    color: #a80000 !important;
+    text-decoration: none !important;
+}
+
+article > header h1, h2, h3 {
+    color: #a80000 !important;
+}
+
+article > header > h1 > a {
+  font-family: 'RobotoRegular', 'HelveticaNeue', 'Helvetica Neue', Helvetica, Arial, san-serif !important;
+}
+
+
+aside > section h1 {
+    color: #a80000 !important;
+}
+
+article ul, ol {
+  list-style: disc !important;
+  padding: 0 !important;
+  margin: 0 0 10px 25px !important;
+}
+
+article li {
+  line-height: 20px !important;
+}
+
+article blockquote {
+  padding: 0 0 0 15px !important;
+  margin: 0 0 20px !important;
+  border-left: 5px solid #eeeeee !important;
+}
+
+blockquote p {
+  margin-bottom: 0 !important;
+  font-size: 17.5px !important;
+  font-weight: 300 !important;
+  line-height: 1.25 !important;
+  font-style: italic !important;
+}
