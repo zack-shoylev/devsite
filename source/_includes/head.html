@@ -19,12 +19,23 @@
   {% capture canonical %}{{ site.url }}{% if site.permalink contains '.html' %}{{ page.url }}{% else %}{{ page.url | remove:'index.html' | strip_slash }}{% endif %}{% endcapture %}
   <link rel="canonical" href="{{ canonical }}">
   <link href="/favicon.png" rel="icon">
+
   <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+  <link rel="stylesheet" href="/static/css/normalize.css" type="text/css">
+  <link rel="stylesheet" href="/static/css/styles.css" type="text/css">
+  <link rel="stylesheet" href="/static/css/octo_overrides.css" type="text/css">
+
   <link href="{{ site.subscribe_rss }}" rel="alternate" title="{{site.title}}" type="application/atom+xml">
-  <script src="/javascripts/modernizr-2.0.js"></script>
+
+
   <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
-  <script>!window.jQuery && document.write(unescape('%3Cscript src="./javascripts/lib/jquery.min.js"%3E%3C/script%3E'))</script>
+  <script>window.jQuery || document.write('<script src="/static/js/libs/jquery-1.9.1.min.js"><\/script>')</script>
+  <script src="/static/js/libs/modernizr-2.6.2.min.js" type="text/javascript"></script>
+  <script src="/static/js/libs/bootstrap.min.js" type="text/javascript"></script>
+  <script src="/static/js/plugins.js" type="text/javascript"></script>
+  <script src="/static/js/main.js" type="text/javascript"></script>
   <script src="/javascripts/octopress.js" type="text/javascript"></script>
+
   {% include custom/head.html %}
   {% include google_analytics.html %}
 </head>
