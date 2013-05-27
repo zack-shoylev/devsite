@@ -6,8 +6,12 @@ h4 {
   font-family: 'RobotoRegular', 'HelveticaNeue', 'Helvetica Neue', Helvetica, Arial, san-serif !important;
 }
 
-.blog-index {
-    margin-top: 50px !important;
+header {
+    margin-top: 30px !important;
+}
+
+article > footer {
+    padding-bottom: 10px !important;
 }
 
 .blog-index a {

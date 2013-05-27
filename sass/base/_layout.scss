@@ -43,6 +43,7 @@ $header-padding-bottom: 1.5em !default;
   }
 }
 
+/*
 body {
   -webkit-text-size-adjust: none;
   max-width: $max-width;
@@ -88,7 +89,7 @@ body {
     padding-bottom: $header-padding-bottom;
   }
 }
-
+*/
 #content {
   overflow: hidden;
   > div, > article { width: 100%; }
@@ -113,6 +114,7 @@ aside.sidebar {
 
 .toggle-sidebar { &, .no-sidebar & { display: none; }}
 
+/*
 body.sidebar-footer {
   @media only screen and (min-width: 750px) {
     aside.sidebar{ @include collapse-sidebar; }
@@ -120,6 +122,7 @@ body.sidebar-footer {
   #content { margin-right: 0px; }
   .toggle-sidebar { display: none; }
 }
+*/
 
 @media only screen and (min-width: 550px) {
   body > header { font-size: $header-font-size; }
