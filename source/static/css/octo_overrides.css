@@ -6,6 +6,10 @@ h4 {
   font-family: 'RobotoRegular', 'HelveticaNeue', 'Helvetica Neue', Helvetica, Arial, san-serif !important;
 }
 
+.blog-index {
+    margin-top: 50px !important;
+}
+
 .blog-index a {
     color: #a80000 !important;
     text-decoration: none !important;
