@@ -5,6 +5,9 @@
     {% else %}
       <h1>{% if site.titlecase %}{{ page.title | titlecase }}{% else %}{{ page.title }}{% endif %}</h1>
     {% endif %}
+    <p class="author">
+     {% include post/author.html %}<br />{% if page.categories %}{% include post/categories.html %}{% endif %}
+   </p>
     {% unless page.meta == false %}
       <p class="meta">
         {% include post/date.html %}{{ time }}
