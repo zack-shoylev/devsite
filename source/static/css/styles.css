@@ -9179,9 +9179,7 @@ button.btn.btn-tiny .badge,
 input.btn.btn-tiny .badge {
   top: 0;
 }
-body {
-  padding-top: 61px;
-}
+
 .red {
   color: #a80000;
 }
