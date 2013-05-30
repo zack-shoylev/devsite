@@ -1,10 +1,10 @@
 ---
 layout: post
 title: "Cloud Databases vs. MySQL on Cloud Servers"
-date: 2013-05-24 8:00
+date: 2013-05-24 12:00
 comments: true
 author: Edward Adame
-published: false
+published: true
 categories: 
 - Cloud Servers
 - Cloud Databases
@@ -32,3 +32,5 @@ So, which should *you* choose?
 For lighter workloads and smaller database sizes, my suggestion would be to choose your platform based upon features instead of performance. With Cloud Databases, you don’t have to configure or patch the server. You have the convenience of a control panel interface, and three copies of the database are maintained automatically. This does not, however, protect you from accidentally dropping a table, so you should also perform a scheduled dump to disk from a Cloud Server client as illustrated here: <http://www.rackspace.com/knowledge_center/article/exporting-data>
 
 Cloud Databases also do not allow you to modify the MySQL configuration files or configure master /slave replication, so if you need to run backups on a replicated slave, you must choose a Cloud Server. For heavier workloads and where these limitations are not a factor, Cloud Databases would likely be a better choice.
+
+_Editor's Note: There is some confusion around the "three copies" statement in this post. Cloud Databases uses volumes to store data. Volumes are automatically provisioned on shared Internet Small Computer System Interface (iSCSI) storage area networks (SAN) that provide for increased performance, scalability, availability and manageability. Applications with high I/O demands are performance optimized and data is protected through both local and network RAID-10. Additionally, network RAID provides synchronous replication of volumes with automatic failover and load balancing across available storage clusters. --Hart_
