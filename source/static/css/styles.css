@@ -8339,7 +8339,7 @@ a:active {
   color: #414141;
   font-style: normal;
   font-weight: normal;
-  text-decoration: underline;
+  text-decoration: none;
 }
 a:link.white,
 a:visited.white,
@@ -8347,13 +8347,13 @@ a:active.white {
   color: #FFFFFF;
   font-style: normal;
   font-weight: normal;
-  text-decoration: underline;
+  text-decoration: none;
 }
 a:hover {
   color: #1e82d7;
   font-style: normal;
   font-weight: normal;
-  text-decoration: underline;
+  text-decoration: none;
 }
 a:hover.white {
   color: #FFFFFF;
@@ -8362,7 +8362,7 @@ a:hover.white {
   /* Fallback */
 
   text-shadow: 0 1px 2px rgba(0, 0, 0, 0.5);
-  text-decoration: underline;
+  text-decoration: none;
 }
 /************************************************************************
 ************************************************************************
@@ -9179,7 +9179,11 @@ button.btn.btn-tiny .badge,
 input.btn.btn-tiny .badge {
   top: 0;
 }
-
+/*
+body {
+  padding-top: 61px;
+}
+*/
 .red {
   color: #a80000;
 }
@@ -9270,12 +9274,7 @@ FORMS
 /*********************************************************
 NAVBAR
 *********************************************************/
-.navbar {
-  /*********************************************************
-    DROPDOWN
-    *********************************************************/
 
-}
 .navbar .navbar-inner .container {
   height: 60px;
   padding-top: 10px;
@@ -9285,9 +9284,7 @@ NAVBAR
   font-family: 'RobotoCondensedBold', 'HelveticaNeue', 'Helvetica Neue', Helvetica, Arial, san-serif;
   text-transform: uppercase;
 }
-.navbar .navbar-inner .container .nav-collapse .nav > li > a {
-  line-height: 20px;
-}
+
 .navbar .dropdown-menu a {
   text-decoration: none;
 }
@@ -9714,19 +9711,21 @@ SERVICES
   letter-spacing: .01em;
   margin: 0 0 1em 0;
 }
-#services-content .tab-pane#services-rackspace div.row-fluid {
+
+#services-content div.row-fluid {
   padding: 20px 0;
 }
-#services-content .tab-pane#services-rackspace div.row-fluid > div .product {
+#services-content div.row-fluid > div .product {
   padding-bottom: 30px;
 }
-#services-content .tab-pane#services-rackspace div.row-fluid > div .logo {
+#services-content div.row-fluid > div .logo {
   float: left;
   margin-right: 10px;
   width: 40px;
   height: 40px;
 }
-#services-content .tab-pane#services-rackspace div.row-fluid > div .description h5 a {
+#services-content div.row-fluid > div .description h5 a {
+  font-family: 'RobotoLight', 'HelveticaNeue', 'Helvetica Neue', Helvetica, Arial, san-serif;
   text-decoration: none;
   font-weight: 800;
 }
@@ -9737,35 +9736,7 @@ SERVICES
 /************************************
 BLOG
 ************************************/
-#home-blog {
-  border: 3px solid #a80000;
-  border-width: 3px 0;
-  padding: 30px 0;
-  position: relative;
-}
-#home-blog .section-header {
-  position: absolute;
-  top: 5px;
-  right: 0;
-  width: 100%;
-  display: none;
-}
-#home-blog .section-header h1 {
-  font-size: 15px;
-  margin: 0;
-  padding: 0;
-  line-height: 1em;
-  text-align: right;
-}
-#home-blog .section-header h1 a {
-  position: static;
-  float: none;
-  text-transform: uppercase;
-  font-size: 15px;
-  color: #a80000;
-  text-decoration: none;
-  font-family: 'RobotoCondensedBold', 'HelveticaNeue', 'Helvetica Neue', Helvetica, Arial, san-serif;
-}
+
 #home-blog .blog-article {
   margin-bottom: 0;
   padding-bottom: 0;
@@ -10386,4 +10357,122 @@ FOOTER
   font-size: 11px;
   line-height: 1.4em;
   margin-top: 20px 0;
+}
+
+/*
+  Jesse added classes
+*/
+
+.icon_wrap {
+  display: block;
+  height: 50px;
+}
+
+.oss_blurbs {
+  text-align: center !important;
+}
+
+.oss_blurbs h3, .oss_blurbs h4, .oss_blurbs p {
+  text-align: center !important;
+}
+
+.highlighter a {
+  color: #a80000 !important;
+}
+
+.grey_bg {
+  background-color: #eeeeee;
+}
+
+.hero-unit {
+  background: #f6f6f6 url(../img/blueprint.png) repeat;
+}
+
+.hero-unit h1, .hero-unit p {
+  text-align: center !important;
+}
+
+.hero-unit .hero-buttons {
+  text-align: center !important;
+  margin-top: 20px;
+  border-bottom: 0;
+}
+
+.hero-unit .hero-buttons a {
+  font-family: 'RobotoLight', 'HelveticaNeue', 'Helvetica Neue', Helvetica, Arial, san-serif;
+  font-size: 1.4em;
+  text-decoration: none;
+  line-height: 1em;
+  padding: 10px 25px 5px;
+  font-weight: 400;
+}
+
+.sdk-ent {
+  margin-bottom: 15px;
+}
+
+
+.lang-name {
+  display: inline-block;
+  margin-right: 22px;
+  padding-bottom: 0px;
+  margin-bottom: 0px;
+  line-height: 26px;
+}
+
+.sdk-ent dl dt {
+  border-bottom: 1px solid #d2d2d2;
+  margin-bottom: 10px;
+  font-family: 'RobotoCondensedBold', 'HelveticaNeue', 'Helvetica Neue', Helvetica, Arial, san-serif;
+  text-transform: uppercase;
+}
+.sdk-ent dl dd {
+  color: #4c4c4c;
+  font-size: 14px;
+  line-height: 140%;
+  letter-spacing: .01em;
+  margin: 0 0 .5em 0;
+}
+.sdk-ent dl dd h3 {
+  color: #4c4c4c;
+  font-size: 18px;
+  font-weight: 200;
+  line-height: 140%;
+  letter-spacing: .01em;
+  margin: 0 0 1em 0;
+  margin: 0;
+  padding: 0;
+}
+.sdk-ent dl dd h4 {
+  color: #4c4c4c;
+  font-size: 16px;
+  line-height: 140%;
+  letter-spacing: .01em;
+  margin: 0 0 1em 0;
+  margin: 0;
+  padding: 0;
+}
+.sdk-ent dl dd a {
+  text-decoration: none;
+  color: #a80000;
+}
+.sdk-ent dl dd p {
+  color: #4c4c4c;
+  font-size: 14px;
+  line-height: 140%;
+  letter-spacing: .01em;
+  margin: 0 0 1em 0;
+}
+
+.sdk-ent dl {
+  padding-top: 10px;
+  padding-bottom: 10px;
+}
+
+.sdk-ent hr {
+  color: #a80000;
+  background-color: #a80000;
+  height: 3px;
+  margin: 5px 0;
+
 }
