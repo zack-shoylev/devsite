@@ -9323,6 +9323,7 @@ HOMEPAGE
 ************************************/
 .section-header {
   margin-bottom: 10px;
+  margin-top: 20px;
 }
 .section-header .section-title {
   font-family: 'RobotoCondensedBold', 'HelveticaNeue', 'Helvetica Neue', Helvetica, Arial, san-serif;
@@ -10476,3 +10477,23 @@ FOOTER
   margin: 5px 0;
 
 }
+
+/* ribbon */
+
+.redribbon {
+    background: url(../img/ribbon.png) no-repeat center left;
+    position: fixed;
+    bottom: 35px;
+    right: 0;
+    padding : 0 20px;
+    height : 60px;
+    line-height: 60px;
+    font-weight: bold;
+}
+
+.redribbon a {
+    color: white;
+    font-family: 'RobotoCondensedBold', 'HelveticaNeue', 'Helvetica Neue', Helvetica, Arial, san-serif;
+    font-size: 1.2em;
+}
+
