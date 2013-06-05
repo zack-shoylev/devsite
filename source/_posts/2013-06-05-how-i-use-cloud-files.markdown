@@ -166,3 +166,5 @@ I personally appreciate that these libraries are open source.
 To wrap up, I'll say that I'm still a happy Rackspace customer, and I'm
 encouraged by the positive activity that I see to make their services more
 accessible to developers.
+
+_Brad Montgomery is a software developer and entrepreneur in Memphis, TN. He has predominantly worked on web-based products, and is the co-founder of Work for Pie — a company that believes it can find a better way for Companies to recruit software developers. Brad believes in an agile-inspired approach to work, and he prefers open source tools. He has built a number of products using Python and Django, though he fully believes in using the right tool for the job (whether that’s python, ruby, javascript, C, or a bash script). Brad lives in Bartlett, TN with his wonder wife and two amazing daughters (both of whom are growing up way to quickly!)._
