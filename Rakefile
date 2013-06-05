@@ -113,7 +113,6 @@ task :new_post, :title do |t, args|
     post.puts "author: YOUR_NAME_HERE"
     post.puts "published: false"
     post.puts "categories: "
-    post.puts "- Cloud Servers
     post.puts "---"
   end
 end
