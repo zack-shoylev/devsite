@@ -2,7 +2,7 @@
 #      Main Configs       #
 # ----------------------- #
 
-url: http://developer.rackspace.com/blog
+url: http://developer.rackspace.com
 title: Rackspace Developer Center
 subtitle: Empowering developers to successfully consume and build on the Rackspace Open Cloud.
 author:
@@ -16,7 +16,7 @@ description:
 date_format: "ordinal"
 
 # RSS / Email (optional) subscription links (change if using something like Feedburner)
-subscribe_rss: /atom.xml
+subscribe_rss: /blog/atom.xml
 subscribe_email:
 # RSS feeds can list your email address if you like
 email:
@@ -37,7 +37,7 @@ markdown: rdiscount
 pygments: false # default python pygments have been replaced by pygments.rb
 
 paginate: 10          # Posts per page on the blog index
-pagination_dir: /  # Directory base for pagination URLs eg. /blog/page/2/
+pagination_dir: /blog  # Directory base for pagination URLs eg. /blog/page/2/
 recent_posts: 5       # Posts in the sidebar Recent Posts section
 excerpt_link: "Continue Reading &rarr;"  # "Continue reading" link text at the bottom of excerpted articles
 
