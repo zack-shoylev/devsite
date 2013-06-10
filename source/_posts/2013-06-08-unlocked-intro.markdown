@@ -1,7 +1,7 @@
 ---
 layout: post
 title: "Learn How To Cloud At Unlocked: The Hybrid Cloud"
-date: 2013-06-08 18:26
+date: 2013-06-10 08:00
 comments: true
 author: Wayne Walls
 published: true
