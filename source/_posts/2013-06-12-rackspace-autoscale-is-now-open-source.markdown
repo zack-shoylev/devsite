@@ -10,7 +10,7 @@ categories:
 - Cloud Servers
 - Cloud Monitoring
 ---
-Our Autoscale project -- codenamed "otter" -- is now open source. 
+Our Autoscale project -- codenamed "otter" -- is now open source.
 
 Autoscale takes the work out of capacity planning, allowing [Rackspace Cloud Monitoring][1] alerts or scheduled events to create and delete servers. Through the use of webhooks, Autoscale can be integrated into countless deployment scenarios.
 
@@ -32,7 +32,7 @@ Rackspace is committed to open source software and developer communities. Anythi
 [1]: https://www.rackspace.com/cloud/monitoring/
 [2]: http://technicae.cogitat.io/2013/04/autoscale-and-orchestration-heat-of.html
 [3]: http://www.rackspace.com/blog/the-heat-is-on-for-autoscaling-at-openstack-summit-portland/
-[4]: http://technicae.cogitat.io/2013/04/openmailto:autoscale@rackspace.comstack-developer-summit-heat-followup.html
+[4]: http://technicae.cogitat.io/2013/04/openstack-developer-summit-heat-followup.html
 [5]: https://github.com/rackerlabs/otter
 [6]: https://readthedocs.org/builds/rackspace-autoscale/
 [7]: mailto:autoscale@rackspace.com
