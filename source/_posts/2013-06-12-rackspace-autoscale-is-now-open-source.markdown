@@ -10,7 +10,7 @@ categories:
 - Cloud Servers
 - Cloud Monitoring
 ---
-Our Autoscale project -- codenamed "otter" -- is now open source. 
+Our Autoscale project -- codenamed "otter" -- is now open source.
 
 Autoscale takes the work out of capacity planning, allowing [Rackspace Cloud Monitoring][1] alerts or scheduled events to create and delete servers. Through the use of webhooks, Autoscale can be integrated into countless deployment scenarios.
 
