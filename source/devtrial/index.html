@@ -104,14 +104,17 @@
               </div>
             </header>
             <div style="text-align: center">
-              <a href="https://cart.dev.website.rackspace.com/" class="btn btn-large btn-success white" type="button">Accept these terms and sign up &raquo;</a>
+              <a id="accept" href="https://cart.dev.website.rackspace.com/"
+                class="btn btn-large btn-success white" type="button">
+                Accept these terms and sign up &raquo;
+              </a>
               <br/>
               <br/>
               <div class="alert">
                 <p>Note: We know you hate cookies, we do to -
-                  but for this to work, you need to have them turned on.
-                  Please? We promise it's not a perma cookie or tracking you in
-                  some hideous way.
+                  but for this to work, you need to have them and javascript
+                  turned on. Please? We promise it's not a perma cookie or
+                  tracking you in some hideous way.
                 </p>
               </div>
             </div>
@@ -313,6 +316,23 @@
       cmCreatePageviewTag('Rackspace Developer Center: index.html');
     </script>
     <!-- END COREMETRICS -->
+
+    <script type="text/javascript">
+      $(document).ready(function() {
+        $("#accept").click(function() {
+          $.cookie.json = true;
+          $.cookie('promoCode',
+                    { promoCode: 'DevTierDiscountDeal' },
+                    { expires: 10,
+                      path: '/',
+                      //domain: 'rackspace.com'
+                    }
+                  );
+          //window.location = $(this).attr('href');
+          //return false;
+        });
+      });
+    </script>
 
     </body>
 </html>
