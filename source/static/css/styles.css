@@ -1158,7 +1158,7 @@ address {
   font-style: normal;
   line-height: 20px;
 }
-code,
+/* code,
 pre {
   padding: 0 3px 2px;
   font-family: Monaco, Menlo, Consolas, "Courier New", monospace;
@@ -1206,7 +1206,7 @@ pre code {
 .pre-scrollable {
   max-height: 340px;
   overflow-y: scroll;
-}
+}*/
 form {
   margin: 0 0 20px;
 }
