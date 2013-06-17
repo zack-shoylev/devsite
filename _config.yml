@@ -93,3 +93,8 @@ google_analytics_tracking_id: UA-35639070-1
 
 # Facebook Like
 facebook_like: false
+
+# Gravatar Emails
+gravatar_emails:
+  - wayne.walls@rackspace.com
+  - hart.hoover@rackspace.com
