@@ -1,7 +1,7 @@
 ---
 layout: post
 title: "Rackspace SDK Update"
-date: 2013-06-17 09:21
+date: 2013-06-18 09:21
 comments: true
 author: Jesse Noller
 published: true
