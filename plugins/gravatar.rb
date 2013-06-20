@@ -28,9 +28,9 @@ module Jekyll
             # get the email address from the site config
             email_addresses = site_config['gravatar_emails']
 
-            "<ul>" + email_addresses.map do |a|
-                "<li><img src=\"#{gravatar_url(a)}\" title=\"#{a}\"/></li>"
-            end.join("\n") + "</ul>"
+            "<div class=\"row-fluid\">" + email_addresses.map do |a|
+                "<div class=\"span3 killmargin\"><img src=\"#{gravatar_url(a)}\" title=\"#{a}\"/></div>"
+            end.join("\n") + "</div>"
         end
     end
 end

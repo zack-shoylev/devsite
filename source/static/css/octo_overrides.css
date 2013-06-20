@@ -67,3 +67,7 @@ blockquote p {
   line-height: 1.25 !important;
   font-style: italic !important;
 }
+
+.killmargin{
+    margin:0 !important;
+}
