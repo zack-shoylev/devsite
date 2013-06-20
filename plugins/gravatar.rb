@@ -29,7 +29,7 @@ module Jekyll
             email_addresses = site_config['gravatar_emails']
 
             "<div class=\"row-fluid\">" + email_addresses.map do |a|
-                "<div class=\"span3 killmargin\"><img src=\"#{gravatar_url(a)}\" title=\"#{a}\"/></div>"
+                "<div class=\"span3 killmargin\"><img src=\"#{gravatar_url(a)}\"/></div>"
             end.join("\n") + "</div>"
         end
     end
