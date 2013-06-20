@@ -37,7 +37,7 @@ Next, run a few commands from within this director to get the gem set up:
 	bundle install –binstubs
 	./bin/newrelic_rs --sample-config
 
-Modify the `config/newrelic_plugin.yml` with your New Relic key, Rackspace username and API key, and the region in which your load balancer sits. Here is a good site for YAML parsing help. 
+Modify the `config/newrelic_plugin.yml` with your New Relic key, Rackspace username and API key, and the region in which your load balancer sits. [Here][5] is a good site for YAML parsing help. 
 
 **NOTE**: It is crucial to use lowercase for the region – it will not work otherwise. If you have load balancers in multiple regions, you will need to configure a separate plugin per region.
 
@@ -57,3 +57,4 @@ This is a post written and contributed by Jim Battenberg. Jim is a Cloud Evangel
 [2]: http://newrelic.com/plugins/rackspace/91
 [3]: http://twitter.com/jimbattenberg
 [4]: http://www.linkedin.com/in/jimbattenberg
+[5]: http://yaml-online-parser.appspot.com/
