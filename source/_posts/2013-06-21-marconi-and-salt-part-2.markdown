@@ -8,7 +8,7 @@ published: true
 categories: 
 - Marconi
 - OpenStack
-- Salt
+- SaltStack
 ---
 In the [first article][1] we configured salt-master and created a Cloud Server. In this article we will start building up the Marconi environment and while doing so shape what our salt configuration will look like. 
 
