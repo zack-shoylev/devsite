@@ -25,12 +25,16 @@ p.author {
 }
 
 .octopress-authorbox {
-  border-top: 4px solid #333;
-  background-color: #eee;
+  border-top: 2px solid #000;
+  background-color: #fff;
 
   .author-pic {
     float: left;
     margin: 8px;
+    img {
+      width: 80px;
+      height: 80px;
+    }
   }
 
   .author-about {

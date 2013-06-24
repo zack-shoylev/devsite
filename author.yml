@@ -1,16 +1,31 @@
-waynewalls:
-	name: Wayne Walls
-	twitter: waynewalls
-	email: wayne.walls@rackspace.com
-	blog: http://developer.rackspace.com
-	description: "Wayne Walls is a Cloud Architect at Rackspace, where he evangelizes global cloud strategy. A tenured technology leader, Wayne has engineered complex technical solutions, delivered IT transformation plans, and implemented multiple training initiatives around cloud computing. Co-maintainer of the Rackspace Developer blog, Wayne is helping developers, engineers, and executives understand cloud technologies and how to turn that knowledge into tangible returns. He holds a B.S. of Information Systems and a B.A. of Economics from the University of Oklahoma."
+#waynewalls:
+#	name: Wayne Walls
+#	twitter: waynewalls
+#	email: wayne.walls@rackspace.com
+#	blog: http://developer.rackspace.com
+#	description: "Wayne Walls is a Cloud Architect at Rackspace, where he evangelizes global cloud strategy. A tenured technology leader, Wayne has engineered complex technical solutions, delivered IT transformation plans, and implemented multiple training initiatives around cloud computing. Co-maintainer of the Rackspace Developer blog, Wayne is helping developers, engineers, and executives understand cloud technologies and how to turn that knowledge into tangible returns. He holds a B.S. of Information Systems and a B.A. of Economics from the University of Oklahoma."
 
-#  - hart.hoover@rackspace.com
+harthoover:
+  name: Hart Hoover
+  twitter: hhoover
+  email: hart.hoover@rackspace.com
+  blog: http://developer.rackspace.com
+  description: "Hart Hoover is a Cloud Strategist at Rackspace Hosting. Hoover started his career as a Racker in 2007 as a Linux Systems Administrator, providing technical support for dedicated servers. He moved to the cloud in 2009 to help design the Managed Cloud Servers support model. He has presented at various technical conferences, maintains and contributes to the Rackspace DevOps Blog, and advises Rackspace customers on best practices for cloud computing."
+
+
 #  - alan.quillin@rackspace.com
 #  - alex@alexscammon.com
 #  - ben.arent@RACKSPACE.COM
 #  - bret.mcgowen@RACKSPACE.COM
 #  - brad@bradmontgomery.net
+
+#chadlung:
+#	name: Chad Lung
+#	twitter: chadlung
+#	email: chad.lung@gmail.com
+#	blog: http://www.giantflyingsaucer.com/blog/
+#	description: "Chad Lung is a software engineer on the Rackspace Cloud Integration team and is the maintainer of Atom Hopper." 
+
 #  - chad.lung@gmail.com
 #  - dave.king@mailtrust.com
 #  - Duan.vanderWesthuizen@rackspace.com
