@@ -1,0 +1,20 @@
+{% assign author = site.authors[page.author] %}
+
+<div class="octopress-authorbox">
+  <div class="row-fluid">
+      <div class="span2">
+        <img src="http://www.gravatar.com/avatar/{{ author.gravatar }}" title="{{ author.display_name }}" />
+      </div><!--end author-pic-->
+      <div class="span10">
+        <h3>About the author:</h3>
+        <h4>{{ author.display_name }}</h4>
+        <p>{{ author.description }}</p>
+        {% if author.twitter %}
+        <p>You can follow {{ author.display_name }} on Twitter: <a href="http://twitter.com/{{ author.twitter }}">@{{ author.twitter }}</a>.</p>
+        {% endif %}
+        {% if author.blog %}
+        <p>Blog: <a href="{{ author.blog }}">{{ author.blog }}</a></p>
+        {% endif %}
+      </div><!--end author-about-->
+  </div>
+</div>

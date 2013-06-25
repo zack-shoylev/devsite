@@ -24,33 +24,17 @@ p.author {
   margin-bottom:0.8em;
 }
 
-.octopress-authorbox {
-  border-top: 2px solid #000;
-  background-color: #fff;
-
-  .author-pic {
-    float: left;
-    margin: 8px;
+.author-pic {
     img {
       width: 80px;
       height: 80px;
     }
-  }
+}
 
-  .author-about {
-    float: left;
-    margin: 5px;
-    padding: 5px;
-    ul {
-      list-style: none;
-
-      li {
-        display: inline;
-        margin-left: 5px;
-      }
-    }
-
-  }
+.octopress-authorbox {
+  border-top: 2px solid #333;
+  background-color: #fff;
+  padding: 5px;
 }
 
 .octopress-authorbox:after {

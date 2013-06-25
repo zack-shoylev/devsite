@@ -93,3 +93,26 @@ google_analytics_tracking_id: UA-35639070-1
 
 # Facebook Like
 facebook_like: false
+
+# Author information
+authors:
+  harthoover:
+    display_name: Hart Hoover
+    gravatar: c76300d8dd57b50fdd0e395358f9c28a
+    blog:
+    twitter: hhoover
+    description: "Hart Hoover is a Cloud Strategist at Rackspace Hosting. Hoover started his career as a Racker in 2007 as a Linux Systems Administrator, providing technical support for dedicated servers. He moved to the cloud in 2009 to help design the Managed Cloud Servers support model. He has presented at various technical conferences, maintains and contributes to the Rackspace DevOps Blog, and advises Rackspace customers on best practices for cloud computing."
+
+  waynewalls:
+    display_name: Wayne Walls
+    gravatar: b011731e5a5c8f215b1361f1886d07a9
+    twitter: waynewalls
+    blog:
+    description: "Wayne Walls is a Cloud Architect at Rackspace, where he evangelizes global cloud strategy. A tenured technology leader, Wayne has engineered complex technical solutions, delivered IT transformation plans, and implemented multiple training initiatives around cloud computing. Co-maintainer of the Rackspace Developer blog, Wayne is helping developers, engineers, and executives understand cloud technologies and how to turn that knowledge into tangible returns. He holds a B.S. of Information Systems and a B.A. of Economics from the University of Oklahoma."
+
+  chadlung:
+    display_name: Chad Lung
+    gravatar: 721e88df3b8c9a2e0bbb9d619000f623
+    twitter: chadlung
+    blog: http://www.giantflyingsaucer.com/blog/
+    description: "Chad Lung is a software engineer on the Rackspace Cloud Integration team and is the maintainer of Atom Hopper." 

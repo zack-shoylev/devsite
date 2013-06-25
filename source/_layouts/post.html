@@ -9,6 +9,7 @@ single: true
 <article class="hentry span9" role="article">
 {% endif %}
   {% include article.html %}
+  {% include custom/author.html %}
   <footer>
     {% unless page.sharing == false %}
       {% include post/sharing.html %}
