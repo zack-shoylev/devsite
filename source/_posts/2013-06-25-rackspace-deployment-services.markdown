@@ -12,7 +12,7 @@ Early last year, a project code-named Checkmate was created by Rackers to make i
 
 Rackers across the company have a lot of experience running real-world applications in the cloud. We wanted to take this knowledge and not only crowd-source that information into best-practice "blueprints," but also expose that information publically, enabling customers to easily deploy a configuration built on these best practices. We knew that it would be a win-win: customers would have access this expertise without having search for it on the web, and Rackers would get to contribute their knowledge to a broader audience of customers.
 
-Checkmate now powers a new feature we are exposing for preview in the Cloud Control Panel today called Rackspace Deployment Services.
+Checkmate now powers a new feature we are exposing for preview in the Cloud Control Panel today called Rackspace Deployment Services.<!--More-->
 
 We're adding a "Create Deployment" button alongside Cloud Servers so customers can launch multi-server solutions. We're also adding a "Deployments" tab to the Cloud Control Panel so customers can view all of their deployments in real time.
 
@@ -37,4 +37,6 @@ For questions and to contact the team working on Checkmate find us on freenode a
 
 Rackspace is investing in and supporting the development of Heat; the orchestration and configuration management service in OpenStack. Part of the team working on Checkmate transitioned in June to work on Heat to get it to the level of stability and capability that would allow us to eventually run the deployments feature using Heat as the engine behind it. At the last OpenStack Summit in Portland, we also proposed the Checkmate API and blueprint syntax as the new open API for Heat and are working with the OpenStack community to implement that. We believe the experience we have gained in developing and running Checkmate will help us make valuable contributions to the development of Heat's capabilities and API. Our intent is that the two projects will converge in the future and we are putting resources behind making that happen.
 
-If you are interested in joining the preview of Checkmate, please send us an email at (x) or click this link
+If you are interested in joining the preview of Checkmate, please fill out this [survey here][1]!
+
+[1]: https://rackspace.qualtrics.com/SE/?SID=SV_3WuQo6rpwLH1uyp
