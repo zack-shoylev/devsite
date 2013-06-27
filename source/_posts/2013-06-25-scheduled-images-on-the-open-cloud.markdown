@@ -1,7 +1,7 @@
 ---
 layout: post
 title: "Scheduled Images On The Open Cloud"
-date: 2013-06-25 08:58
+date: 2013-07-01 08:00
 comments: true
 author: Brian Rosmaita
 published: false
