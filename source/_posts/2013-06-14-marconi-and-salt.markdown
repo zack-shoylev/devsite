@@ -6,7 +6,7 @@ comments: true
 author: Oz Akan
 published: true
 categories: 
-- Salt
+- SaltStack
 - Marconi
 - OpenStack
 ---

@@ -27,13 +27,13 @@ We're finishing up integration with the rest of Rackspace services. We are curre
 Our interest in open sourcing the product was to enable transparency and collaboration.The code we have shared in the repository does not include any of our deployment scripts. We do have plans to make Autoscale easier to use outside of the Rackspace infrastructure, so stay tuned! We also accept pull requests :-)
 
 ####If I can't use this right now, why are you releasing it?
-Rackspace is committed to open source software and developer communities. Anything we have helped build that could be useful, now or in the future, we want to put in your hands as soon as possible. We will be adding features and making the software generally easier to use and we will also accept pull requests! 
+Rackspace is committed to open source software and developer communities. Anything we have helped build that could be useful, now or in the future, we want to put in your hands as soon as possible. We will be adding features and making the software generally easier to use and we will also accept pull requests!
 
 [1]: https://www.rackspace.com/cloud/monitoring/
 [2]: http://technicae.cogitat.io/2013/04/autoscale-and-orchestration-heat-of.html
 [3]: http://www.rackspace.com/blog/the-heat-is-on-for-autoscaling-at-openstack-summit-portland/
 [4]: http://technicae.cogitat.io/2013/04/openstack-developer-summit-heat-followup.html
 [5]: https://github.com/rackerlabs/otter
-[6]: https://readthedocs.org/builds/rackspace-autoscale/
+[6]: https://rackspace-autoscale.readthedocs.org/en/latest/
 [7]: mailto:autoscale@rackspace.com
 [8]: http://www.rackspace.com/blog/autoscale-survey-tell-us-what-you-want/

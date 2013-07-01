@@ -1,7 +1,8 @@
+{% if site.gravatar_emails %}
 <section>
-  <h1>Brought to you by:</h1>
-	<p><strong><a href="http://twitter.com/waynewalls">Wayne Walls</a></strong></p>
-	<p><img src="{{ root_url }}/images/wayne.jpg"></p>
-	<p><strong><a href="http://twitter.com/hhoover">Hart Hoover</a></strong></p>
-	<p><img src="{{ root_url }}/images/hart.jpg"></p>
+	<h1>Contributors</h1>
+	<span>
+		{% gravatar_images 50 %}
+	</span>
 </section>
+{% endif %}
