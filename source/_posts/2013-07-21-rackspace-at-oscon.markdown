@@ -28,9 +28,23 @@ Come to the Rackspace booth in Hall D #507 to talk about how open source is bein
 
 ###Speaking Events###
 
-####Everett Toews: Monday 7:00PM Room D137 & Wednesday 11:30AM Room E143 - jclouds:Control Multi-Cloud Infrastructure With Java.
+####Everett Toews: Monday 7:00PM Room D137 [jclouds:Control Multi-Cloud Infrastructure With Java](http://www.oscon.com/oscon2013/public/schedule/detail/31451)
 
-Come listen to Everett explain how to use jclouds to avoid vendor lock-in. In this session you'll learn how to effectively use software development toolkits that operate across multiple clouds. Find out how to distinguish between the layers of abstraction to achieve maximum portability or utilize cloud specific features. He will show examples of multi-cloud toolkit code for Java (jclouds), Node.js (pkgcloud), Python (libcloud), and Ruby (fog).
+In this BoF Everett will introduce you to Apache jclouds and what it can do for you.
+
+jclouds is an open source library that helps you get started in the cloud and utilizes your Java or Clojure development skills. The jclouds API gives you the freedom to use portable abstractions or cloud-specific features. It's a multi-cloud toolkit that works with both public and private clouds, enabling hybrid cloud workloads.
+
+There is a great community behind this toolkit working together to provide a better experience for developers in the cloud. Their goal is to simplify the control of many different clouds while still giving you the freedom to use cloud-specific features. The result is a toolkit that allows developers to write better code, in a shorter period of time, that works with the many supported clouds.
+
+Once the introduction is finished, we can discuss any topics from novice to expert. Everett is a committer on jclouds and will do his best to answer any questions you might have!
+
+####Everett Toews: Wednesday 11:30AM Room E143 [Cloud Portability With Multi-Cloud Toolkits](http://www.oscon.com/oscon2013/public/schedule/detail/31432)
+
+It’s a multi-cloud world but your code needs to run somewhere. However, the cloud you choose today may not be the cloud you need tomorrow. Changes in reliability, performance, cost, and privacy may drive you to research alternative public clouds, a private cloud, or a hybrid of the two.
+
+Considering cloud portability upfront can be crucial in avoiding lock-in. The tools you use to interact with the cloud will play a large part in how portable your code is between clouds.
+
+In this session you'll learn how to effectively use software development toolkits that operate across multiple clouds. Find out how to distinguish between the layers of abstraction to achieve maximum portability or utilize cloud specific features. Everett will show examples of multi-cloud toolkit code for Java (jclouds), Node.js (pkgcloud), Python (libcloud), and Ruby (fog).
 
 ####Shane Duan: Monday 7:00PM Room D139 - So You Want to Collect lots of Metrics? Come check out Rackspace's new open source project Blueflood.
 
