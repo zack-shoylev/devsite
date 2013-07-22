@@ -1,7 +1,7 @@
 ---
 layout: post
 title: "A Look Back at PyCon Australia 2013"
-date: 2013-07-22 08:00
+date: 2013-07-22 17:00
 comments: true
 author: Ed Leafe
 published: true
