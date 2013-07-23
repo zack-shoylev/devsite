@@ -1,7 +1,7 @@
 ---
 layout: post
 title: "Introducing rumm: a Command Line Tool for the Rackspace Cloud"
-date: 2013-07-23 13:29
+date: 2013-07-23 16:00
 comments: true
 author: Damon Cali
 published: true
