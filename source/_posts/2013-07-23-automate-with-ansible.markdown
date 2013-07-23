@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "Automate with Ansible"
+title: "Automate Application Updates with Ansible"
 date: 2013-07-24 12:00
 comments: true
 author: Michael DeHaan
@@ -10,9 +10,11 @@ categories:
 ---
 This is a guest post written by Michael DeHaan, CTO at [AnsibleWorks][1], a Rackspace Cloud Tools partner. AnsibleWorks provides IT orchestration solutions that simplify the way IT manages systems, applications, and infrastructure.
 
+----
+
 When developers and systems administrators work to automate the rollout of application updates, a common problem is automating web and SaaS architectures that span more than a single machine and, more importantly, managing those systems in a way that preserves uptime. This is especially critical in high-traffic web sites and services.
 
-When looking at the automation modelling itself, it is insufficient to model the actions that happen on one machine at a time, or even all classes of machines at a time, because simultaneous updates can introduce outages.   
+When looking at the automation modelling itself, it is insufficient to model the actions that happen on one machine at a time, or even all classes of machines at a time, because simultaneous updates can introduce outages.<!--More-->
 
 Performing updates on live infrastructure is one of those problems that historically results in your IT team locked in a conference room late at night or on a Saturday, again and again, and it’s not a fun place to be. Not only is an arduous process, but getting a step wrong means customers will experience problems (lost orders, dropped connections, etc.).
 
