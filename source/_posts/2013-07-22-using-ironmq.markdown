@@ -4,7 +4,7 @@ title: "Using IronMQ for Delayed Processing and Increasing Scale"
 date: 2013-07-23 08:00
 comments: true
 author: Paddy Foran
-published: false
+published: true
 categories: 
 - IronMQ
 - Cloud Tools
@@ -244,3 +244,6 @@ This pattern goes beyond just tracking analytics to your page; any data your app
 We created a demo application that shows off the patterns above for increasing scale but pushing tasks to the background. This includes the first model where workers are just polling a queue as well as more sophisticated patterns that push to multiple queues.
 
 Want the code for the demo app? You can find it [on Github](https://github.com/iron-io/rackspace-django-demo/). Sign up for [IronMQ](http://www.iron.io/mq) and get millions of API requests free each month.
+
+##About the Author
+Paddy is a Python and Go developer at Iron.io, where he works as a Developer Experience Engineer. He works with customers, the community, and Iron.io's engineering teams to make their products enjoyable and easy to use, while still providing scalable, flexible, and elegant solutions. He believes in an Open Web, cloud computing, webhooks, and unicorns.
