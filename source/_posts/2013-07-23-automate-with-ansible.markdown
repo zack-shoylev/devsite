@@ -4,7 +4,7 @@ title: "Automate Application Updates with Ansible"
 date: 2013-07-24 12:00
 comments: true
 author: Michael DeHaan
-published: false
+published: true
 categories: 
 - Ansible
 ---
