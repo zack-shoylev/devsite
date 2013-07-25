@@ -4,16 +4,16 @@ title: "Project Mensicus - Logging as a Service (Update)"
 date: 2013-07-25 08:00
 comments: true
 author: Chad Lung
-published: false
+published: true
 categories:
 - OpenStack
 - Python
 ---
 
-It’s been a while since my [last post](http://developer.rackspace.com/blog/introducing-project-meniscus-the-python-event-cloud-logging-service.html) on [Project Meniscus] (http://projectmeniscus.org), which is an open-source, [Apache 2 Licensed](http://www.apache.org/licenses/LICENSE-2.0.html), cloud-scale logging service that collects logging data from cloud servers and services, makes the data easily searchable through [ElasticSearch](http://www.elasticsearch.org/), and dispatches it into numerous other data stores, including [MongoDB](http://www.mongodb.org/) and [Hadoop](http://hadoop.apache.org/). Today I want to update everyone about the current status of the project and our future plans.
+It’s been a while since my [last post](http://developer.rackspace.com/blog/introducing-project-meniscus-the-python-event-cloud-logging-service.html) on [Project Meniscus](http://projectmeniscus.org), which is an open-source, [Apache 2 Licensed](http://www.apache.org/licenses/LICENSE-2.0.html), cloud-scale logging service that collects logging data from cloud servers and services, makes the data easily searchable through [ElasticSearch](http://www.elasticsearch.org/), and dispatches it into numerous other data stores, including [MongoDB](http://www.mongodb.org/) and [Hadoop](http://hadoop.apache.org/). Today I want to update everyone about the current status of the project and our future plans.
 <!--More-->
 
-* Our session at the [OpenStack](http://openstack.org) conference in Portland was a success. Many interested people attended, and they asked great questions about the project. We returned with some useful feedback. If you haven't already, check out the video of our session [here](http://www.youtube.com/watch?v=1mi7N4tDKA4)
+* Our session at the [OpenStack](http://openstack.org) Summit in Portland was a success. Many interested people attended, and they asked great questions about the project. We returned with some useful feedback. If you haven't already, check out the video of our session [here](http://www.youtube.com/watch?v=1mi7N4tDKA4).
 
 * Recently the funding for the [Common Event Expression](http://cee.mitre.org/) (CEE) organization was cut, which means that all work on CEE has stopped. With that said, we don't see this change affecting our project.
 
@@ -23,7 +23,7 @@ It’s been a while since my [last post](http://developer.rackspace.com/blog/int
 
 {% img center /images/2013-07-25-project-mensicus-logging-as-a-service-update/updated-arch.png %}
 
-* We've introduced some additional technologies like [Celery](http://www.celeryproject.org/) to handle the distribution of incoming messages, and processing.
+* We've introduced some additional technologies like [Celery](http://www.celeryproject.org/) to handle the distribution of incoming messages and processing.
 
 * For authentication/authorization and rate limiting, we will use projects like [Repose](http://openrepose.org), and possibly emerging projects like [pyrox](https://github.com/zinic/pyrox).
 
@@ -37,11 +37,11 @@ It’s been a while since my [last post](http://developer.rackspace.com/blog/int
 
 * We continue to pursue inclusion in [OpenStack](http://openstack.org).
 
-* We have been putting [a lot of effort](https://github.com/ProjectMeniscus/chef-cookbooks) into automating our deployments via tools like [Chef](http://www.opscode.com/chef/).
+* We have put [a lot of effort](https://github.com/ProjectMeniscus/chef-cookbooks) into automating our deployments via tools like [Chef](http://www.opscode.com/chef/).
 
 * We are now in the process of brining on our first internal customer for our first round of alpha testing.
 
-* Stay tuned to our [wiki](https://github.com/ProjectMeniscus/meniscus/wiki) for updated documentation as well as an upcoming article on getting Meniscus installed on a single computer (for testing and development purposes)
+* Stay tuned to our [wiki](https://github.com/ProjectMeniscus/meniscus/wiki) for updated documentation as well as an upcoming article on getting Meniscus installed on a single computer (for testing and development purposes).
 
 ###What about Logstash?
 
@@ -51,4 +51,5 @@ We did evaluate several other logging solutions initially but none filled our pa
 
 Feel free the [browse the code](https://github.com/ProjectMeniscus/) and remember, pull requests are welcome.
 
+###About the Author
 _Chad Lung is a software engineer on the Rackspace Cloud Integration team and is currently working on [Project Meniscus](http://projectmeniscus.org). Be sure to check out his personal blog at [http://www.giantflyingsaucer.com/blog/](http://www.giantflyingsaucer.com/blog/) and follow [@chadlung](https://twitter.com/chadlung) on Twitter._
