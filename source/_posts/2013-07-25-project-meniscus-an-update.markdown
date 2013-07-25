@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "Project Mensicus - Logging as a Service (Update)"
+title: "Project Meniscus - Logging as a Service (Update)"
 date: 2013-07-25 08:00
 comments: true
 author: Chad Lung
