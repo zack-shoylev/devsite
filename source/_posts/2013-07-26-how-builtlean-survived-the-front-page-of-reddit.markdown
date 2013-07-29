@@ -4,7 +4,7 @@ title: "How BuiltLean Survived the Front Page of Reddit"
 date: 2013-07-26 10:49
 comments: true
 author: Alexander Baldwin
-published: true
+published: false
 categories: 
 ---
 
