@@ -143,6 +143,8 @@ or let us know using our new
 
 ### 1. Download and install Vagrant 1.1
 
+**NOTE: These instructions are out of date. Make sure you are using the latest version of Vagrant.**
+
 Go to <http://downloads.vagrantup.com/tags/v1.1.0>, find an installer for your
 operating system, download it and run it.
 

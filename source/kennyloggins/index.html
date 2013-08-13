@@ -107,19 +107,11 @@
               </div>
             </header>
             <div style="text-align: center">
-              <a id="accept" href="https://cart.dev.website.rackspace.com/"
+              <a id="accept" href="http://devtier.cart.dev.website.rackspace.com/cloud/?promo_code=DevTierDiscountDeal"
                 class="btn btn-large btn-success white" type="button">
                 Accept these terms and sign up &raquo;
               </a>
               <br/>
-              <br/>
-              <div class="alert">
-                <p>Note: We know you hate cookies (we do, too), but for it
-                  to work, you need to have them and javascript
-                  turned on. Please? We promise it's not a perma cookie or
-                  tracking you in some hideous way.
-                </p>
-              </div>
             </div>
 
         </div> <!--/community-->
@@ -296,7 +288,6 @@
     <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
     <script>window.jQuery || document.write('<script src="/static/js/libs/jquery-1.9.1.min.js"><\/script>')</script>
     <script src="/static/js/libs/bootstrap.min.js"></script>
-    <script src="/static/js/libs/jquery.cookie.js"></script>
     <script src="/static/js/plugins.js"></script>
     <script src="/static/js/main.js"></script>
 
@@ -325,23 +316,6 @@
       cmCreatePageviewTag('Rackspace Developer Center: index.html');
     </script>
     <!-- END COREMETRICS -->
-
-    <script type="text/javascript">
-      $(document).ready(function() {
-        $("#accept").click(function() {
-          $.cookie.json = true;
-          $.cookie('promoCode',
-                    { promoCode: 'DevTierDiscountDeal' },
-                    { expires: 10,
-                      path: '/',
-                      domain: 'rackspace.com'
-                    }
-                  );
-          //window.location = $(this).attr('href');
-          //return false;
-        });
-      });
-    </script>
 
     </body>
 </html>
