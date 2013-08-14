@@ -12,9 +12,9 @@ categories:
 - OpenStack Swift
 ---
 
-{% img http://ipython.org/_static/IPy_header.png 'IPython logo' 'IPython logo' %}
+{% img /images/2013-08-13-bookstore-for-ipython-notebooks/IPy_header.png 'IPython logo' 'IPython logo' %}
 
-If there is anything I love about the Python ecosystem, it's the scientific computing ecosystem. Standing on top of this stack for me is [IPython](http://ipython.org/), a robust tool for interactive computing. It has features like a simple navigable history, auto-completion, a brilliant [web based notebook](http://ipython.org/notebook.html) with inline plotting, an easy to use [parallel computing framework](http://ipython.org/ipython-doc/stable/parallel/parallel_intro.html), and a well structured protocol that is being used to extend IPython for interactive computing with [other](https://github.com/minrk/iruby) [languages](http://nbviewer.ipython.org/4279371/node-kernel.ipynb) including [Julia](https://github.com/JuliaLang/IJulia.jl). If you haven't heard of IPython before, I recommend you watch [Fernando Perez's keynote talk on IPython](http://vimeo.com/63250251) from PyData Silicon Valley 2013.
+If there is anything I love about the Python ecosystem, it's the scientific computing ecosystem. Standing on top of this stack for me is [IPython](http://ipython.org/), a robust tool for interactive computing. It has features like a simple navigable history, auto-completion, a brilliant [web based notebook](http://ipython.org/notebook.html) with inline plotting, an easy to use [parallel computing framework](http://ipython.org/ipython-doc/stable/parallel/parallel_intro.html), [magic](http://ipython.org/ipython-doc/stable/interactive/tutorial.html), and a well structured protocol that is being used to extend IPython for interactive computing with [other](https://github.com/minrk/iruby) [languages](http://nbviewer.ipython.org/4279371/node-kernel.ipynb) including [Julia](https://github.com/JuliaLang/IJulia.jl). If you haven't heard of IPython before, I recommend you watch [Fernando Perez's keynote talk on IPython](http://vimeo.com/63250251) from PyData Silicon Valley 2013.
 
 As mentioned above, IPython contains a web based notebook for interactive computing called the IPython notebook. If you've ever used Mathematica, you'll feel right at home. IPython notebooks provide an easy way to interactively work with your code and data, all while visualizing and prototyping to your heart's content.
 
@@ -26,19 +26,19 @@ Each cell allows you to write Python, run a computation, view results, and plot 
 
 The greatest feature to the notebook is the ease to which you can share notebooks with others. This allows others to run through your code (👍 for reproducibility), change it locally, and see results for themselves. By default the notebooks are stored in the same directory IPython was invoked from and have a file extension of `.ipynb`. The easiest way to share them is to put the notebook file on the web, through a GitHub Gist or in a GitHub repo, then link to it through the [notebook viewer](http://nbviewer.ipython.org/).
 
-There's another way to store and save these notebooks now, using OpenStack Swift or Rackspace CloudFiles: Bookstore.
+There's another way to store and save these notebooks now, using OpenStack Swift or Rackspace CloudFiles: [Bookstore](http://github.com/rgbkrk/bookstore).
 
 # Bookstore
 
 [Bookstore](http://github.com/rgbkrk/bookstore) allows you to save your IPython notebooks to OpenStack Swift or CloudFiles, seamlessly, while interacting with the notebook. You can even CDN enable your notebooks so they can be downloaded or [viewed by others](http://nbviewer.ipython.org/).
 
-Install bookstore via pip:
+Install bookstore via pip
 
 ```bash
 $ pip install bookstore
 ```
 
-then add bookstore to your IPython configuration
+Then add bookstore to your IPython configuration
 
 ```python
 # Setup IPython Notebook to write notebooks to CloudFiles
@@ -78,9 +78,11 @@ $ ipython notebook
 2013-08-14 11:18:28.676 [NotebookApp] Use Control-C to stop this server and shut down all kernels (twice to skip confirmation).
 ```
 
-If you've configured it correctly, notebooks will be listed out of CloudFiles (empty on first run though).
+If you've configured it correctly, notebooks will be listed and read directly from CloudFiles.
 
 {% img /images/2013-08-13-bookstore-for-ipython-notebooks/notebook_list.png 'Notebook List' 'List of IPython Notebooks' %}
+
+It's worth noting that it will certainly be slower than interacting with your local filesystem, since it has to send the whole ipynb document to CloudFiles. If your IPython notebook server is running in the same data center though, this time difference may not be noticeable.
 
 ## Storage
 
@@ -89,7 +91,7 @@ Notebooks are stored by a UUID and checkpoints are stored relative to that UUID.
     {notebook_id} # Notebook itself
     {notebook_id}/checkpoints/{checkpoint_id} # Checkpoints for that notebook
 
-Your notebooks will end up being stored like this:
+Your notebooks will end up being stored like so:
 
 {% img /images/2013-08-13-bookstore-for-ipython-notebooks/nb_storage.png 'Notebooks as UUIDs' 'Notebooks are stored using a UUID' %}
 
@@ -98,5 +100,8 @@ Currently only single checkpoints are stored, but multiple checkpoints will be e
 ## Beneath the covers
 
 Bookstore extends the `NotebookManager` class from [IPython.html.services.notebooks.nbmanager](https://github.com/ipython/ipython/blob/master/IPython/html/services/notebooks/nbmanager.py) by simply overriding reading, writing, listing, and deleting both notebooks and checkpoints while conforming to the NotebookManager interface. The IPython team did an excellent job making it easy to extend from. All the generic OpenStack Swift code for manipulating the notebooks as objects is handled by a `SwiftNotebookManager` which is extended by the two classes that handle the current authentication types `KeystoneNotebookManager` for OpenStack Keystone authentication and `CloudFilesNotebookManager` for Rackspace authentication.
+
+[Pyrax](https://github.com/rackspace/pyrax) does all the heavy lifting of working with Swift, allowing bookstore to work with Python objects rather than primitive types.
+
 
 
