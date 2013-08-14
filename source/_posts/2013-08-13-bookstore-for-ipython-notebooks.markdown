@@ -146,10 +146,8 @@ Bookstore extends the `NotebookManager` class from [IPython.html.services.notebo
 
 # Closing up
 
-IPython notebook is a wonderful tool and I'm really happy to have a way to save my notebooks automagically, publish them on the CDN, and provide nbviewer links.
+IPython notebook is a wonderful tool and I'm really happy we have a way to save our notebooks automagically, publish them on the CDN, and provide nbviewer links.
 
 Happy Computing!
-
-
 
 
