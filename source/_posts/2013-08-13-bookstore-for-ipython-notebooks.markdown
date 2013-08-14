@@ -16,15 +16,15 @@ categories:
 
 If there is anything I love about the Python ecosystem, it's the scientific computing ecosystem. Standing on top of this stack for me is [IPython](http://ipython.org/), a robust tool for interactive computing. It has features like a simple navigable history, auto-completion, a brilliant [web based notebook](http://ipython.org/notebook.html) with inline plotting, an easy to use [parallel computing framework](http://ipython.org/ipython-doc/stable/parallel/parallel_intro.html), [magic](http://ipython.org/ipython-doc/stable/interactive/tutorial.html), and a well structured protocol that is being used to extend IPython for interactive computing with [other](https://github.com/minrk/iruby) [languages](http://nbviewer.ipython.org/4279371/node-kernel.ipynb) including [Julia](https://github.com/JuliaLang/IJulia.jl). If you haven't heard of IPython before, I recommend you watch [Fernando Perez's keynote talk on IPython](http://vimeo.com/63250251) from PyData Silicon Valley 2013.
 
-As mentioned above, IPython contains a web based notebook for interactive computing called the IPython notebook. If you've ever used Mathematica, you'll feel right at home. IPython notebooks provide an easy way to interactively work with your code and data, all while visualizing and prototyping to your heart's content.
+As mentioned above, IPython contains a web based notebook for interactive computing called the IPython notebook. If you've ever used Mathematica, you'll feel right at home. IPython notebooks provide an easy way to interactively work with your code and data, all while visualizing and prototyping to your heart's content. Output goes [well beyond simple text](http://ipython.org/ipython-doc/dev/config/integrating.html) and plots, by defining a `_repr_html_` method that outputs HTML for your objects. Pandas, in particular, allows their DataFrames to render as clean HTML tables embedded right alongside the rest of the code:
 
-{% img /images/2013-08-13-bookstore-for-ipython-notebooks/ipython_plot.png 'Plot example' 'Plot example' %}
+[{% img /images/2013-08-13-bookstore-for-ipython-notebooks/ipython_basemap.png 'Notebook example' 'Notebook example' %}](http://nbviewer.ipython.org/urls/bitbucket.org/hrojas/learn-pandas/raw/65203d891b5e20bb7c00628332694a612bcb54ee/notebooks/Basic_Basemap.ipynb)
 
-Each cell allows you to write Python, run a computation, view results, and plot data like a typical [Read-eval-print loop](http://en.wikipedia.org/wiki/Read%E2%80%93eval%E2%80%93print_loop). After writing a cell though, you can easily go back and edit your previous code. Cells can also be Markdown, headings, or raw text and even display <span class="texhtml" style="font-family: 'CMU Serif', cmr10, LMRoman10-Regular, 'Times New Roman', 'Nimbus Roman No9 L', Times, serif;">L<span style="text-transform: uppercase; font-size: 70%; margin-left: -0.36em; vertical-align: 0.3em; line-height: 0; margin-right: -0.15em;">a</span>T<span style="text-transform: uppercase; margin-left: -0.1667em; vertical-align: -0.5ex; line-height: 0; margin-right: -0.125em;">e</span>X</span>. This allows you to [create a narrative alongside your code](http://nbviewer.ipython.org/urls/raw.github.com/jakevdp/jakevdp.github.com/master/downloads/notebooks/sparse-graph.ipynb), useful for teaching and presenting. The [example below](http://nbviewer.ipython.org/urls/raw.github.com/jakevdp/jakevdp.github.com/master/downloads/notebooks/sparse-graph.ipynb) comes from [Jake Vanderplas' Python Perambulations blog](http://jakevdp.github.io/blog/2012/10/14/scipy-sparse-graph-module-word-ladders/).
+Each cell allows you to write Python, run a computation, view results, and plot data like a typical [Read-eval-print loop (REPL)](http://en.wikipedia.org/wiki/Read%E2%80%93eval%E2%80%93print_loop). Unlike a typical REPL though, you can easily go back and edit your previous code. Cells can also be Markdown, headings, raw text and even display <span class="texhtml" style="font-family: 'CMU Serif', cmr10, LMRoman10-Regular, 'Times New Roman', 'Nimbus Roman No9 L', Times, serif;">L<span style="text-transform: uppercase; font-size: 70%; margin-left: -0.36em; vertical-align: 0.3em; line-height: 0; margin-right: -0.15em;">a</span>T<span style="text-transform: uppercase; margin-left: -0.1667em; vertical-align: -0.5ex; line-height: 0; margin-right: -0.125em;">e</span>X</span>. This allows you to [create a narrative alongside your code](http://nbviewer.ipython.org/urls/raw.github.com/jakevdp/jakevdp.github.com/master/downloads/notebooks/sparse-graph.ipynb), useful for teaching and presenting. The [example below](http://nbviewer.ipython.org/urls/raw.github.com/jakevdp/jakevdp.github.com/master/downloads/notebooks/sparse-graph.ipynb) comes from [Jake Vanderplas' Python Perambulations blog](http://jakevdp.github.io/blog/2012/10/14/scipy-sparse-graph-module-word-ladders/).
 
 {% img /images/2013-08-13-bookstore-for-ipython-notebooks/ipython_words.png 'IPython cells' 'IPython notebook cell example' %}
 
-The greatest feature to the notebook is the ease to which you can share notebooks with others. This allows others to run through your code (👍 for reproducibility), change it locally, and see results for themselves. By default the notebooks are stored in the same directory IPython was invoked from and have a file extension of `.ipynb`. The easiest way to share them is to put the notebook file on the web, through a GitHub Gist or in a GitHub repo, then link to it through the [notebook viewer](http://nbviewer.ipython.org/).
+The greatest feature of the notebook is the ease at which you can share notebooks with others. This allows them to run through your code (👍 for reproducibility), change it locally, and see results for themselves. By default the notebooks are stored in the same directory IPython was invoked from and have a file extension of `.ipynb`. The easiest way to share them has been to put the notebook file on the web, through a GitHub Gist or in a GitHub repo, then link to it through the [notebook viewer](http://nbviewer.ipython.org/).
 
 There's another way to store and save these notebooks now, using OpenStack Swift or Rackspace CloudFiles: [Bookstore](http://github.com/rgbkrk/bookstore).
 
@@ -40,7 +40,7 @@ $ pip install bookstore
 
 Then add bookstore to your IPython configuration
 
-```python
+{% codeblock ipython_notebook_config.py lang:python %}
 # Setup IPython Notebook to write notebooks to CloudFiles
 c.NotebookApp.notebook_manager_class = 'bookstore.cloudfiles.CloudFilesNotebookManager'
 
@@ -53,7 +53,8 @@ c.CloudFilesNotebookManager.container_name = u'notebooks'
 
 # Optionally, the region
 c.CloudFilesNotebookManager.region = u'DFW'
-```
+{% endcodeblock %}
+
 
 Your API Key is located in *Settings and Contacts* within the Cloud Control panel, underneath the security question.
 
@@ -61,13 +62,23 @@ Your API Key is located in *Settings and Contacts* within the Cloud Control pane
 
 *Note: if you're using Rackspace UK, set region to `'LON'`.*
 
-This code just needs to be added to your IPython configuration, the default configuration being located at `~/.ipython/profile_default/ipython_notebook_config.py`. If you want it in a separate profile just run `ipython profile create <profile_name>`.
+This code just needs to be added to your IPython configuration. Your default configuration is at `~/.ipython/profile_default/ipython_notebook_config.py`. If you want it in a separate profile just run
 
-Bookstore was built with OpenStack in mind so that you can [store your notebooks to your own OpenStack Swift cluster](https://github.com/rgbkrk/bookstore#on-openstack-swift-using-keystone-authentication) (if it uses Keystone authentication -- no support for swauth yet).
+```bash
+$ ipython profile create demo_name
+```
+
+and add the profile option when invoking the notebook
+
+```bash
+$ ipython notebook --profile=demo_name
+```
 
 Once configured, the IPython notebook will behave the same on the frontend but no `.ipynb` files will be created on your local box.
 
-Launch the IPython notebook with your profile of choice (default used below)
+## Launching the Notebook
+
+Now launch the IPython notebook with the profile you configured (default used below)
 
 ```bash
 $ ipython notebook
@@ -82,7 +93,9 @@ If you've configured it correctly, notebooks will be listed and read directly fr
 
 {% img /images/2013-08-13-bookstore-for-ipython-notebooks/notebook_list.png 'Notebook List' 'List of IPython Notebooks' %}
 
-It's worth noting that it will certainly be slower than interacting with your local filesystem, since it has to send the whole ipynb document to CloudFiles. If your IPython notebook server is running in the same data center though, this time difference may not be noticeable.
+It's worth noting that saving will certainly be a little slower than interacting with your local filesystem, since it has to send the whole ipynb document to CloudFiles. If your IPython notebook server is running in the same data center though, this time difference may not be noticeable.
+
+Bookstore was built with OpenStack in mind so that you can [store your notebooks on your own OpenStack Swift cluster](https://github.com/rgbkrk/bookstore#on-openstack-swift-using-keystone-authentication) (if it uses Keystone authentication -- no support for swauth yet).
 
 ## Storage
 
@@ -95,13 +108,44 @@ Your notebooks will end up being stored like so:
 
 {% img /images/2013-08-13-bookstore-for-ipython-notebooks/nb_storage.png 'Notebooks as UUIDs' 'Notebooks are stored using a UUID' %}
 
-Currently only single checkpoints are stored, but multiple checkpoints will be enabled for [future versions of IPython and Bookstore](https://github.com/ipython/ipython/pull/3939).
+Currently only single checkpoints are stored, but multiple checkpoints will be enabled for [future versions of IPython and Bookstore](https://github.com/ipython/ipython/pull/3939). As IPython advances, this setup for saving will likely change as [multi-directory notebooks get implemented](https://github.com/ipython/ipython/pull/3619).
+
+## CDN Enabling Containers
+
+You can also CDN Enable your notebooks for wider dissemination. From the control panel for CloudFiles click the gear icon next to your container then click "Make Public (Enable CDN)".
+
+{% img /images/2013-08-13-bookstore-for-ipython-notebooks/cdn_enable.png 'CDN Enable' 'CDN Enable a Container' %}
+
+To get the full base link for the container, from the control panel click on the container then view all links
+
+{% img /images/2013-08-13-bookstore-for-ipython-notebooks/view_all_links.png 'view all links' 'View all links for the container' %}
+
+Which leads to
+
+{% img /images/2013-08-13-bookstore-for-ipython-notebooks/cdn_links.png 'CDN Links' 'CDN Links' %}
+
+These links are the base links for the container. Put the UUID for a notebook after the HTTP or HTTPS urls to reach that specific notebook. As an example, let's imagine the URL for your container is http://504a2743e3ef413d3f50-f754606aafcd7bad1b04f6d0cd003745.r33.cf1.rackcdn.com. Within the IPython notebook, the URL shows the UUID at the top.
+
+{% img /images/2013-08-13-bookstore-for-ipython-notebooks/notebook_url.png 'Notebook UUID in URL' 'Notebook UUID in URL' %}
+
+The notebook above can then be reached at
+
+http://504a2743e3ef413d3f50-f754606aafcd7bad1b04f6d0cd003745.r33.cf1.rackcdn.com/77ba6f19-de0e-469f-8bad-76d675222b31
+
+Couple this with a CNAME for your container (use the HTTP link) through Rackspace's DNS (or your own DNS)
+
+{% img /images/2013-08-13-bookstore-for-ipython-notebooks/add_cname.png 'Add' 'Add CNAME' %}
+
+and you'll have a cleaner URL for sharing through the nbviewer.
 
 ## Beneath the covers
 
-Bookstore extends the `NotebookManager` class from [IPython.html.services.notebooks.nbmanager](https://github.com/ipython/ipython/blob/master/IPython/html/services/notebooks/nbmanager.py) by simply overriding reading, writing, listing, and deleting both notebooks and checkpoints while conforming to the NotebookManager interface. The IPython team did an excellent job making it easy to extend from. All the generic OpenStack Swift code for manipulating the notebooks as objects is handled by a `SwiftNotebookManager` which is extended by the two classes that handle the current authentication types `KeystoneNotebookManager` for OpenStack Keystone authentication and `CloudFilesNotebookManager` for Rackspace authentication.
+Bookstore extends the `NotebookManager` class from [IPython.html.services.notebooks.nbmanager](https://github.com/ipython/ipython/blob/master/IPython/html/services/notebooks/nbmanager.py) by simply overriding reading, writing, listing, and deleting both notebooks and checkpoints while conforming to the NotebookManager interface. The IPython team did an excellent job making it easy to extend from. All the generic OpenStack Swift code for manipulating the notebooks as objects is handled by a [`SwiftNotebookManager`](https://github.com/rgbkrk/bookstore/blob/master/bookstore/swift.py#L68) which is extended by the two classes that handle the current authentication types [`KeystoneNotebookManager`](https://github.com/rgbkrk/bookstore/blob/master/bookstore/swift.py#L320) for OpenStack Keystone authentication and [`CloudFilesNotebookManager`](https://github.com/rgbkrk/bookstore/blob/master/bookstore/cloudfiles.py#L38) for Rackspace authentication.
 
-[Pyrax](https://github.com/rackspace/pyrax) does all the heavy lifting of working with Swift, allowing bookstore to work with Python objects rather than primitive types.
+[Pyrax](https://github.com/rackspace/pyrax) does all the heavy lifting when working with Swift ([python-swiftclient](https://github.com/openstack/python-swiftclient) under the hood), allowing bookstore to work with Python objects rather than primitive types.
 
+# Closing up
+
+IPython notebook is a wonderful tool and I'm really happy to have a way to save my notebooks automagically, publish them on the CDN, and provide nbviewer links.
 
 
