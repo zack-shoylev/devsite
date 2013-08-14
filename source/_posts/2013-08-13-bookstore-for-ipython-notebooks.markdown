@@ -16,7 +16,7 @@ categories:
 
 If there is anything I love about the Python ecosystem, it's the scientific computing ecosystem. Standing on top of this stack for me is [IPython](http://ipython.org/), a robust tool for interactive computing. It has features like a simple navigable history, auto-completion, a brilliant [web based notebook](http://ipython.org/notebook.html) with inline plotting, an easy to use [parallel computing framework](http://ipython.org/ipython-doc/stable/parallel/parallel_intro.html), [magic](http://ipython.org/ipython-doc/stable/interactive/tutorial.html), and a well structured protocol that is being used to extend IPython for interactive computing with [other](https://github.com/minrk/iruby) [languages](http://nbviewer.ipython.org/4279371/node-kernel.ipynb) including [Julia](https://github.com/JuliaLang/IJulia.jl). If you haven't heard of IPython before, I recommend you watch [Fernando Perez's keynote talk on IPython](http://vimeo.com/63250251) from PyData Silicon Valley 2013.
 
-As mentioned above, IPython contains a web based notebook for interactive computing called the IPython notebook. If you've ever used Mathematica, you'll feel right at home. IPython notebooks provide an easy way to interactively work with your code and data, all while visualizing and prototyping to your heart's content. Output goes [well beyond simple text](http://ipython.org/ipython-doc/dev/config/integrating.html) and plots, by defining a `_repr_html_` method that outputs HTML for your objects. Pandas, in particular, allows their DataFrames to render as clean HTML tables embedded right alongside the rest of the code:
+As mentioned above, IPython contains a web based notebook for interactive computing called the IPython notebook. If you've ever used Mathematica, you'll feel right at home. IPython notebooks provide an easy way to interactively work with your code and data, all while visualizing and prototyping to your heart's content. Output goes [well beyond simple text](http://ipython.org/ipython-doc/dev/config/integrating.html) and plots, by allowing you to define a `_repr_html_` method on objects that outputs HTML. Pandas, in particular, allows their DataFrames to render as clean HTML tables embedded right alongside the rest of the code:
 
 [{% img /images/2013-08-13-bookstore-for-ipython-notebooks/ipython_basemap.png 'Notebook example' 'Notebook example' %}](http://nbviewer.ipython.org/urls/bitbucket.org/hrojas/learn-pandas/raw/65203d891b5e20bb7c00628332694a612bcb54ee/notebooks/Basic_Basemap.ipynb)
 
@@ -95,7 +95,7 @@ If you've configured it correctly, notebooks will be listed and read directly fr
 
 It's worth noting that saving will certainly be a little slower than interacting with your local filesystem, since it has to send the whole ipynb document to CloudFiles. If your IPython notebook server is running in the same data center though, this time difference may not be noticeable.
 
-Bookstore was built with OpenStack in mind so that you can [store your notebooks on your own OpenStack Swift cluster](https://github.com/rgbkrk/bookstore#on-openstack-swift-using-keystone-authentication) (if it uses Keystone authentication -- no support for swauth yet).
+Bookstore was built with OpenStack in mind so you can [store your notebooks on your own OpenStack Swift cluster](https://github.com/rgbkrk/bookstore#on-openstack-swift-using-keystone-authentication) (if it uses Keystone authentication -- no support for swauth yet).
 
 ## Storage
 
@@ -104,7 +104,7 @@ Notebooks are stored by a UUID and checkpoints are stored relative to that UUID.
     {notebook_id} # Notebook itself
     {notebook_id}/checkpoints/{checkpoint_id} # Checkpoints for that notebook
 
-Your notebooks will end up being stored like so:
+They should look like this within CloudFiles
 
 {% img /images/2013-08-13-bookstore-for-ipython-notebooks/nb_storage.png 'Notebooks as UUIDs' 'Notebooks are stored using a UUID' %}
 
@@ -116,7 +116,7 @@ You can also CDN Enable your notebooks for wider dissemination. From the control
 
 {% img /images/2013-08-13-bookstore-for-ipython-notebooks/cdn_enable.png 'CDN Enable' 'CDN Enable a Container' %}
 
-To get the full base link for the container, from the control panel click on the container then view all links
+Once that's finished, click the container then view all links
 
 {% img /images/2013-08-13-bookstore-for-ipython-notebooks/view_all_links.png 'view all links' 'View all links for the container' %}
 
@@ -124,19 +124,19 @@ Which leads to
 
 {% img /images/2013-08-13-bookstore-for-ipython-notebooks/cdn_links.png 'CDN Links' 'CDN Links' %}
 
-These links are the base links for the container. Put the UUID for a notebook after the HTTP or HTTPS urls to reach that specific notebook. As an example, let's imagine the URL for your container is http://504a2743e3ef413d3f50-f754606aafcd7bad1b04f6d0cd003745.r33.cf1.rackcdn.com. Within the IPython notebook, the URL shows the UUID at the top.
+These links are the base links for the container. Put the UUID for a notebook after the HTTP or HTTPS urls to reach that specific notebook. Within the IPython notebook, the URL shows the UUID for a notebook at the very end.
 
 {% img /images/2013-08-13-bookstore-for-ipython-notebooks/notebook_url.png 'Notebook UUID in URL' 'Notebook UUID in URL' %}
 
-The notebook above can then be reached at
+As an example, the URL for the container used above is http://504a2743e3ef413d3f50-f754606aafcd7bad1b04f6d0cd003745.r33.cf1.rackcdn.com. The notebook above can then be reached at
 
-http://504a2743e3ef413d3f50-f754606aafcd7bad1b04f6d0cd003745.r33.cf1.rackcdn.com/77ba6f19-de0e-469f-8bad-76d675222b31
+[http://504a2743e3ef413d3f50-f754606aafcd7bad1b04f6d0cd003745.r33.cf1.rackcdn.com/77ba6f19-de0e-469f-8bad-76d675222b31](http://nb.fict.io/77ba6f19-de0e-469f-8bad-76d675222b31)
 
-Couple this with a CNAME for your container (use the HTTP link) through Rackspace's DNS (or your own DNS)
+Couple this with a CNAME for the container (using the HTTP link) through Rackspace's DNS (or your own DNS)
 
 {% img /images/2013-08-13-bookstore-for-ipython-notebooks/add_cname.png 'Add' 'Add CNAME' %}
 
-and you'll have a cleaner URL for [sharing through the nbviewer](http://nbviewer.ipython.org/url/nb.fict.io/77ba6f19-de0e-469f-8bad-76d675222b31).
+To make simplified links like [http://nb.fict.io/77ba6f19-de0e-469f-8bad-76d675222b31](http://nb.fict.io/77ba6f19-de0e-469f-8bad-76d675222b31) and you'll have a shorter URL for [sharing through the nbviewer](http://nbviewer.ipython.org/url/nb.fict.io/77ba6f19-de0e-469f-8bad-76d675222b31).
 
 ## Beneath the covers
 
@@ -147,5 +147,9 @@ Bookstore extends the `NotebookManager` class from [IPython.html.services.notebo
 # Closing up
 
 IPython notebook is a wonderful tool and I'm really happy to have a way to save my notebooks automagically, publish them on the CDN, and provide nbviewer links.
+
+Happy Computing!
+
+
 
 
