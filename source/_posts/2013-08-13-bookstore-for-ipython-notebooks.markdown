@@ -136,7 +136,7 @@ Couple this with a CNAME for your container (use the HTTP link) through Rackspac
 
 {% img /images/2013-08-13-bookstore-for-ipython-notebooks/add_cname.png 'Add' 'Add CNAME' %}
 
-and you'll have a cleaner URL for sharing through the nbviewer.
+and you'll have a cleaner URL for [sharing through the nbviewer](http://nbviewer.ipython.org/url/nb.fict.io/77ba6f19-de0e-469f-8bad-76d675222b31).
 
 ## Beneath the covers
 
