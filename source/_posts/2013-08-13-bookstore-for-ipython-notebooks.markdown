@@ -67,6 +67,21 @@ Bookstore was built with OpenStack in mind so that you can [store your notebooks
 
 Once configured, the IPython notebook will behave the same on the frontend but no `.ipynb` files will be created on your local box.
 
+Launch the IPython notebook with your profile of choice (default used below)
+
+```bash
+$ ipython notebook
+2013-08-14 11:18:16.513 [NotebookApp] Using existing profile dir: u'/Users/kyle6475/.ipython/profile_default'
+2013-08-14 11:18:28.667 [NotebookApp] Using MathJax from CDN: http://cdn.mathjax.org/mathjax/latest/MathJax.js
+2013-08-14 11:18:28.676 [NotebookApp] Serving rgbkrk's notebooks on Rackspace CloudFiles from container notebooks_demo in the DFW region.
+2013-08-14 11:18:28.676 [NotebookApp] The IPython Notebook is running at: http://127.0.0.1:4242/
+2013-08-14 11:18:28.676 [NotebookApp] Use Control-C to stop this server and shut down all kernels (twice to skip confirmation).
+```
+
+If you've configured it correctly, notebooks will be listed out of CloudFiles (empty on first run though).
+
+{% img /images/2013-08-13-bookstore-for-ipython-notebooks/notebook_list.png 'Notebook List' 'List of IPython Notebooks' %}
+
 ## Storage
 
 Notebooks are stored by a UUID and checkpoints are stored relative to that UUID.
