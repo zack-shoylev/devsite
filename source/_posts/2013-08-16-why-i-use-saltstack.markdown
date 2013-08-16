@@ -5,7 +5,7 @@ date: 2013-08-16 08:00
 comments: true
 author: Allen Oster
 published: true
-categories: 
+categories:
 - SaltStack
 ---
 {% img right /images/2013-07-12-join-the-great-salt-sprint/saltstack_logo.jpg 200 %}
@@ -53,13 +53,11 @@ With these grains set, the load balancer is configured through SaltStack to look
 
 That's the power of a DevOps mentality, and the power of properly using version control with infrastructure automation. SaltStack for the win!
 
-Want to check out our code? Take a look at [Graffiti][1] and [Primer][2] on GitHub.
 
 ###About the Author
 
 Allen Oster is a DevOps Engineer at Rackspace. You can put him in a circle [on Google+][3] or follow him on twitter [@OsterCloud][4].
 
-[1]: https://github.rackspace.com/graffitiorg/graffiti
-[2]: https://github.rackspace.com/graffitiorg/primer
+
 [3]: https://plus.google.com/116303852061385832110/
 [4]: https://twitter.com/OsterCloud
