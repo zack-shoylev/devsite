@@ -38,15 +38,17 @@ We ended up choosing Cassandra as the database backend as it is a natural fit fo
    The amount of resources allocated to the tasks associated with each role can also be tuned, giving users full control of optimizing Blueflood for their own unique cluster configuration and usage patterns.
 
 ### Our Cluster:
-  We built Blueflood to run at massive scale, and hundreds of millions of data points per day is nowhere close to max capacity. We use a 36 node multi-datacenter cluster to run Blueflood in production. Of those, 4 nodes perform ingestion and querying, while the remaining 32 perform rollup calculations and querying. Internally, we use a Thrift-based interface for querying and ingestion that contains a lot of code specific to our internal systems. We wrote reference HTTP-based ingestion and query layers for the opensource release. The ingestion nodes are colocated with the Scribe feeds they read off of, and the rollup nodes are colocated with Cassandra.
+
+We built Blueflood to run at massive scale, and hundreds of millions of data points per day is nowhere close to max capacity. We use a 36 node multi-datacenter cluster to run Blueflood in production. Of those, 4 nodes perform ingestion and querying, while the remaining 32 perform rollup calculations and querying. Internally, we use a Thrift-based interface for querying and ingestion that contains a lot of code specific to our internal systems. We wrote reference HTTP-based ingestion and query layers for the opensource release. The ingestion nodes are colocated with the Scribe feeds they read off of, and the rollup nodes are colocated with Cassandra.
 
 {% img center /images/2013-08-22-blueflood-announcement/rollups_per_minute.png %}
 
 ### The Future:
-  We've got plenty of ideas for how to improve Blueflood, and there's a long road ahead of us. Some of the things we're planning to implement:
-  * Pre-aggregated rollups. This would enable users to send us data points that have already been rolled up by metric aggregators, such as [StatsD](https://github.com/etsy/statsd/). 
-  * Better query support. Currently any render-time aggregation functions must be applied on the front-end. We'd like to eventually achieve feature-parity with Graphite in terms of data transformations supported.
-  * Metrics discovery. We'd like to get integration with [Elasticsearch](http://www.elasticsearch.org/), allowing users to perform queries. This will, at a minimum, allow glob-notation when querying for metric data.
+We've got plenty of ideas for how to improve Blueflood, and there's a long road ahead of us. Some of the things we're planning to implement:
+
+* Pre-aggregated rollups. This would enable users to send us data points that have already been rolled up by metric aggregators, such as [StatsD](https://github.com/etsy/statsd/). 
+* Better query support. Currently any render-time aggregation functions must be applied on the front-end. We'd like to eventually achieve feature-parity with Graphite in terms of data transformations supported.
+* Metrics discovery. We'd like to get integration with [Elasticsearch](http://www.elasticsearch.org/), allowing users to perform queries. This will, at a minimum, allow glob-notation when querying for metric data.
  
 ### Contributing:
 We're opensourcing Blueflood to build a community to support its development. We welcome pull requests. If you've got any questions or want to contribute, you can find us on IRC in the #blueflood channel on Freenode.
