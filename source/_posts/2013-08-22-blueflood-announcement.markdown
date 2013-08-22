@@ -5,16 +5,14 @@ date: 2012-08-22 08:00:00
 layout: post
 title: "Blueflood: A new Open Source Tool for Time Series Data at Scale"
 author: James Burkhart
-published: false
+published: true
 categories:
-- General
+- Blueflood
+- Cloud Montitoring
 ---
-
-## Blueflood: A New Open Source Tool for Time Series Data at Scale
-
 Time series data can yield some of the most interesting and relevant information for developers, operators and businesses. But ever larger datasets coming from multiple sources are making it difficult for people to pull real, actionable intelligence from these time series streams.
 
-We've been working on a tool called <b>Blueflood</b> that makes managing massive-scale time series metrics much easier and are pleased to be open sourcing it for comment, collaboration and improvement. Please check out http://blueflood.io for documention, https://github.com/rackerlabs/blueflood for the source code and on Freenode IRC #blueflood for discussion.
+We've been working on a tool called <b>Blueflood</b> that makes managing massive-scale time series metrics much easier and are pleased to be open sourcing it for comment, collaboration and improvement. Please check out <http://blueflood.io> for documention, <https://github.com/rackerlabs/blueflood> for the source code and on Freenode IRC #blueflood for discussion.<!--More-->
 
 ### Background
 
