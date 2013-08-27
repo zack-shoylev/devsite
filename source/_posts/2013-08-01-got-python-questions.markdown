@@ -21,8 +21,8 @@ Mark your calendars for August 6 through August 8 and join us for the first sess
 ##Python Ask-Me-Anything
 
 * August 6, 7 & 8 - [Jesse Noller][2]: Jesse is actively involved in the Python Software Foundation and organizing PyCon. Learn more about him on [his blog][3] or follow him on Twitter [@jessenoller][4] 
-* September 3, 4 & 5 - [Alex Gaynor][5]: Alex has worked for Rackspace as a software engineer on the Developer Relations Group since May. In his free time he works on many open source software projects, such as Django and PyPy, and serves on the board of directors of the Python Software Foundation. He grew up in Chicago and now lives in San Francisco. Follow him on Twitter [@alex_gaynor][6].
-* October 8,9 & 10 - [Ed Leafe][7]: Ed has been a developer for over 20 years, and is one of the original developers involved with OpenStack. After leaving the Microsoft world over a decade ago, he has been primarily a Python developer, and has spoken at several US PyCons. He has worked with Rackspace for the past five years (and he also throws a mean Frisbee). Follow him on Twitter [@EdLeafe][8].
+* September 3 - [Alex Gaynor][5]: Alex has worked for Rackspace as a software engineer on the Developer Relations Group since May. In his free time he works on many open source software projects, such as Django and PyPy, and serves on the board of directors of the Python Software Foundation. He grew up in Chicago and now lives in San Francisco. Follow him on Twitter [@alex_gaynor][6].
+* October TBD - [Ed Leafe][7]: Ed has been a developer for over 20 years, and is one of the original developers involved with OpenStack. After leaving the Microsoft world over a decade ago, he has been primarily a Python developer, and has spoken at several US PyCons. He has worked with Rackspace for the past five years (and he also throws a mean Frisbee). Follow him on Twitter [@EdLeafe][8].
 
 No RSVP is required for these events. Simply show up, post your question and watch the conversation take off. Join us again in September and October as the guests change each month. Hope to see you in the [Community][9]!     
 
