@@ -8,6 +8,8 @@ published: true
 categories: 
 - Python
 ---
+EDITOR’S NOTE: Update: We got some great feedback about the first AMA with Jesse, so we’re moving the discussion space for Alex’s AMA from the Community to <http://reddit.com/r/rackspace> – that way it will be easier to follow the conversation and replies. In addition, we’re tightening up the timeframe – the AMA will happen on Tuesday ONLY, and not Tuesday through Thursday as originally planned. Finally, some of the other devs who work with Alex will be lending a helping hand, so there will be plenty of developer experience on tap for everyone! Hope to see you all there next Tuesday!
+
 We know technical questions come up from time to time; questions that may require a pretty in-depth response. That’s why next week we’re launching a new Ask-Me-Anything three-day event series in partnership with the [Rackspace Community][1]. It’s your opportunity to ask ANY development question you like and solicit feedback from Rackspace experts and others in the field. Ok, maybe not any development question: for this series of virtual events we’re focusing mainly on Python. 
 
 At Rackspace, we are fortunate to have the best and brightest in the Python community keeping us at the cutting edge, and they want to share some of their expertise and experience with our Community members!<!--More-->
