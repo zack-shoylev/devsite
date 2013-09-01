@@ -1,7 +1,7 @@
 ---
-:q:wqlayout: post
+layout: post
 title: "Chef - Creating dynamic host files"
-date: 2013-08-27 17:11
+date: 2013-09-03 08:00
 comments: true
 author: Sri Rajan
 published: false
