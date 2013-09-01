@@ -123,7 +123,7 @@ You will need to replace the **user** and **hostname** appropriate for your node
 
 As above, you will need to replace **hostname** with the node's actual hostname and then repeat this for each and every node in your cluster.  You will be prompted by the nodes for the root password you set in step 1 above.
 
-### Delopy the Nodes
+### Deploy the Nodes
 The deploy script installs the Chef client on all the nodes you specified in the *setuprc* file.  After the deploy script is done, manually running the chef-client command kicks off the install of OpenStack.  Start the install of the client by typing the following from the Chef server:
 
     ./openstack_deploy.sh
@@ -212,20 +212,3 @@ If anything goes wrong with the install, be sure to ask for help.  The easiest w
 	nova-compute     invictus            nova             enabled    :-)   2013-08-23 17:10:47
 	nova-network     spartacus           internal         enabled    :-)   2013-08-23 17:10:52
 	nova-compute     spartacus           nova             enabled    :-)   2013-08-23 17:10:49
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                
