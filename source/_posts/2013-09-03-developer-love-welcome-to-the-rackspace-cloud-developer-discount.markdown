@@ -1,7 +1,7 @@
 ---
 layout: post
 title: "Developer love: Welcome to the Rackspace Cloud Developer Discount"
-date: 2013-09-03 06:30
+date: 2013-09-03 06:25
 comments: true
 author: Jesse Noller
 published: true
@@ -62,7 +62,7 @@ on Github and share it with the world. Remember - we
 [5]: https://github.com/rackerlabs
 [6]: https://github.com/rackspace
 [7]: mailto:sdk-support@rackspace.com
-[8]: http://developer.rackspace.com
+[8]: http://developer.rackspace.com/devtrial/
 [9]: http://saltstack.com/community.html
 [10]: https://github.com/ansible/ansible
 [11]: http://www.docker.io/
