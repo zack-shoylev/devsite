@@ -45,7 +45,7 @@ based cloud. Give us your feedback on our array of open source,
 
 Give [vagrant-rackspace][3] a spin, or try out [rumm][4] - a powerful little
 command line tool. Explore our open source tools and projects (check out
-[github.com/rackspace][6][github.com/rackerlabs][5]). We look forward to
+[github.com/rackspace][6] [github.com/rackerlabs][5]). We look forward to
 hearing your thoughts and feedback.
 
 Call, [email][7] or join us on IRC (irc.freenode.net, #rackspace).
