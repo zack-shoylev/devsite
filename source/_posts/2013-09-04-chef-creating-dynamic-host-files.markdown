@@ -1,10 +1,10 @@
 ---
 layout: post
 title: "Creating dynamic host files with Chef"
-date: 2013-09-03 08:00
+date: 2013-09-04 08:00
 comments: true
 author: Sri Rajan
-published: false
+published: true
 categories: 
 - Chef
 - Linux
