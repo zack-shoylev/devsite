@@ -61,7 +61,7 @@ keys with SSH.
 
 You can set ssh to use your key by default or specify it each time with
 the `-i` option. The last step is to disable password authentication on
-your server an only use key pair authentication.
+your server and only use key pair authentication.
 
 To list the current keys stored:
 
@@ -98,7 +98,7 @@ that your server is going to utilize more than 20GB of disk but if
 you’re building a larger flavor for the additional RAM or CPU that might
 not be something that interests you.
 
-If this is the case you can bypass the `--config-drive` option on boot
+If this is the case you can pass the `--disk-config` option on boot
 via the API or the nova client:
 
 `$ nova boot --image fedora --flavor 5 --disk-config manual`
