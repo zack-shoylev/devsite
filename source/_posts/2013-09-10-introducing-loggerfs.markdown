@@ -4,7 +4,7 @@ title: "Introducing LoggerFS"
 date: 2013-09-10 09:15
 comments: true
 author: Eric Cheek
-published: false
+published: true
 categories: 
 - Go
 - Ops
