@@ -1,7 +1,7 @@
 ---
 layout: post
 title: "Using configuration management to manage Vhosts"
-date: 2013-09-15 09:00
+date: 2013-09-18 09:00
 comments: true
 author: Welby McRoberts
 published: true
@@ -186,10 +186,6 @@ Now that we have the pillar returning the data to the minion, the last thing we'
 
 After this has completed, you're webservers will now be configured with the same vhosts!
 
-
-
-
 ###About the Author
 
 Welby has worked at Rackspace in the UK as a Lead Infrastructure Engineer since 2009. Previously he's worked in a variety of roles within the UK ranging from Web Development to Systems Administration to Systems Engineering. You can find him on [Google+](https://plus.google.com/116366454309947618934/) or follow him on twitter [@welbymcroberts](https://twitter.com/welbymcroberts)
-
