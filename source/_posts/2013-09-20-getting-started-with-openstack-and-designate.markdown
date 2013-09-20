@@ -9,6 +9,7 @@ categories:
 - OpenStack
 - Designate
 - DNS
+
 ---
 
 **Note**: This guide has been merged into the official Designate documentation. You can see that here:
