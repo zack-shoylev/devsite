@@ -12,7 +12,7 @@ categories:
 
 ---
 
-**Note**: This guide has been merged into the official Designate documentation. You can see that here:
+**Note**: This guide has been merged into the official Designate documentation. You can see that document here:
 <https://designate.readthedocs.org/en/latest/getting-started.html>
 
 A few weeks ago my team at Rackspace began investigation into the DNS as a Service application of Openstack, [Designate][1]. I’d like to share the method that my team and I formulated for getting a development environment for Designate up and running quickly. This set-up doesn’t include an OpenStack installation so there is no integration with Keystone or Nova. It’s the simplest possible installation, a great way for anyone to get started in contributing to OpenStack. Credit to the folks working on Designate for the original document.<!--More-->
@@ -74,23 +74,7 @@ gsqlite3-database=/root/designate/pdns.sqlite
 #Restart PowerDNS:
 $ service pdns restart
 ```
-BIND9 
 
-```
-#Go to Designate Home directory
-$ apt-get install bind9
-$ cd ../..
-$ mkdir bind9
-$ cd bind9
-#Initialize bind9 zones.config file
-$ vi zones.config
-$ cd /etc/bind/
-$ rndc-confgen
-#Copy the resulting text into a rndc.conf and rndc.key file appropriately
-#Add the Designate Zones to bind9 configuration
-$ vi named.conf.local
-#add " include "/path/to/designate/bind9/zones.config"; "
-```
 **7. If you intend to run Designate as a non-root user, then sudo permissions need to be granted:**
 ```
 $ echo "designate ALL=(ALL) NOPASSWD:ALL" | sudo tee -a /etc/sudoers.d/90-designate
@@ -112,9 +96,8 @@ $ editor designate.conf
 
 Copy or mirror the configuration from this sample file [here][3].
 
-**NOTE**: If you’re using bind, be sure to uncomment the bind9 section of the central service configuration, and set the backend to “bind9″ instead of “powerdns”.
 
-**Install the Central Service**
+**Start the Central Services**
 ------------------------
 
 ```
@@ -126,11 +109,9 @@ $ designate-manage powerdns database-init
 $ designate-manage powerdns database-sync
 #Restart PowerDNS or bind9
 $ service pdns restart
-# $ service bind9 restart
 #Start the central service:
 $ designate-central
 ```
-**NOTE**: If you’re using bind, you need not do any of the PowerDNS commands.
 
 **NOTE**: If you get an error of the form: ERROR [designate.openstack.common.rpc.common] AMQP server on localhost:5672 is unreachable: Socket closed
 Run the following command:
@@ -142,7 +123,7 @@ $ designate-central
 
 You’ll now be seeing the log from the central service.
 
-**Install the API Service**
+**Start the API Service**
 ------------------------
 
 Open up a new ssh window and log in to your server (or however you’re communicating with your server).
@@ -173,9 +154,14 @@ You can find the IP Address of your server by running
  wget http://ipecho.net/plain -O - -q ; echo
 ```
 
-Just one note on the API: Before domains are created, you must create a server.
+If you'd like to see an instance in action, go here: <http://162.209.9.99:9001/v1/>
 
-Happy Designating!
+A couple of notes on the API:
+
+* Before domains are created, you must create a server.
+* You can read the ReST API Documentation [here][4]
+
+Happy Designating! If you would like to contribute to Designate, come and [join us][5].
 
 ###About the Author
 Tim Simmons is a Rackspace intern on the Cloud DNS team. Recently, the
@@ -185,8 +171,8 @@ which is published above. He also wrote a guide on using Designate, which will b
 published here next week. Tim continues to play en essential role in our
 next generation DNS offering.
 
-
-
-  [1]: https://wiki.openstack.org/wiki/Designate
-  [2]: http://www.rackspace.com/cloud/servers/
-  [3]: https://gist.github.com/TimSimmons/6596014
+[1]: https://wiki.openstack.org/wiki/Designate
+[2]: http://www.rackspace.com/cloud/servers/
+[3]: https://gist.github.com/TimSimmons/6596014
+[4]: https://designate.readthedocs.org/en/latest/rest.html
+[5]: https://designate.readthedocs.org/en/latest/getting-involved.html
