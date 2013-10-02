@@ -12,14 +12,15 @@ categories:
 - Files
 ---
 
-What happened to Cloud Files support, you ask?
-And when will Gophercloud finally become multi-vendor?
-Sorry.  It's my fault.
-I bit off more than I could chew.
+What happened to Gophercloud's Cloud Files support?
+And, when will Gophercloud finally become multi-vendor?
+I plan on completing these two items in that exact order
+in the coming months, but
+it will take some time.
 
 <!-- more -->
 
-First, let me cover my tardiness with Cloud Files support.
+First, let me cover my relative tardiness with Cloud Files support.
 Working for any company, you're often pulled in a plurality of directions at once.
 Some projects take priority over others, and even their relative priorities shift over time.
 Such was the case with Gophercloud:
