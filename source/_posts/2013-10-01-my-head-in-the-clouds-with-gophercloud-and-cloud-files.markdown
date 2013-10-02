@@ -64,14 +64,13 @@ if Go supported macros.
 No, the real excitement lies with making Gophercloud multi-vendor capable,
 for in there lies the more interesting problems to solve.
 
-Unless I receive overwhelming support for the contrary view,
-and can make convincing arguments to support your position,
+Unless I receive strong support for the opposing view,
 I think the time has come that I should invest effort in widening support for multiple vendors.
 (After I complete cloud files support first, of course.)
 After all, this has always been part of Gophercloud's promise from day one,
 and I'd feel disingenuous for going too long without addressing this feature.
-Besides, having existing infrastructure for more platforms might provide the avenue by which additional contributions,
+Besides, having existing infrastructure for more platforms might provide the way by which additional contributions,
 especially for non-OpenStack platforms, come.
-"Build it and they will come," it turns out, is not always true.
+"Build it and they will come," may not always true.
 Sometimes, folks just want a paved road to the construction site.
 
