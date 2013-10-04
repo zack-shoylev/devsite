@@ -1,6 +1,15 @@
 ---
 layout: post
 title: "Grace Hopper and OpenStack"
+date: 2013-10-04 12:38
+comments: true
+author: YOUR_NAME_HERE
+published: false
+categories: 
+---
+---
+layout: post
+title: "Grace Hopper and OpenStack"
 date: 2013-10-04 08:56
 comments: true
 author: Anne Gentle
