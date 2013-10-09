@@ -2,7 +2,7 @@
 layout: post
 title: "Neutron Networking: Simple Flat Network"
 date: 2013-10-08 17:00
-comments: false
+comments: true
 author: James Denton
 published: true
 categories:
@@ -11,6 +11,7 @@ categories:
 - Neutron
 - Cloud Networks
 ---
+
 In this multi-part walkthrough series, I intend to dive into the various components of the OpenStack Neutron project, and to also provide working examples of multiple networking configurations for clouds built with Rackspace Private Cloud powered by OpenStack on Ubuntu 12.04 LTS. When possible, I’ll provide configuration file examples for those following along on an install from source.
 
 In the previous installment, [Neutron Networking: The Building Blocks of an OpenStack Cloud](http://developer.rackspace.com/blog/neutron-networking-the-building-blocks-of-an-openstack-cloud.html), I laid the foundation of the Neutron networking model that included terminology, concepts, and a brief description of services and capabilities. In this second installment, I’ll describe how to build a simple flat network consisting of a few servers and limited networking gear. Future installments will include VLAN-based provider and tenant networks, GRE-based tenant networks, Open vSwitch troubleshooting, and more.<!--more-->
