@@ -1,7 +1,7 @@
 ---
 layout: post
 title: "Launch Ghost with Rackspace Deployments"
-date: 2013-10-14
+date: 2013-10-14 00:22
 comments: true
 author: Ryan Walker
 published: true
@@ -59,4 +59,4 @@ Once you are finished, click the arrow next to "Save Draft" in the bottom right 
 It should be noted that Ghost is still in heavy development and that this is their first public release. There are probably bugs, and they have a ton more features promised that have not been developed yet. However, this release puts them off to a great start at making something that makes simple blogging simple for everyone.
 
 # About the Author
-Ryan Walker is a DevOps Enginner at Rackspace working on the Deployments team. You can follow him on twitter [@theryanwalker](http://twitter.com/theryanwalker) and on Github as [ryandub](https://github.com/ryandub).
+Ryan Walker is a DevOps Engineer at Rackspace working on the Deployments team. You can follow him on twitter [@theryanwalker](http://twitter.com/theryanwalker) and on Github as [ryandub](https://github.com/ryandub).
