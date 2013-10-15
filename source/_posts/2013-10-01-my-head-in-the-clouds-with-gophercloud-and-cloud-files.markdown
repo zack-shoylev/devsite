@@ -1,11 +1,11 @@
 ---
 layout: post
 title: "My Head In the Clouds with Gophercloud and Cloud Files"
-date: 2013-10-01 12:00
+date: 2013-10-15 12:00
 comments: true
 author: Samuel A. Falvo II
-published: false
-categories: 
+published: true
+categories:
 - OpenStack
 - Gophercloud
 - Cloud
