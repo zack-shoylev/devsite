@@ -11,12 +11,6 @@ categories:
     outreach
 ---
 
-Earlier this year, [Rackspace announced an initiative](http://www.rackspace.com/blog/how-rackspace-supports-code-for-america-fellows/)
-that would encourage Rackspace employees to apply for a
-[Code for America](http://codeforamerica.org) fellowship. Now I'm on the ground
-at the Code for America summit.
-
-<!-- more -->
 
 Earlier this year, [Rackspace announced an initiative](http://www.rackspace.com/blog/how-rackspace-supports-code-for-america-fellows/)
 that would encourage "Rackers" (Rackspace employees) to apply for a
@@ -24,7 +18,7 @@ that would encourage "Rackers" (Rackspace employees) to apply for a
 realize it at the time, Rackspace was the first company to have an official
 sabbatical policy that would permit employees to take a year off to serve with
 Code for America, and then to return to full employment with no loss of
-seniority or vesting.
+seniority or vesting. <!-- more -->
 
 Code for America has [announced their Fellows for 2014](http://codeforamerica.org/2013/10/15/2014fellowship_launch/),
 along with their civic partners. Unfortunately, none of the Rackers who
