@@ -4,7 +4,7 @@ title: "Ruby Treats For October"
 date: 2013-10-21 11:03
 comments: true
 author: Kyle Rames
-published: true
+published: false
 categories: 
 - fog
 - vagrant-rackspace
