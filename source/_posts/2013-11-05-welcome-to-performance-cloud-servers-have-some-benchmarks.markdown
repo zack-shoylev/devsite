@@ -21,7 +21,7 @@ Today, all of us at Rackspace are proud to roll out our new Performance Cloud Se
 
 Our Cloud Servers have been completely re-engineered from the ground up to deliver performance and reliability.  They are built entirely with RAID 10 protected SSDs and powerful Intel Xeon processors.  40 gigabits per second of highly available network throughput is delivered to **every** host, enabling high bandwidth applications and blazing fast Cloud Block Storage performance.  All hosts have dual power feeds with redundant power supplies and are deployed in Rackspace’s world-class data centers. 
 
-But you, as developers, probably want to know more. A lot more. I've spent several weeks taking many of the new flavors for a spin, putting them through a variety of benchmarks and stress tests. I’m a developer, and pretty much any time a vendor – even a well meaning one – publishes benchmarks, I want to see the raw data, how to run them and most of all, how I can recreate them. I'm going to show and share to you not just numbers, but the raw data, and how each test was executed.
+But you, as developers, probably want to know more. A lot more. I've spent several weeks taking many of the new flavors for a spin, putting them through a variety of benchmarks and stress tests. I’m a developer though and pretty much any time a vendor – even a well meaning one – publishes benchmarks, I want to see the raw data, how to run them and most of all, how I can recreate them, so that's what I am doing - all raw results, plots, run scripts, etc are on [GitHub](https://github.com/rackerlabs/performance_cloud_benchmarks).
 
 <!-- more -->
 
