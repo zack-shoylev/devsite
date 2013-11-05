@@ -17,7 +17,7 @@ categories:
 
 {% img right /images/2013-11-04-welcome-to-performance-cloud-servers/brace-yourselves.png 200 %}
 
-Today, all of us at Rackspace are proud to roll out our new Performance Cloud Server offering. These are new flavors of Cloud Servers available to all customers as of today, providing higher performance from RAM to Disk I/O, and more. We've also rolled out a significant update to our [cloud control panel](http://mycloud.rackspace.com) panel to greatly improve the user experience of selecting flavors, operating systems and more.
+Today, all of us at Rackspace are proud to roll out our new Performance Cloud Server offering. These are new flavors of Cloud Servers available to all customers as of today, providing higher performance from RAM to Disk I/O, and more. We've also rolled out a significant update to our [cloud control panel](http://mycloud.rackspace.com) to greatly improve the user experience of selecting flavors, operating systems and more.
 
 Our Cloud Servers have been completely re-engineered from the ground up to deliver performance and reliability.  They are built entirely with RAID 10 protected SSDs and powerful Intel Xeon processors.  40 gigabits per second of highly available network throughput is delivered to **every** host, enabling high bandwidth applications and blazing fast Cloud Block Storage performance.  All hosts have dual power feeds with redundant power supplies and are deployed in Rackspace’s world-class data centers. 
 
@@ -35,6 +35,15 @@ Both flavor groups will eventually phase out our current Cloud Server offering. 
 
 > "As an application developer, nothing's better than a data layer that doesn't slow down my app" - [Jacob Kaplan-Moss](http://jacobian.org/)
 
+#### Availability Note:
+
+The Performance Cloud Servers are available now in our Northern Virginia (IAD) region. They will come online in our Dallas (DFW), Chicago (ORD), and London (LON) regions later in November. Our Sydney (SYD) and Hong Kong (HKG) regions will follow in the first half of 2014.
+
+If you are using the **nova** command line client set the following:
+
+```
+OS_REGION_NAME=IAD
+```
 
 #### Performance 1 Flavor Class
 
@@ -60,7 +69,7 @@ If you fire up the new control panel on [mycloud.rackspace.com](http://mycloud.r
 As you can see, the new flavors are labeled by name - not ID. These match the names you'll find exposed in the control panel, making the experience much more cohesive between the command line tools / API and the control panel itself. This means firing one of them up off the command line is as simple as:
 
 ```
-nova boot perf1GB --disk-config MANUAL --flavor performance1-1 --image dee7f62b-cbb1-4fdc-8dc5-33e408d8c599 --poll
+nova boot perf1GB --flavor performance1-1 --image dee7f62b-cbb1-4fdc-8dc5-33e408d8c599 --poll
 ```
 
 This will spin up a 1GB Ubuntu 13.04 system for you. Use "**nova show**" once it's complete to get the public facing IP address - oh, and save the root/admin password if you're not using the "**--key-name**" SSH key system. All of the new flavors work with all of our [tools and SDKs](http://developer.rackspace.com), and of course - **you can use the [developer discount](http://developer.rackspace.com/devtrial/) to try them out**!
