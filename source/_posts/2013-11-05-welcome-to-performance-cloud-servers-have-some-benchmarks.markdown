@@ -19,7 +19,7 @@ categories:
 
 Today, all of us at Rackspace are proud to roll out our new Performance Cloud Server offering. These are new flavors of Cloud Servers available to all customers as of today, providing higher performance from RAM to Disk I/O, and more. We've also rolled out a significant update to our [cloud control panel](http://mycloud.rackspace.com) to greatly improve the user experience of selecting flavors, operating systems and more.
 
-Our Cloud Servers have been completely re-engineered from the ground up to deliver performance and reliability.  They are built entirely with RAID 10 protected SSDs and powerful Intel Xeon processors.  40 gigabits per second of highly available network throughput is delivered to **every** host, enabling high bandwidth applications and blazing fast Cloud Block Storage performance.  All hosts have dual power feeds with redundant power supplies and are deployed in Rackspace’s world-class data centers. 
+Our Cloud Servers have been completely re-engineered from the ground up to deliver performance and reliability.  They are built entirely with RAID 10 protected SSDs and powerful Intel Xeon processors.  40 gigabits per second of highly available network throughput is delivered to **every** host, enabling high bandwidth applications and blazing fast Cloud Block Storage performance.  All hosts have dual power feeds with redundant power supplies and are deployed in Rackspace’s world-class data centers.
 
 But you, as developers, probably want to know more. A lot more. I've spent several weeks taking many of the new flavors for a spin, putting them through a variety of benchmarks and stress tests. I’m a developer though and pretty much any time a vendor – even a well meaning one – publishes benchmarks, I want to see the raw data, how to run them and most of all, how I can recreate them, so that's what I am doing - all raw results, plots, run scripts, etc are on [GitHub](https://github.com/rackerlabs/performance_cloud_benchmarks).
 
@@ -31,7 +31,7 @@ Alright. So we've rolled out two new flavor classes of servers: Performance 1 an
 
 {% img /images/2013-11-04-welcome-to-performance-cloud-servers/image2013-10-16_16_0_21.png 800 %}
 
-Both flavor groups will eventually phase out our current Cloud Server offering. These are completely RAID 10 SSD backed, Intel(R) Xeon(R) E5-2670 2.60GHz based systems (up to 32 vCPUs!) with 10GE networking (every host receives 40Gbps of network capacity - that alone accounts for huge gains when using [Cloud Block Storage](http://developer.rackspace.com/blog/happy-birthday-cloud-block-storage.html)). In the chart above, you can see how many vCPUs you get with each image, and I can tell you - they fly. 
+Both flavor groups will eventually phase out our current Cloud Server offering. These are completely RAID 10 SSD backed, Intel(R) Xeon(R) E5-2670 2.60GHz based systems (up to 32 vCPUs!) with 10GE networking (every host receives 40Gbps of network capacity - that alone accounts for huge gains when using [Cloud Block Storage](http://developer.rackspace.com/blog/happy-birthday-cloud-block-storage.html)). In the chart above, you can see how many vCPUs you get with each image, and I can tell you - they fly.
 
 > "As an application developer, nothing's better than a data layer that doesn't slow down my app" - [Jacob Kaplan-Moss](http://jacobian.org/)
 
@@ -47,7 +47,7 @@ OS_REGION_NAME=IAD
 
 #### Performance 1 Flavor Class
 
-The *Performance 1* flavor class has a shared (oversubscribed) CPU and network with a 1:1 ratio of RAM to CPU (peak burst) and are best suited for apps that can benefit from burst-style usage, including web servers, batch processing, network appliances, smaller databases, and most general purpose computing workloads. When you want to build a rapid horizontal scale-out web application, mobile back end, host your site etc - this flavor class is going to be your bread and butter. 
+The *Performance 1* flavor class has a shared (oversubscribed) CPU and network with a 1:1 ratio of RAM to CPU (peak burst) and are best suited for apps that can benefit from burst-style usage, including web servers, batch processing, network appliances, smaller databases, and most general purpose computing workloads. When you want to build a rapid horizontal scale-out web application, mobile back end, host your site etc - this flavor class is going to be your bread and butter.
 
 We eliminated the lowest end flavor (512) and will start with the competitively priced the 1GB flavor, while drastically increasing its performance from the previous 1 GB offering (we have charts!). This means that the price per month for a 1GB instance is now $29.20/Month ($0.04/Hr). All together?  The performance you get for the new prices across all of the Performance Cloud Server flavors is amazingly competitive and a great improvement to the Rackspace portfolio.
 
@@ -99,16 +99,16 @@ I’m a developer, and pretty much any time a vendor - even a well meaning one -
 
 {% img right /images/2013-11-04-welcome-to-performance-cloud-servers/dog-dude-wait-what.jpg 300 %}
 
-Yeah, you're probably wondering what the **PV** and **PV-HVM** markers in that list are. As you probably know, Rackspace runs [OpenStack](http://www.openstack.org), and the key virtual machine component, Nova offers you a choice of [hypervisors](http://en.wikipedia.org/wiki/Hypervisor) to work with. Internally, our clusters use [Xen](http://www.xenproject.org/), an open source, scalable and powerful hypervisor. Hypervisors though are funny little animals - they actually operate within a [spectrum](http://wiki.xen.org/wiki/Virtualization_Spectrum), meaning you can virtualize some of the resources for guests, all, or some interesting mixture for your specific needs. 
+Yeah, you're probably wondering what the **PV** and **PV-HVM** markers in that list are. As you probably know, Rackspace runs [OpenStack](http://www.openstack.org), and the key virtual machine component, Nova offers you a choice of [hypervisors](http://en.wikipedia.org/wiki/Hypervisor) to work with. Internally, our clusters use [Xen](http://www.xenproject.org/), an open source, scalable and powerful hypervisor. Hypervisors though are funny little animals - they actually operate within a [spectrum](http://wiki.xen.org/wiki/Virtualization_Spectrum), meaning you can virtualize some of the resources for guests, all, or some interesting mixture for your specific needs.
 
 The basic terminology you need to know (quoting from the [xen wiki](http://wiki.xen.org/wiki/Virtualization_Spectrum)):
 
 * [Paravirtualization (PV)](http://wiki.xen.org/wiki/Paravirtualization_(PV)): Paravirtualization (PV) is an efficient and lightweight virtualization technique introduced by Xen, later adopted by other virtualization solutions. PV does not require virtualization extensions from the host CPU and thus enables virtualization on hardware architectures that do not support Hardware-assisted virtualization. However, PV guests and control domains require kernel support and drivers that in the past required special kernel builds, but are now part of the Linux kernel as well as other operating systems.
 * [PV on HVM (PV-HVM)](http://wiki.xen.org/wiki/PV_on_HVM): PV on HVM is a mixture of paravirtualization and full hardware virtualization. The primary goal of PV on HVM is to boost performance of fully virtualized HVM guests through use of specially optimized paravirtual device drivers (also called PVHVM or PV-on-HVM drivers).
 
-You can also read more about the [PV-HVM Linux drivers](http://wiki.xen.org/wiki/Xen_Linux_PV_on_HVM_drivers) 
+You can also read more about the [PV-HVM Linux drivers](http://wiki.xen.org/wiki/Xen_Linux_PV_on_HVM_drivers)
 
-So, terminology aside, today, when you boot any Linux image on Rackspace Cloud, that image uses standard paravirtualization (PV), for Windows and FreeBSD we use HVM. In the case of the new Performance Cloud Servers, we still default to PV images, and are currently testing PV on HVM images. PV-HVM images can be great for CPU-intensive workloads (as you'll see).  
+So, terminology aside, today, when you boot any Linux image on Rackspace Cloud, that image uses standard paravirtualization (PV), for Windows and FreeBSD we use HVM. In the case of the new Performance Cloud Servers, we still default to PV images, and are currently testing PV on HVM images. PV-HVM images can be great for CPU-intensive workloads (as you'll see).
 
 For these benchmarks - I tested all three styles - our current (well, as of yesterday) Next Gen Cloud Server (PV), Performance PV and Performance PV-HVM. We should be rolling out the PV-HVM images to customers as soon as our quality engineers are happy with their stability and functionality. As it is you **could** use them today (for Fedora 19 and Ubuntu) 13.04 using the **nova** client to pick one of the test images:
 
@@ -163,7 +163,7 @@ They're pretty fast, I'd say - but you can look at the raw data and draw your ow
 * Test(s) run: **fio --name fio_test_file --direct=1 --rw=randwrite --bs=16k --size=1G --numjobs=16 --time_based --runtime=180 --group_reporting**
 * Iterations: 6 (+1 for initial warmup)
 
-So, fio is an I/O tool meant to be used both for benchmark and stress/hardware verification. It has support for 13 different types of I/O engines (sync, mmap, libaio, posixaio, SG v3, splice, null, network, syslet, guasi, solarisaio, and more), I/O priorities (for newer Linux kernels), rate I/O, forked or threaded jobs, and much more. 
+So, fio is an I/O tool meant to be used both for benchmark and stress/hardware verification. It has support for 13 different types of I/O engines (sync, mmap, libaio, posixaio, SG v3, splice, null, network, syslet, guasi, solarisaio, and more), I/O priorities (for newer Linux kernels), rate I/O, forked or threaded jobs, and much more.
 
 It spits out a lot of data, and sure - we could chart it but the results... Well, the charts look down right silly with an increase of almost 2000-5000% with IOPS jumping from 1-2k to 22k+. Just to show how silly, we charted just the IOPS across the 1GB and 30GB servers:
 
@@ -217,7 +217,7 @@ Ok, so you won't see any 1GB flavor results here - [PyPy](http://pypy.org/) need
 
 {% img center /images/2013-11-04-welcome-to-performance-cloud-servers/sadface.gif 400 %}
 
-So, the graph ([click here for full size](http://7c5dfdbb739dc73f99cb-b85bd20d3e627e59093de9f95b53ad56.r58.cf5.rackcdn.com/kernel30gb.png)): 
+So, the graph ([click here for full size](http://7c5dfdbb739dc73f99cb-b85bd20d3e627e59093de9f95b53ad56.r58.cf5.rackcdn.com/kernel30gb.png)):
 
 {% img /images/2013-11-04-welcome-to-performance-cloud-servers/pypy_translate.png 900 %}
 
@@ -247,7 +247,7 @@ Things on the wish list:
 
 Actually, since we're on that topic - if you have corrections, or additions, or suggestions for us to add to all of this, please file an issue on the [GitHub repository](https://github.com/rackerlabs/performance_cloud_benchmarks) - all raw results, plotting scripts, etc is sitting right there, though my in progress fabric script to run them all didn't make the print deadline.
 
-If you see something wrong? Let us know. All of these new flavors are fully operational with our complete range of [tools and SDKs](http://developer.rackspace.com). You can reach out to me ([Jesse Noller][1]) on [Twitter][2], [email the developer support team](mailto:sdk-support@rackspace.com), ping [@Rackspace](https://twitter.com/Rackspace) on Twitter, or even reach out to [help@rackspace.com](mailto:help@rackspace.com). Special thanks to the entire Rackspace team for making this possible, and a special shout-out to [Brian Curtin](https://twitter.com/brian_curtin) for helping me get all the data put together into some semblance of sanity!
+If you see something wrong? Let us know. All of these new flavors are fully operational with our complete range of [tools and SDKs](http://developer.rackspace.com). You can reach out to me ([Jesse Noller][1]) on [Twitter][2], [email the developer support team](mailto:sdk-support@rackspace.com), ping [@Rackspace](https://twitter.com/Rackspace) on Twitter, or even reach out to [help@rackspace.com](mailto:help@rackspace.com). Special thanks to the entire Rackspace team for making this possible, a special shout-out to [Brian Curtin](https://twitter.com/brian_curtin) for helping me get all the data put together into some semblance of sanity! Thanks to [plot.ly](http://plot.ly) for making graphing data simple and awesome!
 
 I'm really looking forward to seeing what these new Performance Cloud Servers, a revitalized [Cloud Block Storage](http://developer.rackspace.com/blog/happy-birthday-cloud-block-storage.html), [OpenStack Heat](http://developer.rackspace.com/blog/openstack-heat-orchestration-coming-to-rackspace.html) orchestration, and [Cloud Queues](http://www.rackspace.com/blog/cloud-queues-available-now-to-all-cloud-customers/) will empower you, developers & hackers to dream up and build.
 
