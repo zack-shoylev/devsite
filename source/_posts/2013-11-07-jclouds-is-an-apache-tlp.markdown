@@ -1,10 +1,10 @@
 ---
 layout: post
 title: "jclouds is an Apache Top Level Project"
-date: 2013-11-07 06:00
+date: 2013-11-07 11:35
 comments: true
 author: Everett Toews
-published: false
+published: true
 categories:
 - jclouds
 - java
