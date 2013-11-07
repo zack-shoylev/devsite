@@ -11,7 +11,8 @@ categories:
 - sdk
 - developer
 ---
-{% img right /images/2013-11-07-jclouds-is-an-apache-tlp/jclouds.png 200 %}
+{% img right /images/2013-11-07-jclouds-is-an-apache-tlp/jclouds.jpg 200 %}
+
 The lower case j's have been dotted and the t's have been crossed. jclouds is an Apache Software Foundation (ASF) Top Level Project (TLP)! With the closing of [this issue](https://issues.apache.org/jira/browse/INFRA-6912) and the resolution being set to "Fixed", it's officially and infrastructurally done. We've even dropped the "incubator" prefix/suffix from our DNS entries and various source code artifacts. You can now find us at our permanent home [jclouds.apache.org](http://jclouds.apache.org/). Huzzah!
 
 It's been a relatively short ride through the ASF incubation process, just over 6 months. Adrian Cole founded jclouds over 4 years ago and had already built a thriving community before proposing the move to an open source foundation. That community, on the strength of its diversity, had already met many of the requirements to become a TLP. We had some excellent mentors but it was David Nalley that really helped guide our fledging project through the incubation process.
