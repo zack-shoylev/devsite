@@ -1,11 +1,11 @@
 ---
 layout: post
 title: "Step-by-step walkthrough to using Chef to bootstrap Windows Nodes on the Rackspace Cloud"
-date: 2013-11-08 08:20
+date: 2013-11-08 09:30
 comments: true
 author: Nico Engelen
-published: false
-categories: 
+published: true
+categories:
 - Chef
 - Windows
 - Configuration Management
@@ -18,76 +18,117 @@ If you are a frequent reader of this blog you will have seen Hart's posts about 
 * [Part two](http://devops.rackspace.com/cooking-with-chef2.html): Cookbooks and Deploying with Knife
 * [Part three](http://devops.rackspace.com/cooking-with-chef3.html): Installing your own Open Source Chef
 
-Further to these there are also a lot of tutorials on the internet. Most of them seem to focus on using chef to deploy/manage Linux servers but you will have a hard time to find a lot for doing the same on Windows Servers (Yes, Windows as in Microsoft Windows).
+Further to these there are also a lot of tutorials on the internet. Most of
+them seem to focus on using chef to deploy/manage Linux servers but you will
+have a hard time to find a lot for doing the same on Windows Servers (Yes,
+Windows as in Microsoft Windows).
 
-I have therefore sat down and put together a detailed step-by-step walkthrough that will guide you through installing your own Open Source Chef Server on a Rackspace Cloud Server running CentOS 6.4, installing the knife-windows plugin and then spinning up, bootstrapping and installing IIS on a Windows Server 2012 Rackspace Cloud Server without logging on to it one single time. Read on, if you dare...<!--More-->
+I have therefore sat down and put together a detailed step-by-step walkthrough
+that will guide you through installing your own Open Source Chef Server on a
+Rackspace Cloud Server running CentOS 6.4, installing the knife-windows
+plugin and then spinning up, bootstrapping and installing IIS on a Windows
+Server 2012 Rackspace Cloud Server without logging on to it once.
+Read on, if you dare...
+
+<!--More-->
+
 ##Acknowledgements
-For the simplicity of this walkthrough, I am using __one__ single CentOS server to act as Chef Server and Chef Workstation at the same time. I have also used the root account on this server to get the fiddling around with su and sudo out of the way. I am well aware that this might not be following best practices and in a perfect world you'd be using different servers for Chef Server and Chef Workstation and of course never log on as the root user. Further, I have partly sanitized the output as the IP of the chef server is still in use. I have therefore replaced all occurences of it with <IP_ADDR>. Please just replace that with the IP address that the nova show command is returning for you. Having said that, let's get cracking.
+
+For the simplicity of this walkthrough, I am using a single CentOS server to
+act as Chef Server and Chef Workstation at the same time. I have also used the
+root account on this server to get the fiddling around with su and sudo out
+of the way. I am well aware that this might not be following best practices
+and in a perfect world you'd be using different servers for Chef Server and
+Chef Workstation and of course never log on as the root user. Further, I have
+partly sanitized the output as the IP of the chef server is still in use.
+
+I have therefore replaced all occurences of it with <IP_ADDR>. Please just
+replace that with the IP address that the nova show command is returning for
+you. Having said that, let's get cracking.
 
 ##Prerequisites
-You will obviously need a Rackspace Cloud Account for this. If you haven't got one yet, go sign up for it [here](https://cart.rackspace.com/cloud/) (or [here](https://buyonline.rackspace.co.uk/cloud/) if you are in the UK). There even is a [developer discount](http://developer.rackspace.com/devtrial/) going on right now, check it out.   
-   
-Once you have an account, log into the Control Panel, spin up a Cloud Server running the Linux distribution of your choice and install the novaclient on it following these [instructions](http://www.rackspace.com/knowledge_center/article/installing-python-novaclient-on-linux-and-mac-os) so you can spin up Cloud Servers from the command line. I called my server nova-serv but feel free to call it whatever you like. Once that's done, you're ready to go.
+
+You will obviously need a Rackspace Cloud Account for this. If you haven't
+got one yet, go sign up for it [here](http://developer.rackspace.com/devtrial/),
+which includes a 300$ developer discount.
+
+Once you have an account, log into the Control Panel, spin up a Cloud Server
+running the Linux distribution of your choice and install the novaclient on it
+following these [instructions](http://www.rackspace.com/knowledge_center/article/installing-python-novaclient-on-linux-and-mac-os)
+so you can spin up Cloud Servers from the command line. I called my server
+nova-serv but feel free to call it whatever you like. Once that's done,
+you're ready to go.
 
 ##Spin up the Cloud Server instance
-First of all, let's spin up a new Rackspace Cloud Server, running CentOS 6.4 with 512MB of RAM. While we're at it, let's also inject our SSH RSA public key into the list of authorized keys for the root user
-	[nico@nova-serv ~]$ nova boot --image e0ed4adb-3a00-433e-a0ac-a51f1bc1ea3d --flavor 2 --file "/root/.ssh/authorized_keys=.ssh/id_rsa.pub" chef-serv
-	+------------------------+--------------------------------------+
-	| Property               | Value                                |
-	+------------------------+--------------------------------------+
-	| status                 | BUILD                                |
-	| updated                | 2013-07-31T07:36:29Z                 |
-	| hostId                 |                                      |
-	| key_name               | None                                 |
-	| image                  | CentOS 6.4                           |
-	| OS-EXT-STS:task_state  | scheduling                           |
-	| OS-EXT-STS:vm_state    | building                             |
-	| flavor                 | 512MB Standard Instance              |
-	| id                     | 7052aa1a-5714-47f2-abce-bd389d876d00 |
-	| user_id                | 10017907                             |
-	| name                   | chef-serv                            |
-	| adminPass              | o4oviBbrDUmE                         |
-	| tenant_id              | 10029688                             |
-	| created                | 2013-07-31T07:36:29Z                 |
-	| OS-DCF:diskConfig      | AUTO                                 |
-	| accessIPv4             |                                      |
-	| accessIPv6             |                                      |
-	| progress               | 0                                    |
-	| OS-EXT-STS:power_state | 0                                    |
-	| metadata               | {}                                   |
-	+------------------------+--------------------------------------+
+
+First of all, let's spin up a new Rackspace Cloud Server, running CentOS 6.4
+with 512MB of RAM. While we're at it, let's also inject our SSH RSA public key
+into the list of authorized keys for the root user
+
+    [nico@nova-serv ~]$ nova boot --image e0ed4adb-3a00-433e-a0ac-a51f1bc1ea3d --flavor 2 --file "/root/.ssh/authorized_keys=.ssh/id_rsa.pub" chef-serv
+    +------------------------+--------------------------------------+
+    | Property               | Value                                |
+    +------------------------+--------------------------------------+
+    | status                 | BUILD                                |
+    | updated                | 2013-07-31T07:36:29Z                 |
+    | hostId                 |                                      |
+    | key_name               | None                                 |
+    | image                  | CentOS 6.4                           |
+    | OS-EXT-STS:task_state  | scheduling                           |
+    | OS-EXT-STS:vm_state    | building                             |
+    | flavor                 | 512MB Standard Instance              |
+    | id                     | 7052aa1a-5714-47f2-abce-bd389d876d00 |
+    | user_id                | 10017907                             |
+    | name                   | chef-serv                            |
+    | adminPass              | o4oviBbrDUmE                         |
+    | tenant_id              | 10029688                             |
+    | created                | 2013-07-31T07:36:29Z                 |
+    | OS-DCF:diskConfig      | AUTO                                 |
+    | accessIPv4             |                                      |
+    | accessIPv6             |                                      |
+    | progress               | 0                                    |
+    | OS-EXT-STS:power_state | 0                                    |
+    | metadata               | {}                                   |
+    +------------------------+--------------------------------------+
 
 Check back after a few minutes and the build process shoud have completed
 
-	[nico@chef-serv ~]$ nova show 7052aa1a-5714-47f2-abce-bd389d876d00
-	+---------------------------------------------------------------------+
-	| Property               | Value                                      |
-	+------------------------+--------------------------------------------+
-	| status                 | ACTIVE                                     |
-	| updated                | 2013-07-31T07:39:45Z                       |
-	| hostId                 | 53ae616f8c649f7c6db25980e1b8a9827919bde4...|
-	| private network        |                                            |
-	| key_name               | None                                       |
-	| image                  | CentOS 6.4                                 |
-	| OS-EXT-STS:task_state  | None                                       |
-	| OS-EXT-STS:vm_state    | active                                     |
-	| public network         | <IP_ADDR>                                  |
-	| flavor                 | 512MB Standard Instance (2)                |
-	| id                     | 7052aa1a-5714-47f2-abce-bd389d876d00       |
-	| user_id                | 10017907                                   |
-	| name                   | chef-serv                                  |
-	| created                | 2013-07-31T07:36:29Z                       |
-	| tenant_id              | 10029688                                   |
-	| OS-DCF:diskConfig      | AUTO                                       |
-	| accessIPv4             | <IP_ADDR>                                  |
-	| accessIPv6             |                                            |
-	| progress               | 100                                        |
-	| OS-EXT-STS:power_state | 1                                          |
-	| metadata               | {}                                         |
-	+------------------------+--------------------------------------------+ 
+    [nico@chef-serv ~]$ nova show 7052aa1a-5714-47f2-abce-bd389d876d00
+    +---------------------------------------------------------------------+
+    | Property               | Value                                      |
+    +------------------------+--------------------------------------------+
+    | status                 | ACTIVE                                     |
+    | updated                | 2013-07-31T07:39:45Z                       |
+    | hostId                 | 53ae616f8c649f7c6db25980e1b8a9827919bde4...|
+    | private network        |                                            |
+    | key_name               | None                                       |
+    | image                  | CentOS 6.4                                 |
+    | OS-EXT-STS:task_state  | None                                       |
+    | OS-EXT-STS:vm_state    | active                                     |
+    | public network         | <IP_ADDR>                                  |
+    | flavor                 | 512MB Standard Instance (2)                |
+    | id                     | 7052aa1a-5714-47f2-abce-bd389d876d00       |
+    | user_id                | 10017907                                   |
+    | name                   | chef-serv                                  |
+    | created                | 2013-07-31T07:36:29Z                       |
+    | tenant_id              | 10029688                                   |
+    | OS-DCF:diskConfig      | AUTO                                       |
+    | accessIPv4             | <IP_ADDR>                                  |
+    | accessIPv6             |                                            |
+    | progress               | 100                                        |
+    | OS-EXT-STS:power_state | 1                                          |
+    | metadata               | {}                                         |
+    +------------------------+--------------------------------------------+
 
 ##Spin up the Windows Cloud Server we are bootstrapping later
-Create a bootstrap.cmd in the current directory and make put the following content in. Make sure to change the IP (<IP_ADDR>) and the hostname (chef-serv) to reflect your values. Also note that there are only two lines in the file (depending on you screen resolution the first line might wrap) with the first line containing the two netsh command connected with an ampersand. We will inject this file into our Windows Server so that it will be executed after the first boot and accomplish the following things:
+
+Create a bootstrap.cmd in the current directory and make put the following
+content in. Make sure to change the IP (<IP_ADDR>) and the hostname (chef-serv)
+to reflect your values. Also note that there are only two lines in the file
+(depending on you screen resolution the first line might wrap) with the first
+line containing the two netsh command connected with an ampersand. We will
+inject this file into our Windows Server so that it will be executed after the
+first boot and accomplish the following things:
 
 - Start the windows time service (w32time)
 - Set the windows times service to sync time from the uk.pool.ntp..org time servers
@@ -95,12 +136,14 @@ Create a bootstrap.cmd in the current directory and make put the following conte
 - Open port 5985 (winrm) on the firewal
 - Add an entry to the hosts file of our Windows Server as chef-client will try and connect back to our chef-server via its name
 
-	[nico@nova-serv ~]$ cat bootstrap.cmd
-	net start w32time
-	w32tm /config /manualpeerlist:"0.uk.pool.ntp.org 1.uk.pool.ntp.org 2.uk.pool.ntp.org 3.uk.pool.ntp.org" /syncfromflags:manual /reliable:yes /update
-	w32tm /resync
-	netsh advfirewall firewall set rule group="remote administration" new enable=yes & netsh advfirewall firewall add rule name="WinRM Port" dir=in action=allow protocol=TCP remoteip=<IP_ADDR> localport=5985
-	echo <IP_ADDR> chef-serv >> C:\Windows\system32\drivers\etc\hosts
+```
+    [nico@nova-serv ~]$ cat bootstrap.cmd
+    net start w32time
+    w32tm /config /manualpeerlist:"0.uk.pool.ntp.org 1.uk.pool.ntp.org 2.uk.pool.ntp.org 3.uk.pool.ntp.org" /syncfromflags:manual /reliable:yes /update
+    w32tm /resync
+    netsh advfirewall firewall set rule group="remote administration" new enable=yes & netsh advfirewall firewall add rule name="WinRM Port" dir=in action=allow protocol=TCP remoteip=<IP_ADDR> localport=5985
+    echo <IP_ADDR> chef-serv >> C:\Windows\system32\drivers\etc\hosts
+```
 
 And now boot a Cloud Server from the Windows Server 2012 image injecting our bootstrap.cmd into the load point for files auto-executed after bootup (C:\cloud-automation\bootstrap.cmd). This will take a while longer to finish so we leave it running while we install Chef Server and Chef Client on our chef server. We will check back on the progress later. Don't forget to take a note of the `adminPass`
 
@@ -131,37 +174,38 @@ And now boot a Cloud Server from the Windows Server 2012 image injecting our boo
 	+------------------------+--------------------------------------+
 
 ##Installing Chef Server on our CentOS server
+
 OK, let's get onto the CentOS server we spun up above, this should be trusting our SSH key so no need to enter a password.
 
-	[nico@nova-serv ~]$ ssh root@<IP_ADDR>
-	The authenticity of host '<IP_ADDR> (<IP_ADDR>)' can't be established.
-	RSA key fingerprint is d2:40:af:96:47:fa:67:ec:5c:20:b0:d5:b9:14:ae:e0.
-	Are you sure you want to continue connecting (yes/no)? yes
-	Warning: Permanently added '<IP_ADDR>' (RSA) to the list of known hosts.
+    [nico@nova-serv ~]$ ssh root@<IP_ADDR>
+    The authenticity of host '<IP_ADDR> (<IP_ADDR>)' can't be established.
+    RSA key fingerprint is d2:40:af:96:47:fa:67:ec:5c:20:b0:d5:b9:14:ae:e0.
+    Are you sure you want to continue connecting (yes/no)? yes
+    Warning: Permanently added '<IP_ADDR>' (RSA) to the list of known hosts.
 
 OK, first of all, let's install Ruby. The latest version available via yum is 1.8.7, however, the knife-windows plugin requires at least 1.9.1 so we are going to install rvm which will ask us to source /etc/profile.d/rvm.sh
 
-	[root@chef-serv ~]# curl -L https://get.rvm.io | bash 
-	[root@chef-serv ~]# source /etc/profile.d/rvm.sh
+    [root@chef-serv ~]# curl -L https://get.rvm.io | bash
+    [root@chef-serv ~]# source /etc/profile.d/rvm.sh
 
 Now use rvm to install the latest ruby version available (1.9.3 at the time of writing this)
 
-	[root@chef-serv ~]# rvm install 1.9.3
+    [root@chef-serv ~]# rvm install 1.9.3
 
 Next, we will download the Chef Server rpm package from [here](http://www.opscode.com/chef/install/ "Opscode download link for chef open-source"), install it and do the initial server configuration
 
-	[root@chef-serv ~]# wget https://opscode-omnibus-packages.s3.amazonaws.com/el/6/x86_64/chef-server-11.0.8-1.el6.x86_64.rpm 
-	[root@chef-serv ~]# rpm --install ./chef-server-11.0.8-1.el6.x86_64.rpm
-	[root@chef-serv ~]# chef-server-ctl reconfigure
+    [root@chef-serv ~]# wget https://opscode-omnibus-packages.s3.amazonaws.com/el/6/x86_64/chef-server-11.0.8-1.el6.x86_64.rpm
+    [root@chef-serv ~]# rpm --install ./chef-server-11.0.8-1.el6.x86_64.rpm
+    [root@chef-serv ~]# chef-server-ctl reconfigure
 
 Once that's all been done, we need to open ports 80 (http) and 443 (https) on the host firewall so we can actually connect to our Chef Server. Don't forget to save your iptables config so it persists a reboot
 
-	[root@chef-serv ~]# iptables -I INPUT 1 -p tcp -m tcp --dport 80 -j ACCEPT 
-	[root@chef-serv ~]# iptables -I INPUT 1 -p tcp -m tcp --dport 443 -j ACCEPT 
-	[root@chef-serv ~]# service iptables save
+    [root@chef-serv ~]# iptables -I INPUT 1 -p tcp -m tcp --dport 80 -j ACCEPT
+    [root@chef-serv ~]# iptables -I INPUT 1 -p tcp -m tcp --dport 443 -j ACCEPT
+    [root@chef-serv ~]# service iptables save
 
-**IMPORTANT: Log in to your server via https at this point (i.e. https://<IP_ADDR>) and change the default admin password (or someone else might do that for you)**   
-   
+**IMPORTANT: Log in to your server via https at this point (i.e. https://<IP_ADDR>) and change the default admin password (or someone else might do that for you)**
+
 **NOTE: as an alternative to using the IP address you can also append the following line to your hosts file: `<IP_ADDR> chef-serv` which allows you to use the hostname in the browser rather than the IP.**
 
 Next, use gem to install chef rather than following the instructions on opscode's website.
@@ -182,7 +226,7 @@ OK, let's do the initial configuration for knife. This will do a couple of thing
 
 Just run the below command and leave all default values as they are.
 
-	[root@chef-serv ~]# knife configure -i -r ~/chef-repo/ 
+	[root@chef-serv ~]# knife configure -i -r ~/chef-repo/
 	WARNING: No knife configuration file found
 	Where should I put the config file? [/root/.chef/knife.rb]
 	Please enter the chef server URL: [https://chef-serv:443]
@@ -198,8 +242,8 @@ Just run the below command and leave all default values as they are.
 
 Almost there, next up is installing knife-windows directly from the github repo it is on. For that, we will have to install a couple of necessary dependencies. After that, we'll clone the github repo for knife-windows, then checkout a specific commit (we're doing that because the current latest version of knife-windows - 0.5.14.rc.1 - seems broken), build a gem from that code using rake and then install the gem using gem.
 
-	[root@chef-serv ~]# yum install ruby-devel libxml2-devel libxslt-devel -y 
-	[root@chef-serv knife-windows]# cd knife-windows 
+	[root@chef-serv ~]# yum install ruby-devel libxml2-devel libxslt-devel -y
+	[root@chef-serv knife-windows]# cd knife-windows
 	[root@chef-serv knife-windows]# git clone https://github.com/opscode/knife-windows.git
 	[root@chef-serv knife-windows]# git checkout 95d79e32eb47db95471726c1460cc561caaef6d7
 	[root@chef-serv knife-windows]# rake build
@@ -211,12 +255,12 @@ Done. You should now have a Chef Server running as well as the chef-client insta
 	[root@chef-serv ~]# knife windows
 	FATAL: Cannot find sub command for: 'windows'
 	Available windows subcommands: (for details, knife SUB-COMMAND --help)
- 
+
 	** WINDOWS COMMANDS **
 	knife bootstrap windows winrm FQDN (options)
 	knife bootstrap windows ssh FQDN (options)
 	knife winrm QUERY COMMAND (options)
- 
+
 	[root@chef-serv ~]# knife winrm --help
 	knife winrm QUERY COMMAND (options)
 	    -a, --attribute ATTR             The attribute to use for opening the connection - default is fqdn
@@ -250,7 +294,7 @@ Done. You should now have a Chef Server running as well as the chef-client insta
 	    -x, --winrm-user USERNAME        The WinRM username
 	    -y, --yes                        Say yes to all prompts for confirmation
 	    -h, --help                       Show this message
-	    
+
 
 ##Bootstrapping our Windows Server with knife
 Quickly log out to check on the status of our Cloud Windows Server build (I'll be back).
@@ -440,13 +484,13 @@ Let's quickly check, if our Windows server is listening on 5985:
 	95.138.188.93 [2013-07-31T08:32:00+00:00] INFO: Running report handlers
 	95.138.188.93 [2013-07-31T08:32:00+00:00] INFO: Report handlers complete
 
-That went through fine but as you can see, there is a warning about the empty run_list. 
+That went through fine but as you can see, there is a warning about the empty run_list.
 ##Installing IIS
 Time to do something useful now and install IIS.
 First of all, download the cookbooks that are required for the iis cookbook (i.e. webpi, windows and chef_handler)
 
-	[root@chef-serv ~]# knife cookbook site install webpi 
-	[root@chef-serv ~]# knife cookbook site install windows 
+	[root@chef-serv ~]# knife cookbook site install webpi
+	[root@chef-serv ~]# knife cookbook site install windows
 	[root@chef-serv ~]# knife cookbook site install chef_handler
 
 Download the iis community cookbook itself and upload all of the cookbooks just downloaded to our Chef Server so we can use them.
@@ -545,16 +589,16 @@ That was fairly quick. You now have a Windows Server 2012 server running up in t
 Finally, if you want to reproduce this quickly and don't really want to scroll through this document and copy-paste each command one at a time, find below a list of commands arranged in blocks so there are breaks when user input or action is required. The easiest is to just copy that into a notepad/text editor of your choice and substitute the values as you go along and copy-paste.
 
 	nova boot --image e0ed4adb-3a00-433e-a0ac-a51f1bc1ea3d --flavor 2 --file "/root/.ssh/authorized_keys=.ssh/id_rsa.pub" chef-serv
-	
+
 	echo 'net start w32time
 	w32tm /config /manualpeerlist:"0.uk.pool.ntp.org 1.uk.pool.ntp.org 2.uk.pool.ntp.org 3.uk.pool.ntp.org" /syncfromflags:manual /reliable:yes /update
 	w32tm /resync
 	netsh advfirewall firewall set rule group="remote administration" new enable=yes & netsh advfirewall firewall add rule name="WinRM Port" dir=in action=allow protocol=TCP remoteip=<IP_ADDR> localport=5985
 	echo <IP_ADDR> chef-serv >> C:\Windows\system32\drivers\etc\hosts' > bootstrap.cmd
 	nova boot --image f7f274f3-5d04-4a2c-9159-29b9d295cf76 --flavor 3 --file "C:\\cloud-automation\\bootstrap.cmd=bootstrap.cmd" chef-win
-	
+
 	ssh root@<IP_ADDR>
-	
+
 	curl -L https://get.rvm.io | bash
 	source /etc/profile.d/rvm.sh
 	rvm install 1.9.3
@@ -564,13 +608,13 @@ Finally, if you want to reproduce this quickly and don't really want to scroll t
 	iptables -I INPUT 1 -p tcp -m tcp --dport 80 -j ACCEPT
 	iptables -I INPUT 1 -p tcp -m tcp --dport 443 -j ACCEPT
 	service iptables save
-	
+
 	gem install rdoc
 	gem install chef
 	yum install git -y
 	git clone https://github.com/opscode/chef-repo
 	knife configure -i -r ~/chef-repo/
-	
+
 	yum install ruby-devel libxml2-devel libxslt-devel -y
 	git clone https://github.com/opscode/knife-windows.git
 	cd knife-windows
@@ -578,17 +622,17 @@ Finally, if you want to reproduce this quickly and don't really want to scroll t
 	rake build
 	gem install pkg/knife-windows-0.5.13.gem
 	cd ..
-	
+
 	telnet 95.138.188.93 5985
-	
+
 	knife bootstrap windows winrm 95.138.188.93 -x Administrator -P A7not3si5ELo
-	
-	knife cookbook site install webpi 
-	knife cookbook site install windows 
+
+	knife cookbook site install webpi
+	knife cookbook site install windows
 	knife cookbook site install chef_handler
 	knife cookbook site install iis
 	knife cookbook upload iis windows webpi chef_handler
-	
+
 	echo 'name "iis"
 	description "IIS Web Server"
 	run_list(
@@ -603,5 +647,5 @@ Finally, if you want to reproduce this quickly and don't really want to scroll t
 	)' > chef-repo/roles/iis.rb
 	knife role from file chef-repo/roles/iis.rb
 	knife node run_list add CHEF-WIN role[iis]
-	
+
 	knife winrm name:CHEF-WIN 'chef-client' -x ADministrator -P A7not3si5ELo -a ipaddress
