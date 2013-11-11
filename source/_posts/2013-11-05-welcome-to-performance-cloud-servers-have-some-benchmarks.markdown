@@ -69,7 +69,7 @@ If you fire up the new control panel on [mycloud.rackspace.com](http://mycloud.r
 As you can see, the new flavors are labeled by name - not ID. These match the names you'll find exposed in the control panel, making the experience much more cohesive between the command line tools / API and the control panel itself. This means firing one of them up off the command line is as simple as:
 
 ```
-nova boot perf1GB --flavor performance1-1 --image dee7f62b-cbb1-4fdc-8dc5-33e408d8c599 --poll
+nova boot perf1GB --flavor performance1-1 --image 62df001e-87ee-407c-b042-6f4e13f5d7e1 --poll
 ```
 
 This will spin up a 1GB Ubuntu 13.04 system for you. Use "**nova show**" once it's complete to get the public facing IP address - oh, and save the root/admin password if you're not using the "**--key-name**" SSH key system. All of the new flavors work with all of our [tools and SDKs](http://developer.rackspace.com), and of course - **you can use the [developer discount](http://developer.rackspace.com/devtrial/) to try them out**!
@@ -113,7 +113,7 @@ So, terminology aside, today, when you boot any Linux image on Rackspace Cloud, 
 For these benchmarks - I tested all three styles - our current (well, as of yesterday) Next Gen Cloud Server (PV), Performance PV and Performance PV-HVM. We should be rolling out the PV-HVM images to customers as soon as our quality engineers are happy with their stability and functionality. As it is you **could** use them today (for Fedora 19 and Ubuntu) 13.04 using the **nova** client to pick one of the test images:
 
 * Fedora 19 image ID: a12bf25c-e098-45bd-8a7b-b2ed89db250f
-* Ubuntu 13.04 image ID: dee7f62b-cbb1-4fdc-8dc5-33e408d8c599
+* Ubuntu 13.04 image ID: 62df001e-87ee-407c-b042-6f4e13f5d7e1
 
 But be warned: they are not meant for production use *at this time*.
 
