@@ -29,16 +29,18 @@ aside > section a {
     text-decoration: none !important;
 }
 
-article > header h1, h2, h3 {
-    color: #a80000 !important;
+article > header h1 {
     padding: 0px !important;
     margin: 0px !important;
+}
+
+article > header h1, h2, h3, h4 {
+    color: #a80000;
 }
 
 article > header > h1 > a {
   font-family: 'RobotoRegular', 'HelveticaNeue', 'Helvetica Neue', Helvetica, Arial, san-serif !important;
 }
-
 
 aside > section h1 {
     color: #a80000 !important;
