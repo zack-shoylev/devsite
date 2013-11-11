@@ -18,6 +18,8 @@ With the launch of our new [Performance Cloud Servers][1] - we've got speed. Lot
 
 Two cool things - [Performance Cloud Servers][1] and [Docker][2] - what I want to show you today is how quickly you can go from zero to full on Docker setup. (tl;dr: **78 seconds**.)
 
+<!-- more -->
+
 #### First, what is Docker
 
 {% img center /images/2013-11-11-peanut-butter-docker-time/docker-transparent.png 400 %}
