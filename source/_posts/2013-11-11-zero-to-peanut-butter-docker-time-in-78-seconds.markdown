@@ -124,6 +124,8 @@ All of these fit into the 1GB Performance Cloud Server (~20,000 average IOPS/sec
 
 So many IOPS. So Docker. Wow.
 
+Any questions, comments or concerns? You can reach out to me ([Jesse Noller][1]) on [Twitter][2], [email the developer support team](mailto:sdk-support@rackspace.com), ping [@Rackspace](https://twitter.com/Rackspace) on Twitter, or even reach out to [help@rackspace.com](mailto:help@rackspace.com).
+
 
 [1]: http://developer.rackspace.com/blog/welcome-to-performance-cloud-servers-have-some-benchmarks.html
 [2]: http://www.docker.io/
