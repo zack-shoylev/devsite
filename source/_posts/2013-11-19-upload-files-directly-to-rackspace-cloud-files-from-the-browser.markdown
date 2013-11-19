@@ -132,7 +132,7 @@ upload URL.
 You can build links to the actual file with any name you want. You just
 need to add a query-string parameter "filename" to the link, like this:
 
-    <a href="{download_url}&filename=jokes-about-your-mom.pdf">download</a>
+    <a href="{download_url}&filename=jokes-about-your-cat.pdf">download</a>
 
 Caveat: You'll have to do a little bit more work here if you want your
 download extension to match your uploaded file's extension. If you
