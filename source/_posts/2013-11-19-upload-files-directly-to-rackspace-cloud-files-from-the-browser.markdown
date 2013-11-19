@@ -303,11 +303,14 @@ I'd love to learn how to fix this, so please, help me out.
 
 ### Contact
 
-Thank you to Matt for this awesome contribution - his email address
-is matt@tplus1.com (feedback welcome!). You can find him on
-[twitter](https://twitter.com/mw44118) and
-[linkedin](http://www.linkedin.com/in/mw44118). If you have awesome things
-you've done with Rackspace, and want to contribute - email
+Thank you to Matt Wilson and Rob Heinen for this awesome contribution.
+Matt and Rob run 216 Software, LLC, a custom software development
+company in beautiful Cleveland Heights, Ohio.
+
+Their website is [http://216software.com](http://216software.com) and they're always looking for
+interesting new projects.
+
+If you have awesome things you've done with Rackspace, and want to contribute - email
 [jesse.noller@rackspace.com](mailto:jesse.noller@rackspace.com).
 
 [1]: https://github.com/216software/ajax-put-rackspace
