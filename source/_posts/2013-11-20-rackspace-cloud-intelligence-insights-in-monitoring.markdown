@@ -1,7 +1,7 @@
 ---
 layout: post
 title: "Rackspace Cloud Intelligence: Insights in Monitoring"
-date: 2013-11-20 13:45
+date: 2013-11-20 15:55
 comments: true
 author: Mary Stufflebeam
 published: True
