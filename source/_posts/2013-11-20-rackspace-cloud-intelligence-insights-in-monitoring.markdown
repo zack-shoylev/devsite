@@ -150,12 +150,12 @@ sign up to be a part of our <a href="https://www.surveymonkey.com/s/CloudIntelli
 We may select you to check out the next product release.
 
 
-[1] <a href="https://blog.twitter.com/2013/observability-at-twitter">https://blog.twitter.com/2013/observability-at-twitter</a>
-[2] <a href="http://www.datastax.com/docs/1.0/operations/monitoring">http://www.datastax.com/docs/1.0/operations/monitoring</a>
-[3] <a href="http://basho.com/monitoring-distributed-systems-new-approaches/">http://basho.com/monitoring-distributed-systems-new-approaches/</a>
-[4] <a href="http://theoryandlogic.com/post/5890089120/the-ideal-monitoring-service">http://theoryandlogic.com/post/5890089120/the-ideal-monitoring-service</a>
-[5] <a href="http://www.cs.umn.edu/tech_reports_upload/tr2007/07-017.pdf">http://www.cs.umn.edu/tech_reports_upload/tr2007/07-017.pdf</a>
-[6] <a href="http://www.cs.rit.edu/~rlaz/prec20092/slides/Overview.pdf">http://www.cs.rit.edu/~rlaz/prec20092/slides/Overview.pdf</a>
-[7] <a href="http://www.bollingerbands.com/">http://www.bollingerbands.com/</a>
-[8] <a href="https://www.economics.utoronto.ca/osborne/MathTutorial/FODF.HTM">https://www.economics.utoronto.ca/osborne/MathTutorial/FODF.HTM</a>
-[9] <a href="http://www.aiai.ed.ac.uk/links/bn.html">http://www.aiai.ed.ac.uk/links/bn.html</a>
+[1]: https://blog.twitter.com/2013/observability-at-twitter
+[2]: http://www.datastax.com/docs/1.0/operations/monitoring
+[3]: http://basho.com/monitoring-distributed-systems-new-approaches/
+[4]: http://theoryandlogic.com/post/5890089120/the-ideal-monitoring-service
+[5]: http://www.cs.umn.edu/tech_reports_upload/tr2007/07-017.pdf
+[6]: http://www.cs.rit.edu/~rlaz/prec20092/slides/Overview.pdf
+[7]: http://www.bollingerbands.com/
+[8]: https://www.economics.utoronto.ca/osborne/MathTutorial/FODF.HTM
+[9]: http://www.aiai.ed.ac.uk/links/bn.html
