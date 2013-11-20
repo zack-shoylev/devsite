@@ -145,7 +145,7 @@ Get started today. Set up checks in
 <a href="https://mycloud.rackspace.com/">Cloud Monitoring</a> to get more
 awesome metrics. Then check out the
 <a href="http://www.rackspace.com/blog/get-more-from-your-data-with-rackspace-cloud-intelligence/">data visualizations</a>
-that are already availble on <a href="https://intelligence.rackspace.com/login?next=%2Fexplore">intelligence.rackspace.com</a> and
+that are already available on <a href="https://intelligence.rackspace.com/login?next=%2Fexplore">intelligence.rackspace.com</a> and
 sign up to be a part of our <a href="https://www.surveymonkey.com/s/CloudIntelligence-EAList">Early Access program</a>.
 We may select you to check out the next product release.
 
