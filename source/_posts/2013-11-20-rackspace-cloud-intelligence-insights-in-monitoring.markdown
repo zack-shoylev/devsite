@@ -12,13 +12,13 @@ categories:
 - pattern recognition
 ---
 
-Drowning in data? You probably just started monitoring your application. Modern applications overwhelm users with an avalanche of metrics<sup><a href="#ftnt1" name="ftnt_ref1">[1]</a></sup> representing their functions and behaviors. Sysadmins are flooded with alerts about their CPU or Network I/O crossing preset thresholds. Developers might be watching a stream of application-level metrics like the gossip protocol activity on a Cassandra ring<sup><a href="#ftnt2" name="ftnt_ref2">[2]</a></sup>. Overwhelmed, they’ll either turn off their monitoring tool, spend weeks tuning it, or give up and accept the unstructured noise.
+Drowning in data? You probably just started monitoring your application. Modern applications overwhelm users with an avalanche of metrics<sup>[1]</sup> representing their functions and behaviors. Sysadmins are flooded with alerts about their CPU or Network I/O crossing preset thresholds. Developers might be watching a stream of application-level metrics like the gossip protocol activity on a Cassandra ring<sup>[2]</sup>. Overwhelmed, they’ll either turn off their monitoring tool, spend weeks tuning it, or give up and accept the unstructured noise.
 
-Rackspace Cloud Monitoring currently samples about 40,000 metrics per second across our cloud-hosted instance flavors. This data accumulates minute by minute and more checks are enabled every day. There's a lot of data here—an automated layer of intelligence over our cloud environments could really help<sup><a href="#ftnt3" name="ftnt_ref3">[3]</a></sup>.
+Rackspace Cloud Monitoring currently samples about 40,000 metrics per second across our cloud-hosted instance flavors. This data accumulates minute by minute and more checks are enabled every day. There's a lot of data here—an automated layer of intelligence over our cloud environments could really help<sup>[3]</sup>.
 
 <!--more-->
 
-Capturing meaningful insights, metrics, or measurements from real-world systems is hard. Configuring those monitoring alerts to get the right balance is even harder<sup><a href="#ftnt4" name="ftnt_ref4">[4]</a></sup>. The goal is to be notified only when something is actually wrong, or about to be broken, and never when there is nothing to do.
+Capturing meaningful insights, metrics, or measurements from real-world systems is hard. Configuring those monitoring alerts to get the right balance is even harder<sup>[4]</sup>. The goal is to be notified only when something is actually wrong, or about to be broken, and never when there is nothing to do.
 
 Even after our industry’s many attempts to solve these problems, most applications expose only the most minimal instrumentation. Most users under-monitor and under-utilize the features of their monitoring systems because the burden of understanding and configuring them is too high. So instead of using these sophisticated tools, businesses tend to focus on the simplest availability metrics and miss out on cost-savings, bottleneck-eliminations, and other optimizations. This results in missed warnings and things catching on fire!
 
@@ -28,7 +28,7 @@ I joined the new Rackspace Cloud Intelligence team four months ago to help analy
 
 We want to know when and why things go wrong for our users and how to define wrong. This is hard because it requires embodying human judgement in the logic of software. An experienced sysadmin would be able to set up the appropriate thresholds and conditions to monitor the health of his or her specific environment. The primary objective of the Cloud Intelligence team is to expose relevant information, like this sysadmin’s understanding, and to help users resolve issues with their infrastructure.
 
-There are lots of ways we could have chosen to approach this problem. We started with two powerful sets of algorithms: anomaly detection<sup><a href="#ftnt5" name="ftnt_ref5">[5]</a></sup> and pattern recognition<sup><a href="#ftnt6" name="ftnt_ref6">[6]</a></sup>. Each work well, but together they have some promising implications. Putting this combination to work requires careful engineering.
+There are lots of ways we could have chosen to approach this problem. We started with two powerful sets of algorithms: anomaly detection<sup>[5]</sup> and pattern recognition<sup>[6]</sup>. Each work well, but together they have some promising implications. Putting this combination to work requires careful engineering.
 
 Anomaly Detection
 -----------------
@@ -37,18 +37,18 @@ Our anomaly detection identifies abnormal spikes, dips, and jumps on the metrics
 
 {% img center /images/anomalies.png Anomalies in metrics %}
 
-We started with a variation on Bollinger Bands<sup><a href="#ftnt7" name="ftnt_ref7">[7]</a></sup> because they’re simple and provide relative definitions of high and low values per time series. Traditionally, Bollinger Bands use the same number of points to calculate the moving average and the moving standard deviation. We’ve found that using a larger span of time for the standard deviation than the moving averages works better. Using a smaller window for the moving average results in a closer fit for the more recent values, which allows the algorithm to be more robust to trends.
+We started with a variation on Bollinger Bands<sup>[7]</sup> because they’re simple and provide relative definitions of high and low values per time series. Traditionally, Bollinger Bands use the same number of points to calculate the moving average and the moving standard deviation. We’ve found that using a larger span of time for the standard deviation than the moving averages works better. Using a smaller window for the moving average results in a closer fit for the more recent values, which allows the algorithm to be more robust to trends.
 
 By using a larger window for the standard deviation, we capture the normal amount of variation on each metric without it dropping to the minimum standard deviation during short periods of constant values. This is a useful statistical approach because users' systems and applications frequently maintain steady states with intermittent periods of activity. We also apply some additional analysis to the output of Bollinger Bands to filter out periodic behavior or otherwise normal behavior.
 
 Pattern Recognition
 -------------------
 
-Our pattern recognition algorithm finds similar behaviors across different server instances in your environment. We start by smoothing the time series by mapping to a set of discrete states via first order differencing<sup><a href="#ftnt8" name="ftnt_ref8">[8]</a></sup>. This way we get the movements between the points in the time series, which captures change in the metrics regardless of raw magnitude.
+Our pattern recognition algorithm finds similar behaviors across different server instances in your environment. We start by smoothing the time series by mapping to a set of discrete states via first order differencing<sup>[8]</sup>. This way we get the movements between the points in the time series, which captures change in the metrics regardless of raw magnitude.
 
 {% img center /images/pattern.png 400 800 A pattern between two metrics %}
 
-We determine a causal model for the observations made of your server over time using a belief network<sup><a href="#ftnt9" name="ftnt_ref9">[9]</a></sup> that maps the observations to finite state sequences. We then apply a vector similarity approach to a time series of these states to determine which sequences are most similar to one another.
+We determine a causal model for the observations made of your server over time using a belief network<sup>[9]</sup> that maps the observations to finite state sequences. We then apply a vector similarity approach to a time series of these states to determine which sequences are most similar to one another.
 
 Vector similarity takes two vectors as input and outputs a score based on how similar the vectors are. The flexibility in using a similarity approach is we can define what the similarity actually means by changing our similarity function. You can define a distance function F with input vectors x and y, and it might look something like:
 
@@ -63,12 +63,12 @@ Making these algorithms useful is about more than statistics and machine learnin
 
 Get started today. Set up checks in <a href="https://mycloud.rackspace.com/">Cloud Monitoring</a> to get more awesome metrics. Then check out the <a href="http://www.rackspace.com/blog/get-more-from-your-data-with-rackspace-cloud-intelligence/">data visualizations</a> that are already availble on <a href="https://intelligence.rackspace.com/login?next=%2Fexplore">intelligence.rackspace.com</a> and sign up to be a part of our <a href="https://www.surveymonkey.com/s/CloudIntelligence-EAList">Early Access program</a>. We may select you to check out the next product release.
   
-<a href="#ftnt_ref1" name="ftnt1">[1]</a> <a href="https://blog.twitter.com/2013/observability-at-twitter">https://blog.twitter.com/2013/observability-at-twitter</a>  
-<a href="#ftnt_ref2" name="ftnt2">[2]</a> <a href="http://www.datastax.com/docs/1.0/operations/monitoring">http://www.datastax.com/docs/1.0/operations/monitoring</a>  
-<a href="#ftnt_ref3" name="ftnt3">[3]</a> <a href="http://basho.com/monitoring-distributed-systems-new-approaches/">http://basho.com/monitoring-distributed-systems-new-approaches/</a>  
-<a href="#ftnt_ref4" name="ftnt4">[4]</a> <a href="http://theoryandlogic.com/post/5890089120/the-ideal-monitoring-service">http://theoryandlogic.com/post/5890089120/the-ideal-monitoring-service</a>  
-<a href="#ftnt_ref5" name="ftnt5">[5]</a> <a href="http://www.cs.umn.edu/tech_reports_upload/tr2007/07-017.pdf">http://www.cs.umn.edu/tech_reports_upload/tr2007/07-017.pdf</a>  
-<a href="#ftnt_ref6" name="ftnt6">[6]</a> <a href="http://www.cs.rit.edu/~rlaz/prec20092/slides/Overview.pdf">http://www.cs.rit.edu/~rlaz/prec20092/slides/Overview.pdf</a>  
-<a href="#ftnt_ref7" name="ftnt7">[7]</a> <a href="http://www.bollingerbands.com/">http://www.bollingerbands.com/</a>  
-<a href="#ftnt_ref8" name="ftnt8">[8]</a> <a href="https://www.economics.utoronto.ca/osborne/MathTutorial/FODF.HTM">https://www.economics.utoronto.ca/osborne/MathTutorial/FODF.HTM</a>  
-<a href="#ftnt_ref9" name="ftnt9">[9]</a> <a href="http://www.aiai.ed.ac.uk/links/bn.html">http://www.aiai.ed.ac.uk/links/bn.html</a>
+[1] <a href="https://blog.twitter.com/2013/observability-at-twitter">https://blog.twitter.com/2013/observability-at-twitter</a>  
+[2] <a href="http://www.datastax.com/docs/1.0/operations/monitoring">http://www.datastax.com/docs/1.0/operations/monitoring</a>  
+[3] <a href="http://basho.com/monitoring-distributed-systems-new-approaches/">http://basho.com/monitoring-distributed-systems-new-approaches/</a>  
+[4] <a href="http://theoryandlogic.com/post/5890089120/the-ideal-monitoring-service">http://theoryandlogic.com/post/5890089120/the-ideal-monitoring-service</a>  
+[5] <a href="http://www.cs.umn.edu/tech_reports_upload/tr2007/07-017.pdf">http://www.cs.umn.edu/tech_reports_upload/tr2007/07-017.pdf</a>  
+[6] <a href="http://www.cs.rit.edu/~rlaz/prec20092/slides/Overview.pdf">http://www.cs.rit.edu/~rlaz/prec20092/slides/Overview.pdf</a>  
+[7] <a href="http://www.bollingerbands.com/">http://www.bollingerbands.com/</a>  
+[8] <a href="https://www.economics.utoronto.ca/osborne/MathTutorial/FODF.HTM">https://www.economics.utoronto.ca/osborne/MathTutorial/FODF.HTM</a>  
+[9] <a href="http://www.aiai.ed.ac.uk/links/bn.html">http://www.aiai.ed.ac.uk/links/bn.html</a>
