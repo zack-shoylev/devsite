@@ -66,7 +66,7 @@ help users resolve issues with their infrastructure.
 
 There are lots of ways we could have chosen to approach this problem. We
 started with two powerful sets of algorithms: [anomaly detection][5] and
-pattern [recognition][6]. Each work well, but together they have some
+[pattern recognition][6]. Each work well, but together they have some
 promising implications. Putting this combination to work requires
 careful engineering.
 
