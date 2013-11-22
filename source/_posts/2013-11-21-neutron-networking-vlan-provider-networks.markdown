@@ -4,7 +4,7 @@ title: "Neutron Networking: VLAN Provider Networks"
 date: 2013-11-21 14:26
 comments: true
 author: James Denton
-published: true
+published: false
 categories:
 - OpenStack
 - Networking
@@ -18,38 +18,39 @@ In the previous installment, [Neutron Networking: Simple Flat Network](http://de
 
 ####Getting Started / VLAN vs Flat Design
 
-One of the negative aspects of a flat network is that it’s one large broadcast domain. Virtual Local Area Networks, or VLANs, aim to solve this problem by creating smaller, more manageable broadcast domains. From a security standpoint, flat networks provide malicious users the potential to see the entire network from a single host. Tools like ping, arp and packet sniffers can be used to determine and attack system resources. 
+One of the negative aspects of a flat network is that it’s one large broadcast domain. Virtual Local Area Networks, or VLANs, aim to solve this problem by creating smaller, more manageable broadcast domains. From a security standpoint, flat networks provide malicious users the potential to see the entire network from a single host. 
 
 VLAN segregation is often used in a web hosting environment where there’s one vlan for web servers (DMZ) and another for database servers (INSIDE). Neither network can communicate directly without a routing device to route between them. With proper security mechanisms in place, if a server becomes compromised in the DMZ it does not have the ability to determine or access the resources in the INSIDE vlan. 
 
 The diagrams below are examples of traditional flat and vlan-segregated networks:
 
-{% img center /images/2013-11-21-neutron-networking-vlan-provider-networks/VLAN_Provider_1.1.png %}
-{% img center /images/2013-11-21-neutron-networking-vlan-provider-networks/VLAN_Provider_1.2.png %}
-{% img center /images/2013-11-21-neutron-networking-vlan-provider-networks/VLAN_Provider_1.3.png %}|
+{% img center /images/2013-11-21-neutron-networking-vlan-provider-networks/VLAN_Provider_1.1.png %}{% img center /images/2013-11-21-neutron-networking-vlan-provider-networks/VLAN_Provider_1.2.png %}
+
+{% img center /images/2013-11-21-neutron-networking-vlan-provider-networks/VLAN_Provider_1.3.png %}
 
 ####VLAN Tagging / What is it and how does it work?
 
-At a basic level on a Cisco switch there are two types of switchports: access ports and trunk ports. Switchports configured as access ports are placed into a single VLAN and can communicate with other switchports in the same VLAN. Switchports configured as trunks allow traffic from multiple vlans to traverse a single interface. The switch adds a tag to the Ethernet frame that contains the corresponding VLAN ID as the frame enters the trunk. As the frame exits the trunk on the other side, the VLAN tag is stripped and the traffic forwarded to its destination. Common uses of trunk ports include uplinks to other switches and more importantly in our case, hypervisors serving virtual machines from various networks. 
+At a basic level on a Cisco switch there are two types of switchports: access ports and trunk ports. Switchports configured as access ports are placed into a single vlan and can communicate with other switchports in the same vlan. Switchports configured as trunks allow traffic from multiple vlans to traverse a single interface. The switch adds a tag to the Ethernet frame that contains the corresponding vlan ID as the frame enters the trunk. As the frame exits the trunk on the other side, the vlan  tag is stripped and the traffic forwarded to its destination. Common uses of trunk ports include uplinks to other switches and more importantly in our case, hypervisors serving virtual machines from various networks. 
 
-{% img center /images/2013-11-21-neutron-networking-vlan-provider-networks/VLAN_Provider_1.5.png %}
+{% img center /images/2013-11-21-neutron-networking-vlan-provider-networks/VLAN_Provider_1.4.png %}
 
 ####VLAN Tagging / How does this apply to Neutron?
 
-In the previous installment I discussed flat networks and their lack of VLAN tagging.  All hosts in the environment were connected to access ports in the same VLAN, thereby allowing hosts and instances to communicate with one another on the same network. VLANs allow us to not only separate host and instance traffic, and to also create multiple networks for instances similar to the DMZ and INSIDE scenarios above. 
+In the [previous installment](http://developer.rackspace.com/blog/neutron-networking-simple-flat-network.html) I discussed flat networks and their lack of vlan tagging.  All hosts in the environment were connected to access ports in the same vlan, thereby allowing hosts and instances to communicate with one another on the same network. VLANs allow us to not only separate host and instance traffic, but to also create multiple networks for instances similar to the DMZ and INSIDE scenarios above. 
 
-Neutron allows users to create multiple provider or tenant networks using VLAN IDs that correspond to real VLANs in the data center. A single OVS bridge can be utilized by multiple provider and tenant networks using different VLAN IDs, allowing instances to communicate with other instances across the environment, and also with dedicated servers, firewall, load balancers and other networking gear on the same L2 VLAN.
+Neutron allows users to create multiple provider or tenant networks using vlan IDs that correspond to real vlans in the data center. A single OVS bridge can be utilized by multiple provider and tenant networks using different vlan IDs, allowing instances to communicate with other instances across the environment, and also with dedicated servers, firewalls, load balancers and other networking gear on the same Layer 2 vlan.
 
 ####Networking / Layout
 
-For this installment, a Cisco ASA 5510 will once again serve as the lead gateway device. In fact, I’ll be building upon the configuration already in place from the flat networking demonstration in the last installment [URL]. 10.240.0.0/24 will continue to serve as the management network for hosts and the flat provider network, and two new provider networks will be created:
+For this installment, a Cisco ASA 5510 will once again serve as the lead gateway device. In fact, I’ll be building upon the configuration already in place from the flat networking demonstration in the [previous installment](http://developer.rackspace.com/blog/neutron-networking-simple-flat-network.html). 10.240.0.0/24 will continue to serve as the management network for hosts and the flat provider network, and two new provider networks will be created:
 
-VLAN 200 – DMZ – 192.168.100.0/24
-VLAN 300 – INSIDE – 172.16.0.0/24
+- *VLAN 100 - MGMT - 10.240.0.0/24 (Existing)*
+- **VLAN 200 – DMZ – 192.168.100.0/24 (NEW)**
+- **VLAN 300 – INSIDE – 172.16.0.0/24 (NEW)**
 
 A single interface on the servers will be used for both management and provider network connectivity.
 
-[1.5]
+{% img center /images/2013-11-21-neutron-networking-vlan-provider-networks/VLAN_Provider_1.5.png %}
 
 ####Networking / Configuration of Network Devices
 
@@ -87,7 +88,7 @@ interface Ethernet0/1.300
   ip address 172.16.0.1 255.255.255.0 
 ```
 
-Based on the diagram above, the firewall’s interface configuration may look something like this:
+Based on the diagram above, the firewall’s switchport configuration may look something like this:
 
 ```
 interface GigabitEthernet0/1
@@ -116,10 +117,12 @@ end
 
 ####Networking / Configuration of Servers
 
-If you followed the previous installment [URL] and successfully configured a bridge in OVS and a flat provider network, the proper server network configuration should already be in place. If you haven’t, there’s a good chance your servers have their IP configured directly on eth0. To utilize Neutron, the hosts must have a network bridge configured. This can be accomplished one of two ways:
-•	Configure a bridge containing eth0
-•	Configure a bridge containing another interface
-The first option enables you to use a single interface on the nodes. However, there are plenty of cases where you may prefer to use other interfaces or configure multiple bridges. For this example, I’ll use a single interface and move the IP address from eth0 to the bridge.
+If you followed the [previous installment](http://developer.rackspace.com/blog/neutron-networking-simple-flat-network.html) and successfully configured a bridge in OVS and a flat provider network, the proper server network configuration should already be in place. If you haven’t, there’s a good chance your servers have their IP configured directly on eth0. To utilize Neutron, the hosts must have a network bridge configured. This can be accomplished one of two ways:
+
+- Utilize a single interface for both management of the hosts and the network bridge
+- Utilize one interface for management of the hosts, and another for the network bridge(s)
+
+For this example, I’ll use a single interface and move the IP address from eth0 to the bridge.
 
 Below is what a default eth0 configuration might look like:
 
@@ -131,7 +134,7 @@ auto eth0
   gateway 10.240.0.1     
   nameserver 8.8.8.8 
 ```
-In order to configure the bridge, eth0 must be modified and the bridge interface created:
+In order to configure the bridge, eth0 must be modified and the bridge interface configured:
 
 ```
 auto eth0 
@@ -146,11 +149,10 @@ iface br-eth0 inet static
   nameserver 8.8.8.8
 ```
 
-TIP: Do not set br-eth0 to auto. Because of the order that processes are started at boot, the interface must be brought up using rc.local. Instead, edit the /etc/rc.local file of each machine and add the following line before the 'exit' statement:
+TIP: Do not set br-eth0 to auto. Because of the order that processes are started at boot, the interface must be brought up using rc.local. Instead, edit the /etc/rc.local file of each machine and add the following line before the 'exit 0' statement:
 
 ```
 ifup br-eth0 
-exit 0
 ```
 
 ####Networking / Open vSwitch Configuration
@@ -163,11 +165,11 @@ The following will create a bridge called ‘br-eth0’ and place physical inter
 ovs-vsctl add-br br-eth0 
 ovs-vsctl add-port br-eth0 eth0
 ```
-The creation and configuration of the bridge enables the instances to communicate on the network.
+The creation and configuration of the bridge enables the instances to communicate on the network. At a minimum, bridges must be configured on the compute and network nodes. Since we're running the network services on the controller instead of using a dedicated network node, the compute and controller nodes should have the bridge configured.
 
 #####Changes to Environment (RPC v4)
 
-When using RPC v4, most configuration changes are handled via Chef. A few changes must be made to the environment file to utilize the bridge for Neutron networking.
+When using RPC v4, most configuration changes are handled via Chef. A few changes must be made to the environment file to utilize the bridge for Neutron networking. **If using RPC v4.2 (Havana), all quantum references should be changed to neutron.**
 
 ```
 knife environment edit grizzly
@@ -187,11 +189,11 @@ The bridge configuration should be modified to mirror the following example, if 
 {    
   "label": "ph-eth0",    
   "bridge": "br-eth0",    
-  "vlans": "1:1" 
+  "vlans": "" 
 } 
 ```
 
-The “vlans” value above represents a range of vlans available for the automatic provisioning of vlan segmentation IDs, and isn’t necessary when specifying the ID from the CLI. If you’d prefer Neutron to handle the ID assignment, which includes networks created through Horizon, the “vlans” value can be modified appropriately:
+The “vlans” value above represents a range of vlans available for the automatic provisioning of vlan segmentation IDs to networks created in Neutron. A range of IDs isn’t necessary if the intent is to always pass an ID manually with the net-create command. If you’d prefer Neutron to handle the ID assignment automatically, which includes networks created through Horizon, the “vlans” value can be modified appropriately:
 
 ```
 {    
@@ -225,7 +227,7 @@ The resulting file would look something like this:
     },
     "quantum": {
       "ovs": {
-	"provider_networks": [
+	    "provider_networks": [
           {
             "label": "ph-eth0",
             "bridge": "br-eth0",
@@ -271,7 +273,7 @@ The label ‘ph-eth0’ represents the provider bridge, in this case the bridge 
 
 ####Networking / OVS Confirmation
 
-Remember the bridge (br-eth0) we created in OVS earlier? At a high level, it can be looked at as our bridge to the physical network infrastructure. Neutron requires an ‘Integration Bridge’ that serves as the bridge to our virtual instances. The integration bridge connects vNICs and Neutron DHCP and L3 agents with virtual networks. Overriding the default value of ‘br-int’ is not recommended, as the bridge must be named the same on each host (controller/compute). RPC v4 creates this bridge during the chef-client run.
+Remember the bridge (br-eth0) we created in OVS earlier? At a high level, it can be looked at as our bridge to the physical network infrastructure. Neutron requires an ‘Integration Bridge’ that serves as the bridge to our virtual instances. The integration bridge connects vNICs and Neutron DHCP and L3 agents with virtual networks. Overriding the default value of ‘br-int’ is not recommended, as the bridge must be named the same on each host (controller/network/compute). RPC v4 creates this bridge during the chef-client run.
 
 ```
 [root@controller01 ~]# ovs-vsctl show
@@ -309,7 +311,10 @@ ovs-vsctl add-br br-int
 With the network devices and OVS configured, it’s time to build a vlan provider network in Neutron. Creating a vlan provider network requires at least two values: the name of the network and the provider bridge label. However, I recommend specifying the vlan segmentation ID to ensure parity with the infrastructure that was previously configured.
 
 
-Syntax: ```quantum net-create --provider:physical_network=<provider label> --provider:network_type=vlan –provider:segmentation_id=<vlan id> <network name>```
+Syntax: 
+```
+quantum net-create --provider:physical_network=<provider label> --provider:network_type=vlan –provider:segmentation_id=<vlan id> <network name>
+```
 
 ```
 root@controller01:~# quantum net-create --provider:physical_network=ph-eth0 --provider:network_type=vlan --provider:segmentation_id=200 --shared INSIDE_NET
@@ -356,7 +361,10 @@ Created a new network:
 With the two networks created, it’s time to create the subnets. 
 
 
-Syntax: ```quantum subnet-create <network_name> <subnet>  --name <subnet_name> --no-gateway --host-route destination=<dest_network>,nexthop=<nexthop_ip> --allocation-pool start=<dhcp_start_ip>,end=<dhcp_end_ip> --dns-nameservers list=true <dhcp_ip_1> <dhcp_ip_2>```
+Syntax: 
+```
+quantum subnet-create <network_name> <subnet>  --name <subnet_name> --no-gateway --host-route destination=<dest_network>,nexthop=<nexthop_ip> --allocation-pool start=<dhcp_start_ip>,end=<dhcp_end_ip> --dns-nameservers list=true <dns_1> <dns_2>
+```
 
 
 It’s a good idea to provide values for the following options:
@@ -419,7 +427,7 @@ Created a new subnet:
 
 ####Networking / Testing Connectivity
 
-Now that the networks have been built in Neutron, it’s time to test connectivity by spinning up some instances. Like the hosts, my instances are running Ubuntu 12.04 LTS.
+Now that the networks have been built in Neutron, it’s time to test connectivity by spinning up some instances. Like the hosts, my instances are running [Ubuntu 12.04 LTS](http://cloud-images.ubuntu.com/precise/current/).
 
 ```
 root@controller01:~# nova boot --flavor=m1.small --key_name=controller-id_rsa --image=3ee2e7d5-9d7a-4650-8f76-f8ad58a8c464 --nic net-id=ce316486-9c19-4c37-983b-e058cdcbd7fb INSIDE_INSTANCE
@@ -459,37 +467,36 @@ root@controller01:~# nova boot --flavor=m1.small --key_name=controller-id_rsa --
 root@controller01:~# nova show INSIDE_INSTANCE
 
 
-+-------------------------------------+--------------------------------------------------------------------------+
-| Property                            | Value                                                                    |
-+-------------------------------------+--------------------------------------------------------------------------+
-| status                              | ACTIVE                                                                   |
-| updated                             | 2013-11-19T14:27:44Z                                                     |
-| OS-EXT-STS:task_state               | None                                                                     |
-| OS-EXT-SRV-ATTR:host                | compute02                                                                |
-| key_name                            | controller-id_rsa                                                        |
-| image                               | Ubuntu 12.04.1 Precise (cloudimg) (3ee2e7d5-9d7a-4650-8f76-f8ad58a8c464) |
-| hostId                              | 496e6f036d3d0648f6cc32568196137e18e2d60f53932aa18160bc7c                 |
-| INSIDE_NET network                  | 192.168.100.102                                                          |
-| OS-EXT-STS:vm_state                 | active                                                                   |
-| OS-EXT-SRV-ATTR:instance_name       | instance-0000011b                                                        |
-| OS-EXT-SRV-ATTR:hypervisor_hostname | compute02.grizzly2.openstacksupport.com                                  |
-| flavor                              | m1.small (2)                                                             |
-| id                                  | 47b58f4c-6a0b-4e4c-b33d-6468acd275a8                                     |
-| security_groups                     | [{u'name': u'default'}]                                                  |
-| user_id                             | 5b585fbd6d1747f89b4bff8995b9c441                                         |
-| name                                | INSIDE_INSTANCE                                                          |
-| created                             | 2013-11-19T14:27:38Z                                                     |
-| tenant_id                           | 30037ac916824dc1882d930407ab7e33                                         |
-| OS-DCF:diskConfig                   | MANUAL                                                                   |
-| metadata                            | {}                                                                       |
-| accessIPv4                          |                                                                          |
-| accessIPv6                          |                                                                          |
-| progress                            | 0                                                                        |
-| OS-EXT-STS:power_state              | 1                                                                        |
-| OS-EXT-AZ:availability_zone         | nova                                                                     |
-| config_drive                        |                                                                          |
-+-------------------------------------+--------------------------------------------------------------------------+
-
++-------------------------------------+---------------------------------------------+
+| Property                            | Value                                       |
++-------------------------------------+---------------------------------------------+
+| status                              | ACTIVE                                      |
+| updated                             | 2013-11-19T14:27:44Z                        |
+| OS-EXT-STS:task_state               | None                                        |
+| OS-EXT-SRV-ATTR:host                | compute02                                   |
+| key_name                            | controller-id_rsa                           |
+| image                               | Ubuntu 12.04.1 Precise (cloudimg) (3ee2e7d5-|
+| hostId                              | 496e6f036d3d0648f6cc32568196137e18e2d60f5393|
+| INSIDE_NET network                  | 192.168.100.102                             |
+| OS-EXT-STS:vm_state                 | active                                      |
+| OS-EXT-SRV-ATTR:instance_name       | instance-0000011b                           |
+| OS-EXT-SRV-ATTR:hypervisor_hostname | compute02.grizzly2.openstacksupport.com     |
+| flavor                              | m1.small (2)                                |
+| id                                  | 47b58f4c-6a0b-4e4c-b33d-6468acd275a8        |
+| security_groups                     | [{u'name': u'default'}]                     |
+| user_id                             | 5b585fbd6d1747f89b4bff8995b9c441            |
+| name                                | INSIDE_INSTANCE                             |
+| created                             | 2013-11-19T14:27:38Z                        |
+| tenant_id                           | 30037ac916824dc1882d930407ab7e33            |
+| OS-DCF:diskConfig                   | MANUAL                                      |
+| metadata                            | {}                                          |
+| accessIPv4                          |                                             |
+| accessIPv6                          |                                             |
+| progress                            | 0                                           |
+| OS-EXT-STS:power_state              | 1                                           |
+| OS-EXT-AZ:availability_zone         | nova                                        |
+| config_drive                        |                                             |
++-------------------------------------+---------------------------------------------+
 root@controller01:~# nova boot --flavor=m1.small --key_name=controller-id_rsa --image=3ee2e7d5-9d7a-4650-8f76-f8ad58a8c464 --nic net-id=cc1c6a8d-7023-40a3-b1a7-5bbf1c2e0702 DMZ_INSTANCE
 
 
@@ -528,36 +535,36 @@ root@controller01:~# nova boot --flavor=m1.small --key_name=controller-id_rsa --
 root@controller01:~# nova show DMZ_INSTANCE
 
 
-+-------------------------------------+--------------------------------------------------------------------------+
-| Property                            | Value                                                                    |
-+-------------------------------------+--------------------------------------------------------------------------+
-| status                              | ACTIVE                                                                   |
-| updated                             | 2013-11-19T14:28:18Z                                                     |
-| OS-EXT-STS:task_state               | None                                                                     |
-| OS-EXT-SRV-ATTR:host                | compute02                                                                |
-| key_name                            | controller-id_rsa                                                        |
-| image                               | Ubuntu 12.04.1 Precise (cloudimg) (3ee2e7d5-9d7a-4650-8f76-f8ad58a8c464) |
-| hostId                              | 496e6f036d3d0648f6cc32568196137e18e2d60f53932aa18160bc7c                 |
-| OS-EXT-STS:vm_state                 | active                                                                   |
-| OS-EXT-SRV-ATTR:instance_name       | instance-0000011d                                                        |
-| OS-EXT-SRV-ATTR:hypervisor_hostname | compute02.grizzly2.openstacksupport.com                                  |
-| flavor                              | m1.small (2)                                                             |
-| id                                  | fb024367-d1c9-4570-8ad5-b8eb9915b569                                     |
-| security_groups                     | [{u'name': u'default'}]                                                  |
-| user_id                             | 5b585fbd6d1747f89b4bff8995b9c441                                         |
-| name                                | DMZ_INSTANCE                                                             |
-| created                             | 2013-11-19T14:28:12Z                                                     |
-| tenant_id                           | 30037ac916824dc1882d930407ab7e33                                         |
-| OS-DCF:diskConfig                   | MANUAL                                                                   |
-| metadata                            | {}                                                                       |
-| accessIPv4                          |                                                                          |
-| accessIPv6                          |                                                                          |
-| DMZ_NET network                     | 172.16.0.102                                                             |
-| progress                            | 0                                                                        |
-| OS-EXT-STS:power_state              | 1                                                                        |
-| OS-EXT-AZ:availability_zone         | nova                                                                     |
-| config_drive                        |                                                                          |
-+-------------------------------------+--------------------------------------------------------------------------+
++-------------------------------------+---------------------------------------------+
+| Property                            | Value                                       |
++-------------------------------------+---------------------------------------------+
+| status                              | ACTIVE                                      |
+| updated                             | 2013-11-19T14:28:18Z                        |
+| OS-EXT-STS:task_state               | None                                        |
+| OS-EXT-SRV-ATTR:host                | compute02                                   |
+| key_name                            | controller-id_rsa                           |
+| image                               | Ubuntu 12.04.1 Precise (cloudimg) (3ee2e7d5-|
+| hostId                              | 496e6f036d3d0648f6cc32568196137e18e2d60f5393|
+| OS-EXT-STS:vm_state                 | active                                      |
+| OS-EXT-SRV-ATTR:instance_name       | instance-0000011d                           |
+| OS-EXT-SRV-ATTR:hypervisor_hostname | compute02.grizzly2.openstacksupport.com     |
+| flavor                              | m1.small (2)                                |
+| id                                  | fb024367-d1c9-4570-8ad5-b8eb9915b569        |
+| security_groups                     | [{u'name': u'default'}]                     |
+| user_id                             | 5b585fbd6d1747f89b4bff8995b9c441            |
+| name                                | DMZ_INSTANCE                                |
+| created                             | 2013-11-19T14:28:12Z                        |
+| tenant_id                           | 30037ac916824dc1882d930407ab7e33            |
+| OS-DCF:diskConfig                   | MANUAL                                      |
+| metadata                            | {}                                          |
+| accessIPv4                          |                                             |
+| accessIPv6                          |                                             |
+| DMZ_NET network                     | 172.16.0.102                                |
+| progress                            | 0                                           |
+| OS-EXT-STS:power_state              | 1                                           |
+| OS-EXT-AZ:availability_zone         | nova                                        |
+| config_drive                        |                                             |
++-------------------------------------+---------------------------------------------+
 ```
 
 Check the Nova console logs to verify the instances received their IPs, routes and metadata. Success here indicates the instances are able to communicate with the network namespace residing on the network or controller nodes.
@@ -591,7 +598,7 @@ Your public key has been saved in /etc/ssh/ssh_host_rsa_key.pub.
 …
 ```
 
-The ability to connect to the instances from the controller confirms that proper VLAN tagging is taking place:
+The ability to connect to the instances from the controller confirms that proper vlan tagging is taking place:
 
 ```
 root@controller01:~# ssh -i .ssh/id_rsa ubuntu@172.16.0.102
@@ -617,8 +624,7 @@ Because the Cisco ASA is the gateway device, all NAT translations should be conf
 
 ####Summary
 
-With a limited amount of networking hardware one can create a functional private cloud based on [Rackspace Private Cloud](http://www.rackspace.com/cloud/private/) powered by [OpenStack](http://www.openstack.org). While the use of VLAN provider networks allows for more flexibility over a ‘flat’ design, it still requires interaction with hardware routers and switches for every network and subnet that gets created. In the case where the use of the L3 agent isn’t possible or necessary, VLAN-based configurations can still provide users with a secure and scalable cloud experience.
+With a limited amount of networking hardware one can create a functional private cloud based on [Rackspace Private Cloud](http://www.rackspace.com/cloud/private/) powered by [OpenStack](http://www.openstack.org). While the use of vlan provider networks allows for more flexibility over a ‘flat’ design, it still requires interaction with hardware routers and switches for every network and subnet that gets created. In the case where the use of the L3 agent isn’t possible or necessary, vlan-based configurations can still provide users with a secure and scalable cloud experience.
 
 
 _Have questions or comments? Feel free to contact or follow me on Twitter [@jimmdenton](https://twitter.com/jimmdenton)_
-
