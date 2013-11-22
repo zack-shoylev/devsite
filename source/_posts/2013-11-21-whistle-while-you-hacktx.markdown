@@ -1,10 +1,10 @@
 ---
 layout: post
 title: "Whistle While You HackTX"
-date: 2013-11-21 11:35
+date: 2013-11-22 13:15
 comments: true
 author: Everett Toews
-published: false
+published: true
 categories:
 - jclouds
 - java
