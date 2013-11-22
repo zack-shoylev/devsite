@@ -22,7 +22,7 @@ First, install the nova client using pip:
 #### Configuring rackspace-novaclient
 
 
-Once that is complete, you need to make a ~/.novarc file for your credentials. Below is an example file. Just replace the variables with your information:
+Once that is complete, you need to make a ~/.novarc file for your credentials. Below is an example file. Just replace the variables with your information. Your `$ACCOUNT_NUMBER` is located in the upper right of the cloud control panel.
 
     
     OS_AUTH_URL=https://identity.api.rackspacecloud.com/v2.0/
@@ -30,7 +30,7 @@ Once that is complete, you need to make a ~/.novarc file for your credentials. B
     OS_AUTH_SYSTEM=rackspace
     OS_REGION_NAME=DFW
     OS_SERVICE_NAME=cloudserversOpenStack
-    OS_TENANT_NAME=$USERNAME
+    OS_TENANT_NAME=$ACCOUNT_NUMBER
     OS_USERNAME=$USERNAME
     OS_PASSWORD=$APIKEY
     OS_NO_CACHE=1
