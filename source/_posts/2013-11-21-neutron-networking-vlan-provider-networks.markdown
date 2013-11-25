@@ -1,10 +1,10 @@
 ---
 layout: post
 title: "Neutron Networking: VLAN Provider Networks"
-date: 2013-11-21 14:26
+date: 2013-11-25 10:00
 comments: true
 author: James Denton
-published: false
+published: true
 categories:
 - OpenStack
 - Networking
@@ -12,15 +12,15 @@ categories:
 - Cloud Networks
 ---
 
-In this multi-part blog series I intend to dive into the various components of the OpenStack Neutron project, and to also provide working examples of networking configurations for clouds built with [Rackspace Private Cloud](http://www.rackspace.com/cloud/private/) powered by [OpenStack](http://www.openstack.org) on Ubuntu 12.04 LTS. 
+In this multi-part blog series I intend to dive into the various components of the OpenStack Neutron project, and to also provide working examples of networking configurations for clouds built with [Rackspace Private Cloud](http://www.rackspace.com/cloud/private/) powered by [OpenStack](http://www.openstack.org) on Ubuntu 12.04 LTS.
 
 In the previous installment, [Neutron Networking: Simple Flat Network](http://developer.rackspace.com/blog/neutron-networking-simple-flat-network.html), I demonstrated an easy method of providing connectivity to instances using an untagged flat network. In this third installment, I’ll describe how to build multiple provider networks using 802.1q vlan tagging.<!--more-->
 
 ####Getting Started / VLAN vs Flat Design
 
-One of the negative aspects of a flat network is that it’s one large broadcast domain. Virtual Local Area Networks, or VLANs, aim to solve this problem by creating smaller, more manageable broadcast domains. From a security standpoint, flat networks provide malicious users the potential to see the entire network from a single host. 
+One of the negative aspects of a flat network is that it’s one large broadcast domain. Virtual Local Area Networks, or VLANs, aim to solve this problem by creating smaller, more manageable broadcast domains. From a security standpoint, flat networks provide malicious users the potential to see the entire network from a single host.
 
-VLAN segregation is often used in a web hosting environment where there’s one vlan for web servers (DMZ) and another for database servers (INSIDE). Neither network can communicate directly without a routing device to route between them. With proper security mechanisms in place, if a server becomes compromised in the DMZ it does not have the ability to determine or access the resources in the INSIDE vlan. 
+VLAN segregation is often used in a web hosting environment where there’s one vlan for web servers (DMZ) and another for database servers (INSIDE). Neither network can communicate directly without a routing device to route between them. With proper security mechanisms in place, if a server becomes compromised in the DMZ it does not have the ability to determine or access the resources in the INSIDE vlan.
 
 The diagrams below are examples of traditional flat and vlan-segregated networks:
 
@@ -30,13 +30,13 @@ The diagrams below are examples of traditional flat and vlan-segregated networks
 
 ####VLAN Tagging / What is it and how does it work?
 
-At a basic level on a Cisco switch there are two types of switchports: access ports and trunk ports. Switchports configured as access ports are placed into a single vlan and can communicate with other switchports in the same vlan. Switchports configured as trunks allow traffic from multiple vlans to traverse a single interface. The switch adds a tag to the Ethernet frame that contains the corresponding vlan ID as the frame enters the trunk. As the frame exits the trunk on the other side, the vlan  tag is stripped and the traffic forwarded to its destination. Common uses of trunk ports include uplinks to other switches and more importantly in our case, hypervisors serving virtual machines from various networks. 
+At a basic level on a Cisco switch there are two types of switchports: access ports and trunk ports. Switchports configured as access ports are placed into a single vlan and can communicate with other switchports in the same vlan. Switchports configured as trunks allow traffic from multiple vlans to traverse a single interface. The switch adds a tag to the Ethernet frame that contains the corresponding vlan ID as the frame enters the trunk. As the frame exits the trunk on the other side, the vlan  tag is stripped and the traffic forwarded to its destination. Common uses of trunk ports include uplinks to other switches and more importantly in our case, hypervisors serving virtual machines from various networks.
 
 {% img center /images/2013-11-21-neutron-networking-vlan-provider-networks/VLAN_Provider_1.4.png %}
 
 ####VLAN Tagging / How does this apply to Neutron?
 
-In the [previous installment](http://developer.rackspace.com/blog/neutron-networking-simple-flat-network.html) I discussed flat networks and their lack of vlan tagging.  All hosts in the environment were connected to access ports in the same vlan, thereby allowing hosts and instances to communicate with one another on the same network. VLANs allow us to not only separate host and instance traffic, but to also create multiple networks for instances similar to the DMZ and INSIDE scenarios above. 
+In the [previous installment](http://developer.rackspace.com/blog/neutron-networking-simple-flat-network.html) I discussed flat networks and their lack of vlan tagging.  All hosts in the environment were connected to access ports in the same vlan, thereby allowing hosts and instances to communicate with one another on the same network. VLANs allow us to not only separate host and instance traffic, but to also create multiple networks for instances similar to the DMZ and INSIDE scenarios above.
 
 Neutron allows users to create multiple provider or tenant networks using vlan IDs that correspond to real vlans in the data center. A single OVS bridge can be utilized by multiple provider and tenant networks using different vlan IDs, allowing instances to communicate with other instances across the environment, and also with dedicated servers, firewalls, load balancers and other networking gear on the same Layer 2 vlan.
 
@@ -63,12 +63,12 @@ interface Ethernet0/1
   speed 100
   duplex full
   no nameif
-  
+
 interface Ethernet0/1.100
   vlan 100
   nameif mgmt
   security-level 100
-  ip address 10.240.0.1 255.255.255.0 
+  ip address 10.240.0.1 255.255.255.0
 ```
 
 e0/1.200 and e0/1.300 will be utilized for the new INSIDE and DMZ vlans, respectively:
@@ -78,14 +78,14 @@ interface Ethernet0/1.200
   vlan 200
   nameif inside
   security-level 100
-  ip address 192.168.100.1 255.255.255.0 
+  ip address 192.168.100.1 255.255.255.0
 
 
 interface Ethernet0/1.300
   vlan 300
   nameif dmz
   security-level 100
-  ip address 172.16.0.1 255.255.255.0 
+  ip address 172.16.0.1 255.255.255.0
 ```
 
 Based on the diagram above, the firewall’s switchport configuration may look something like this:
@@ -127,32 +127,32 @@ For this example, I’ll use a single interface and move the IP address from eth
 Below is what a default eth0 configuration might look like:
 
 ```
-auto eth0 
- iface eth0 inet static     
-  address 10.240.0.10     
-  netmask 255.255.255.0     
-  gateway 10.240.0.1     
-  nameserver 8.8.8.8 
+auto eth0
+ iface eth0 inet static
+  address 10.240.0.10
+  netmask 255.255.255.0
+  gateway 10.240.0.1
+  nameserver 8.8.8.8
 ```
 In order to configure the bridge, eth0 must be modified and the bridge interface configured:
 
 ```
-auto eth0 
-iface eth0 inet manual     
-  up ip l s $IFACE up     
-  down ip l s $IFACE down  
+auto eth0
+iface eth0 inet manual
+  up ip l s $IFACE up
+  down ip l s $IFACE down
 
-iface br-eth0 inet static     
-  address 10.240.0.10     
-  netmask 255.255.255.0     
-  gateway 10.240.0.1     
+iface br-eth0 inet static
+  address 10.240.0.10
+  netmask 255.255.255.0
+  gateway 10.240.0.1
   nameserver 8.8.8.8
 ```
 
 TIP: Do not set br-eth0 to auto. Because of the order that processes are started at boot, the interface must be brought up using rc.local. Instead, edit the /etc/rc.local file of each machine and add the following line before the 'exit 0' statement:
 
 ```
-ifup br-eth0 
+ifup br-eth0
 ```
 
 ####Networking / Open vSwitch Configuration
@@ -162,7 +162,7 @@ Creating the network bridge in Open vSwitch is a requirement for proper manageme
 The following will create a bridge called ‘br-eth0’ and place physical interface eth0 inside:
 
 ```
-ovs-vsctl add-br br-eth0 
+ovs-vsctl add-br br-eth0
 ovs-vsctl add-port br-eth0 eth0
 ```
 The creation and configuration of the bridge enables the instances to communicate on the network. At a minimum, bridges must be configured on the compute and network nodes. Since we're running the network services on the controller instead of using a dedicated network node, the compute and controller nodes should have the bridge configured.
@@ -178,32 +178,32 @@ knife environment edit grizzly
 Look for the section 'quantum : ovs : provider_networks'
 
 ```
-"quantum": {       
-  "ovs": {         
+"quantum": {
+  "ovs": {
     "provider_networks":
 ```
 
 The bridge configuration should be modified to mirror the following example, if it doesn't already exist:
 
 ```
-{    
-  "label": "ph-eth0",    
-  "bridge": "br-eth0",    
-  "vlans": "" 
-} 
+{
+  "label": "ph-eth0",
+  "bridge": "br-eth0",
+  "vlans": ""
+}
 ```
 
 The “vlans” value above represents a range of vlans available for the automatic provisioning of vlan segmentation IDs to networks created in Neutron. A range of IDs isn’t necessary if the intent is to always pass an ID manually with the net-create command. If you’d prefer Neutron to handle the ID assignment automatically, which includes networks created through Horizon, the “vlans” value can be modified appropriately:
 
 ```
-{    
-  "label": "ph-eth0",    
-  "bridge": "br-eth0",    
-  "vlans": "200:200,300:300" 
-} 
+{
+  "label": "ph-eth0",
+  "bridge": "br-eth0",
+  "vlans": "200:200,300:300"
+}
 ```
 
-In the above example, only vlans 200 and 300 are available for automatic assignment. Non-contiguous vlan ranges can be specified and separated by commas. Neutron will assign the next available ID from the list when a segmentation ID is not passed in the net-create command. 
+In the above example, only vlans 200 and 300 are available for automatic assignment. Non-contiguous vlan ranges can be specified and separated by commas. Neutron will assign the next available ID from the list when a segmentation ID is not passed in the net-create command.
 
 The label ‘ph-eth0’ represents our provider interface, in this case the bridge ‘br-eth0’. It will be used during the creation of networks in Neutron.
 
@@ -269,7 +269,7 @@ network_vlan_ranges = ph-eth0:200:200,ph-eth0:300:300
 bridge_mappings = ph-eth0:br-eth0
 ```
 
-The label ‘ph-eth0’ represents the provider bridge, in this case the bridge ‘br-eth0’. It will be used during the creation of networks in Neutron. It’s possible to have more than one provider bridge, especially when you have multiple switching infrastructures for various networks and services. Restart all Neutron and Open vSwitch services on all hosts for the changes to take effect. 
+The label ‘ph-eth0’ represents the provider bridge, in this case the bridge ‘br-eth0’. It will be used during the creation of networks in Neutron. It’s possible to have more than one provider bridge, especially when you have multiple switching infrastructures for various networks and services. Restart all Neutron and Open vSwitch services on all hosts for the changes to take effect.
 
 ####Networking / OVS Confirmation
 
@@ -311,7 +311,7 @@ ovs-vsctl add-br br-int
 With the network devices and OVS configured, it’s time to build a vlan provider network in Neutron. Creating a vlan provider network requires at least two values: the name of the network and the provider bridge label. However, I recommend specifying the vlan segmentation ID to ensure parity with the infrastructure that was previously configured.
 
 
-Syntax: 
+Syntax:
 ```
 quantum net-create --provider:physical_network=<provider label> --provider:network_type=vlan –provider:segmentation_id=<vlan id> <network name>
 ```
@@ -358,10 +358,10 @@ Created a new network:
 +---------------------------+--------------------------------------+
 ```
 
-With the two networks created, it’s time to create the subnets. 
+With the two networks created, it’s time to create the subnets.
 
 
-Syntax: 
+Syntax:
 ```
 quantum subnet-create <network_name> <subnet>  --name <subnet_name> --no-gateway --host-route destination=<dest_network>,nexthop=<nexthop_ip> --allocation-pool start=<dhcp_start_ip>,end=<dhcp_end_ip> --dns-nameservers list=true <dns_1> <dns_2>
 ```
@@ -371,7 +371,7 @@ It’s a good idea to provide values for the following options:
 
 ```
 --no-gateway		Instructs Quantum not to provide a gateway IP.
---host-route		Provides route injection via DHCP. 
+--host-route		Provides route injection via DHCP.
 --allocation-pool		Defines the DHCP IP pool boundaries
 --dns-nameservers		Defines DNS servers
 ```
@@ -401,7 +401,7 @@ Created a new subnet:
 +------------------+----------------------------------------------------------+
 
 
-root@controller01:~# quantum subnet-create DMZ_NET 172.16.0.0/24 --name DMZ_SUBNET --no-gateway --host-route destination=0.0.0.0/0,nexthop=172.16.0.1 
+root@controller01:~# quantum subnet-create DMZ_NET 172.16.0.0/24 --name DMZ_SUBNET --no-gateway --host-route destination=0.0.0.0/0,nexthop=172.16.0.1
 --allocation-pool start=172.16.0.100,end=172.16.0.199 --dns-nameservers list=true 8.8.8.7 8.8.8.8
 
 
@@ -620,7 +620,7 @@ Welcome to Ubuntu 12.04.2 LTS (GNU/Linux 3.2.0-49-virtual x86_64)
 ubuntu@inside-instance:~$
 ```
 
-Because the Cisco ASA is the gateway device, all NAT translations should be configured there to provide external connectivity to/from these instances. Neutron floating IPs cannot be used in this example as they require the use of a Neutron router. 
+Because the Cisco ASA is the gateway device, all NAT translations should be configured there to provide external connectivity to/from these instances. Neutron floating IPs cannot be used in this example as they require the use of a Neutron router.
 
 ####Summary
 
