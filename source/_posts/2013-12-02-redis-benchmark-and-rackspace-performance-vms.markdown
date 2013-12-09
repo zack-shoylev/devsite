@@ -1,19 +1,35 @@
 ---
 layout: post
 title: "Redis Benchmark &amp; Rackspace Performance VMs"
-date: 2013-12-02 09:53
+date: 2013-12-09 12:30
 comments: true
-author: Ken Perkins 
-published: false
-categories: 
+author: Ken Perkins
+published: true
+categories:
+ - performance cloud servers
+ - redis
+ - benchmarks
+ - node.js
+
 ---
-While I was visiting the [Concurix team](www.concurix.com) getting a demo of some of the awesomeness they have for node.js profiling, [Bryce Baril](https://github.com/brycebaril) mentioned that he was a new [node-redis](https://github.com/mranney/node_redis) core-committer and how performance was really critical for the redis package (and redis in general). I asked what he used to benchmark and he informed me that redis has a very robust benchmarking tool built in.
+While I was visiting the [Concurix team](www.concurix.com) getting a demo of
+some of the awesomeness they have for node.js profiling,
+[Bryce Baril](https://github.com/brycebaril) mentioned that he was a new
+[node-redis](https://github.com/mranney/node_redis) core-committer and how
+performance was really critical for the redis package (and redis in general).
+
+I asked what he used to benchmark and he informed me that redis has a very
+robust benchmarking tool built in.
 
 ```
 > redis-benchmark
 ```
 
-I immediatley thought of using `redis-benchmark` to illustrate the difference between our (soon to be deprecated) standard flavors and our new performance flavors. Based on some reading on the redis-benchmark page, I decided to use the same critiera as the Redis Benchmarks page for [evaluating bare-metal and virtual machines](http://redis.io/topics/benchmarks).
+I immediatley thought of using `redis-benchmark` to illustrate the difference
+between our (soon to be deprecated) standard flavors and our new performance
+flavors. Based on some reading on the redis-benchmark page, I decided to use
+the same critiera as the Redis Benchmarks page for
+[evaluating bare-metal and virtual machines](http://redis.io/topics/benchmarks).
 
 <!-- more -->
 
@@ -22,7 +38,9 @@ I immediatley thought of using `redis-benchmark` to illustrate the difference be
 > redis-benchmark -r 1000000 -n 2000000 -t get,set,lpush,lpop -q
 ```
 
-In both cases, I used 1gb virtual machines, running `Ubuntu 13.04 (Raring Ringtail) (PVHVM beta)` in the ORD datacenter. Redis is version `2.6.7` and I ran the test 5 times on each machine.
+In both cases, I used 1gb virtual machines, running
+`Ubuntu 13.04 (Raring Ringtail) (PVHVM beta)` in the ORD datacenter. Redis is
+version `2.6.7` and I ran the test 5 times on each machine.
 
 ### Redis-Benchmark w/o Pipelining
 
@@ -92,7 +110,11 @@ In both cases, I used 1gb virtual machines, running `Ubuntu 13.04 (Raring Ringta
  </tr>
 </table>
 
-I'm not claiming to be an expert on Redis performance, but it's obvious that **our new performance flavors kick ass**. We're seeing 35-45% faster results in the non-pipelined case, and 16-31% in the pipelined case. Not bad considering we made the pricing even more competitive.
+I'm not claiming to be an expert on Redis performance, but it's obvious that
+**our new performance flavors kick ass**. We're seeing 35-45% faster results
+in the non-pipelined case, and 16-31% in the pipelined case. Not bad
+considering we made the pricing even more competitive.
 
-If you haven't already signed up for our [Developer Trial](developer.rackspace.com/devtrial), hopefully these numbers will help.
+If you haven't already signed up for our [Developer Trial](developer.rackspace.com/devtrial)
+you should to give the new servers a spin, hopefully these numbers will help entice you!
 
