@@ -12,7 +12,7 @@ categories:
  - node.js
 
 ---
-While I was visiting the [Concurix team](www.concurix.com) getting a demo of
+While I was visiting the [Concurix team](http://www.concurix.com) getting a demo of
 some of the awesomeness they have for node.js profiling,
 [Bryce Baril](https://github.com/brycebaril) mentioned that he was a new
 [node-redis](https://github.com/mranney/node_redis) core-committer and how
