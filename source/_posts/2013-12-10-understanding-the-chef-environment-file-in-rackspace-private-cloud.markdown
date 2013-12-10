@@ -4,7 +4,7 @@ title: "Understanding the Chef Environment File in Rackspace Private Cloud"
 date: 2013-12-10 11:01
 comments: true
 author: James Thorne
-published: false
+published: true
 categories:
  - chef
  - devops
