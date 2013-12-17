@@ -18,7 +18,7 @@ on one to many nodes. An integral part of deployment is the Chef Environment
 file. This file can be difficult to understand as a newcomer to Chef.
 
 In the following post, I am going to break down each part of two typical Chef
-Environment files specific to Rackspace Private Cloud v4.1.2 powered by
+Environment files specific to Rackspace Private Cloud v4.1.x powered by
 OpenStack Grizzly.
 
 <!-- more -->
@@ -27,7 +27,7 @@ Typical Chef Environments
 -------------------------
 
 Below are two typical Chef Environment files to install Rackspace Private
-Cloud v4.1.2 with nova-network or Quantum Networking.
+Cloud v4.1.x with nova-network or Quantum Networking.
 
 Each Chef Environment file will differ slightly depending on which OpenStack
 Networking model you chose. Each of the following Chef Environment files
@@ -37,11 +37,11 @@ and eth1). eth0 on each node will be assigned an IP address in the
 192.168.236.0/24 subnet and eth1 will be active but will be un-configured;
 Chef will configure it during the chef-client run.
 
-#### Rackspace Private Cloud v4.1.2 using nova-network Chef Environment File:
+#### Rackspace Private Cloud v4.1.x using nova-network Chef Environment File:
 
     {
-        "name": "rpcv412",
-        "description": "Rackspace Private Cloud v4.1.2",
+        "name": "rpc-grizzly",
+        "description": "Rackspace Private Cloud",
         "cookbook_versions": {},
         "json_class": "Chef::Environment",
         "chef_type": "environment",
@@ -75,11 +75,11 @@ Chef will configure it during the chef-client run.
         }
     }
 
-#### Rackspace Private Cloud v4.1.2 using Quantum Networking Chef Environment File:
+#### Rackspace Private Cloud v4.1.x using Quantum Networking Chef Environment File:
 
     {
-        "name": "rpcv412",
-        "description": "Rackspace Private Cloud v4.1.2",
+        "name": "rpc-grizzly",
+        "description": "Rackspace Private Cloud",
         "cookbook_versions": {},
         "json_class": "Chef::Environment",
         "chef_type": "environment",
@@ -117,8 +117,8 @@ Chef will configure it during the chef-client run.
 
 
     {
-        "name": "rpcv412",
-        "description": "Rackspace Private Cloud v4.1.2",
+        "name": "rpc-grizzly",
+        "description": "Rackspace Private Cloud",
         "cookbook_versions": {},
         "json_class": "Chef::Environment",
         "chef_type": "environment",
@@ -188,8 +188,8 @@ JSON block. However, adhering to the intended convention will make everything
 easier to understand. A more appropriate name for the __public__ label would
 be __fixed__ because an instance will always be assigned, or __"fixed"__, an
 IP address from this nova-network. In addition, the __public__ label is
-commonly confused with the public label in the __osops_networks__ JSON block
-you will read about later.
+commonly confused with the public label in the __osops_networks__ JSON block,
+, which you will read about later, and has no relation to it.
 
 When the chef-client command is run on the compute node, it will use the
 parameters in the __public__ JSON block, and the __private__ JSON block if
@@ -383,7 +383,7 @@ Diving Deeper
 -------------
 
 I have gone through two typical Chef Environment files that can be used to
-install Rackspace Private Cloud v4.1.2 powered by OpenStack Grizzly with
+install Rackspace Private Cloud v4.1.x powered by OpenStack Grizzly with
 nova-network or Quantum Networking.
 
 If you want to dive deeper, there are many other override attributes that can
