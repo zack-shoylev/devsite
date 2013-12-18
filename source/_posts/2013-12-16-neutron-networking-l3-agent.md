@@ -4,7 +4,7 @@ title: "Neutron Networking: Neutron Routers and the L3 Agent"
 date: 2013-12-16 14:26
 comments: true
 author: James Denton
-published: true
+published: false
 categories:
 - OpenStack
 - Networking
