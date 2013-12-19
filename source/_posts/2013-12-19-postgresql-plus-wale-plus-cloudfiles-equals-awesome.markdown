@@ -85,8 +85,8 @@ Let's get the leader configured and sending it's logs up to Cloudfiles:
 ```
 
 Before we go any further we need to create a container in Cloudfiles. You can
-easily do this from the `Web interface`_. Below it's be referred to as
-"container-name".
+easily do this from the [Web interface](https://mycloud.rackspace.com/files).
+Below it's referred to as "container-name".
 
 Now you'll want to edit ``/etc/postgresql/9.1/main/postgresql.conf`` on
 ``postgresql-leader`` and change the following values:
