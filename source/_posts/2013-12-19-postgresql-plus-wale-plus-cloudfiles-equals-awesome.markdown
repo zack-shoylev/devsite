@@ -19,19 +19,19 @@ Instagram.
 Let's unpack what that means. If you've ever set up replication with PostgreSQL
 you're probably familiar with the WAL. Essentially there are two parts to
 replication and backup in PostgreSQL, the "base backup" and the WAL. Base
-backups are basically a dump of your entire database at some point in time. You
-might create base backups every night, for example. The WAL is where PostgreSQL
-writes each and every transaction, as they happen. When you run normal
-replication, the leader will send its log file to the followers as it writes
-it.
+backups are a copy of your database files that can be taken while the database
+is running. You might create base backups every night, for example. The WAL is
+where PostgreSQL writes each and every transaction, as they happen. When you
+run normal replication, the leader will send its log file to the followers as
+it writes it.
 
 Instead of just using a simple socket to communicate, WAL-E sends these base
 backups and WAL files across the internet with the help of a cloud object
 store, like Cloudfiles (or any OpenStack Swift deployment). This gives you the
 advantage that, in addition to just being replication, you have a durable
 backup of your database for disaster recovery. Further, you have effectively
-infinite read scalability, you can keep adding more followers without putting
-more stress on the leader.
+infinite read scalability from the archives, you can keep adding more followers
+without putting more stress on the leader.
 
 With the help of WAL-E's primary author, Daniel Farina, we recently added
 support for OpenStack Swift to it. It's not yet in a final release, but if
@@ -48,7 +48,7 @@ our many SDKs. Here I'm booting up two 1GB performance cloud servers.
 ```
 $ pip install rackspace-novaclient
 ...
-$ export OS_AUTH_URL=https://identity.api.rackspacebutt.com/v2.0/
+$ export OS_AUTH_URL=https://identity.api.rackspacecloud.com/v2.0/
 $ export OS_AUTH_SYSTEM=rackspace
 $ export OS_REGION_NAME=IAD
 $ export OS_USERNAME=<your username>
@@ -99,7 +99,8 @@ archive_timeout = 60
 ```
 
 You may find it easier to manage these environment variables with a tool like
-``envdir``. Now you can restart PostgreSQL:
+``envdir`` (part of the ``daemontools`` package). Now you can restart
+PostgreSQL:
 
 ```
 (postgresql-leader) $ /etc/init.d/postgresql restart
