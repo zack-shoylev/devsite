@@ -18,6 +18,7 @@ cp output/atom.xml /home/feeder/devsite/source/feeds/sdk.atom
 
 cd /home/feeder/WebPageToAtomFeed/
 mvn exec:java
+cp /home/feeder/WebPageToAtomFeed/src/main/resources/WebPageToAtomFeed.log /home/feeder/devsite/source/feeds/
 
 cd /home/feeder/devsite
 
