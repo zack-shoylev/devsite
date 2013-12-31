@@ -1,5 +1,6 @@
+<?xml version="1.0" encoding="UTF-8"?>
 <feed xmlns="http://www.w3.org/2005/Atom">
-    <title type="text">fog Release Notes</title>
+    <title type="text">Rackspace Ruby SDK Release Notes</title>
     <subtitle type="text">The Ruby SDK for the Rackspace Cloud</subtitle>
     <updated>2013-12-23T04:59:14.090Z</updated>
     <author>
