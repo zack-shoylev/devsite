@@ -23,7 +23,7 @@ cp /home/feeder/WebPageToAtomFeed/src/main/resources/WebPageToAtomFeed.log /home
 cd /home/feeder/devsite
 
 CHANGES=`git diff-index --name-only HEAD --`
-if git diff-index --quiet HEAD --; then
+if [ -n "$CHANGED" ]; then
   git checkout master
   git branch --delete $BRANCH
 else
