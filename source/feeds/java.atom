@@ -1,7 +1,7 @@
-<?xml version="1.0" encoding="UTF-16"?>
+<?xml version="1.0" encoding="UTF-8"?>
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>jclouds</id>
-    <title type="text">jclouds Release Notes</title>
+    <title type="text">Rackspace Java SDK Release Notes</title>
     <subtitle type="text">The Java SDK (powered by Apache jclouds) for the Rackspace Cloud</subtitle>
     <updated>2013-12-30T23:19:50.110Z</updated>
     <author>

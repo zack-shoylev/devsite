@@ -1,6 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>pkgcloud</id>
-    <title type="text">pkgcloud Release Notes</title>
+    <title type="text">Rackspace Node.js SDK Release Notes</title>
     <subtitle type="text">The Node.js SDK for the Rackspace Cloud</subtitle>
     <updated>2013-12-23T04:59:13.914Z</updated>
     <author>
