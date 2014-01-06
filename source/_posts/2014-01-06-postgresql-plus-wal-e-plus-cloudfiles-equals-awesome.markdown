@@ -1,10 +1,10 @@
 ---
 layout: post
 title: "PostgreSQL + WAL-E + Cloudfiles = Awesome"
-date: 2013-12-19 10:00
+date: 2014-01-6 12:00
 comments: true
 author: Alex Gaynor
-published: false
+published: true
 categories:
  - performance cloud servers
  - postgresql
@@ -36,6 +36,8 @@ without putting more stress on the leader.
 With the help of WAL-E's primary author, Daniel Farina, we recently added
 support for OpenStack Swift to it. It's not yet in a final release, but if
 you're interested in checking it out, read on!
+
+<!-- more -->
 
 ### Setting it up
 
