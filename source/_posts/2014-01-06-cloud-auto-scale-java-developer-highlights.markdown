@@ -10,7 +10,7 @@ categories:
 
 # Cloud Auto Scale - Java Developer Highlights #
 
-One of the big benefits of using the cloud to drive your applications is the ability to seamlessly scale to meet user demand. Developers will find it easy to configure how their Rackspace cloud scales by utilizing Rackspace's Cloud Auto Scale. While SDK support for Auto Scale is available in multiple languages, here I will demonstrate how to configure it with Java and Apache [jclouds](http://jclouds.apache.org/documentation/gettingstarted/what-is-jclouds/).
+One of the big benefits of using the cloud to drive your applications is the ability to seamlessly scale to meet user demand. Developers will find it easy to configure how their Rackspace cloud scales by utilizing Rackspace's Cloud Auto Scale. While SDK support for Auto Scale is available in multiple languages, here I will demonstrate how to configure it with Java and Apache [jclouds](http://developer.rackspace.com/#java).
 
 An easy way to start using jclouds in your Java projects is by adding the proper maven dependencies to the project pom file. Start by including Cloud Auto Scale to your Java project:
 
