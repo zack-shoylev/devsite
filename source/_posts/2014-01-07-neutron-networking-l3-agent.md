@@ -443,3 +443,4 @@ ci-info: route-1: 10.241.0.0      0.0.0.0         255.255.252.0   eth0   U
 cloud-init start running: Wed, 18 Dec 2013 17:24:36 +0000. up 5.22 seconds
 ...
 Generating public/private rsa
+```
