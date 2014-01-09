@@ -1,10 +1,10 @@
 ---
 layout: post
 title:  "Create an indestructible blog with Jekyll, CloudFiles and the PHP SDK"
-date:   2013-12-11 18:05:03
+date:   2014-09-09 13:00
 comments: true
 author:   Jamie Hannaford
-published: false
+published: true
 categories: 
  - jekyll 
  - cloud-files 
@@ -15,6 +15,8 @@ categories:
 Everyone wants a blog these days, but no-one really wants all the collateral that comes with it: servers, databases, language runtimes, firewalls and load balancers, DNS management, deployment and automation. I've heard about all these mystical characters on the scene, like Vagrant, Docker and Capistrano, but what do they actually do? Sure I can spend hours reading docs but I have more important things to do -- like stare aimlessly at Reddit threads and check out new doge memes.
 
 Blogging needs to be **simple to manage**, **simple to deploy**, and it needs to be **affordable**.
+
+<!-- more -->
 
 In this post, I'll proffer what I hope to be a cool alternative to DIY solutions like Wordpress and Rails, and hosted solutions like Svbtle and Medium. By the end, you'll have a static blog generated from markdown, backed by a powerful CDN that ensures uptime without any of the hassle that usually comes with maintaining cloud infrastructure.
 
