@@ -71,7 +71,7 @@ You can roll your own deployment scripts using [the SDK's official docs](http://
 - [`install.php`](https://cdfbb6a8434b6b1025a6-cd48ce34bf144dd47f3b21571e953281.ssl.cf5.rackcdn.com/install.php) sets up your Cloud Files container, enables the CDN, and if necessary, adds a CNAME record to your main domain. You only need to run this script once as an initial setup.
 - [`deploy.php`](https://cdfbb6a8434b6b1025a6-cd48ce34bf144dd47f3b21571e953281.ssl.cf5.rackcdn.com/deploy.php) is the main script you'll use to deploy changes to CloudFiles. You will re-use this every time you want to deploy changes.
 
-You can either download a [zip archive](https://cdfbb6a8434b6b1025a6-cd48ce34bf144dd47f3b21571e953281.ssl.cf5.rackcdn.com/rackspace-jekyll-deploy.zip) of all three, or download each file individually by clicking on their names. Let's be lazy:
+You can either download a [zip archive](https://a95b6fcf466121d56e06-db7cec48e060b4467264ed9ced92e83e.ssl.cf5.rackcdn.com/rackspace-jekyll-deploy.zip) of all three, or download each file individually by clicking on their names. Let's be lazy:
 
 ```bash
 curl -O https://cdfbb6a8434b6b1025a6-cd48ce34bf144dd47f3b21571e953281.ssl.cf5.rackcdn.com/rackspace-jekyll-deploy.zip
