@@ -4,7 +4,7 @@ title:  "Create an indestructible blog with Jekyll, CloudFiles and the PHP SDK"
 date:   2013-12-11 18:05:03
 comments: true
 author:   Jamie Hannaford
-published: true
+published: false
 categories: 
  - jekyll 
  - cloud-files 
