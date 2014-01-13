@@ -1,11 +1,11 @@
 ---
 layout: post
 title: "Upgrade Your Ghost Deployment"
-date: 2014-01-13 15:06
+date: 2014-01-13 16:00
 comments: true
 author: Ryan Walker
-published: false
-categories: 
+published: true
+categories:
 - Deployments
 ---
 
@@ -22,7 +22,7 @@ First things, first. Here's what you will need before we begin:
 * A recent backup.
 	* Seriously. If anything on your Ghost blog is important, back it up first. While this update method is tested, swamp gas, solar flares, and/or aliens could cause unexpected consequences.
 	* Check out [this](http://www.rackspace.com/knowledge_center/article/cloud-essentials-4-creating-an-image-backup-cloning-and-restoring-a-server-from-a-saved) link on how to create a server snapshot.
-	
+
 # Roll Up Your Sleeves and Dig In
 
 * Once logged in to the server as `root`, type `cd /var/www/vhosts/<your_domain>` to change into the directory where Ghost is installed.
