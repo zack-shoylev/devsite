@@ -36,7 +36,7 @@ First things, first. Here's what you will need before we begin:
 
 # Check Yourself
 
-I doesn't look like the UI displays a version anywhere, so to verify that everything updated, look for this content in the HTML:
+It doesn't look like the UI displays a version anywhere, so to verify that everything updated, look for this content in the HTML:
 
 ```
 # curl -s localhost|grep generator
