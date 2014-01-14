@@ -1,13 +1,13 @@
 ---
 layout: post
 title:  "Create an indestructible blog with Jekyll, CloudFiles and the PHP SDK"
-date:   2014-09-09 13:00
+date:   2014-01-09 13:00
 comments: true
 author:   Jamie Hannaford
 published: true
-categories: 
- - jekyll 
- - cloud-files 
+categories:
+ - jekyll
+ - cloud-files
  - php-sdk
  - php-opencloud
 ---
@@ -22,7 +22,7 @@ In this post, I'll proffer what I hope to be a cool alternative to DIY solutions
 
 ## 1. Install Jekyll
 
-First thing's first: what the hell is Jekyll? To quote the contributors who wrote it: 
+First thing's first: what the hell is Jekyll? To quote the contributors who wrote it:
 
 > Jekyll is a simple, blog aware, static site generator. It takes a template directory (representing the raw form of a website), runs it through Textile or Markdown and Liquid converters, and spits out a complete, static website suitable for serving with Apache or your favorite web server.
 
@@ -45,14 +45,14 @@ Now check out http://localhost:4000 and Hey Presto.
 
 ## 2. Install the SDK
 
-So you have your blog ready and waiting -- all you need now is somewhere to host it and a means of deploying it. 
+So you have your blog ready and waiting -- all you need now is somewhere to host it and a means of deploying it.
 
 This is where Cloud Files and our SDK enter the picture. Using our SDK, you can easily synchronize your local Jekyll directory with a container (a place where assets are stored). Placing a CDN in front of it pretty much makes your blog indestructible - you never have to worry about unnecessarily complex and expensive systems again!
 
-**2a.** Create a place to hold all your deployment scripts: 
+**2a.** Create a place to hold all your deployment scripts:
 
 ```bash
-mkdir _scripts 
+mkdir _scripts
 cd _scripts
 ```
 
@@ -85,7 +85,7 @@ exclude: scripts
 ```
 
 It's probably a good idea to add this to your `.gitignore` file too if you're using git.
- 
+
 ## 3. Write some blog posts
 
 Do your thing and write some blog posts. All your files will need to sit inside the `_posts` directory and be valid markup. You will also need to make sure each post file starts with a [YAML front matter block](http://jekyllrb.com/docs/frontmatter/). For more information about writing posts, see their [official guide](http://jekyllrb.com/docs/posts/).
@@ -107,7 +107,7 @@ There are a [few more flags](http://jekyllrb.com/docs/configuration/) you can us
 
 Now you're ready to deploy all your work! Fill in your details to `options.php`, and launch the one-off installation script: `php install.php`.
 
-And sync your content: 
+And sync your content:
 
 ```bash
 php deploy.php
