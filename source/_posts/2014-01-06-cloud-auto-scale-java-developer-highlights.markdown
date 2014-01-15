@@ -1,16 +1,25 @@
 ---
 layout: post
 title: "Cloud Auto Scale - Java Developer Highlights"
-date: 2014-01-06 21:24
+date: 2014-01-15 10:30
 comments: true
-author: YOUR_NAME_HERE
-published: false
-categories: 
+author: Zack Shoylev
+published: true
+categories:
+ - jclouds
+ - autoscale
 ---
 
 # Cloud Auto Scale - Java Developer Highlights #
 
-One of the big benefits of using the cloud to drive your applications is the ability to seamlessly scale to meet user demand. Developers will find it easy to configure how their Rackspace cloud scales by utilizing Rackspace's Cloud Auto Scale. While SDK support for Auto Scale is available in multiple languages, here I will demonstrate how to configure it with Java and Apache [jclouds](http://developer.rackspace.com/#java).
+One of the big benefits of using the cloud to drive your applications is the
+ability to seamlessly scale to meet user demand. Developers will find it easy
+to configure how their Rackspace cloud scales by utilizing Rackspace's Cloud
+Auto Scale. While SDK support for Auto Scale is available in multiple
+languages, here I will demonstrate how to configure it with Java and
+Apache [jclouds](http://developer.rackspace.com/#java).
+
+<!-- more -->
 
 An easy way to start using jclouds in your Java projects is by adding the proper maven dependencies to the project pom file. Start by including Cloud Auto Scale to your Java project:
 
@@ -20,7 +29,7 @@ An easy way to start using jclouds in your Java projects is by adding the proper
     	<version>1.7.0</version>
     </dependency>
 
-Once the dependency is in place, instantiate the Auto Scale Api like this:  
+Once the dependency is in place, instantiate the Auto Scale Api like this:
 
     AutoscaleApi autoscaleApi = ContextBuilder.newBuilder("rackspace-autoscale-us")
             .credentials(username, apiKey)
@@ -77,7 +86,7 @@ To begin using Auto Scale, a scaling group needs to be created and configured. A
 
       Group g = groupApi.create(groupConfiguration, launchConfiguration, scalingPolicies);
 
-Multiple components need to be configured to create a working scaling group, as demonstrated above. While the GroupConfiguration setup is straightforward, some explaining might be needed for the LaunchConfiguration and ScalingPolicy. 
+Multiple components need to be configured to create a working scaling group, as demonstrated above. While the GroupConfiguration setup is straightforward, some explaining might be needed for the LaunchConfiguration and ScalingPolicy.
 
 Remember how the scaling group contains a set of *similarly* configured servers? The LaunchConfiguration determines the configuration of these servers, such as which image gets used, which networks the machine connects to, and so-forth. Personality here specifically refers to any files we want to customize on the image.
 
@@ -95,7 +104,7 @@ Here is one way to execute the Webhook (and corresponding scaling policy):
 
     result = AutoscaleUtils.execute(webhook.getAnonymousExecutionURI().get());
 
-If you look at the execute code, you will see that you do not have to do anything to authorize the call. It is usually a good idea to create multiple Webhooks when a policy can be executed from multiple applications (for example). Thus specific Webhooks can be later deleted without affecting the policy. 
+If you look at the execute code, you will see that you do not have to do anything to authorize the call. It is usually a good idea to create multiple Webhooks when a policy can be executed from multiple applications (for example). Thus specific Webhooks can be later deleted without affecting the policy.
 
 The full examples code is also [available](https://github.com/jclouds/jclouds-examples/tree/master/rackspace).
 
