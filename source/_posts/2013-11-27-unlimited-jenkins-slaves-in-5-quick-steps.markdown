@@ -73,7 +73,7 @@ It is possible to configure builds to create an instance just-in-time, but for t
 
 You'll find this by going back to Manage Jenkins, and then Manage Nodes.
 
-{% zoomable_img /images/2013-11-27-unlimited-jenkins-slaves-in-5-quick-steps/template.png Click Provision via jclouds - Rackspace, then the name of your template. %}
+{% zoomable_img /images/2013-11-27-unlimited-jenkins-slaves-in-5-quick-steps/provision.png Click Provision via jclouds - Rackspace, then the name of your template. %}
 
 You will be able to see the instance building in the Rackspace Control Panel, but it won't show up in Jenkins until it is finished.
 
@@ -81,6 +81,6 @@ You will be able to see the instance building in the Rackspace Control Panel, bu
 
 Now, you just need to tell your build to use one of these instances, and you're done!
 
-{% zoomable_img /images/2013-11-27-unlimited-jenkins-slaves-in-5-quick-steps/provision.png In your build, set "Restrict where this project can be run" to the name of your template. %}
+{% zoomable_img /images/2013-11-27-unlimited-jenkins-slaves-in-5-quick-steps/restrict_label.png In your build, set "Restrict where this project can be run" to the name of your template. %}
 
 That's it for now.  You can can learn how to use the jclouds plugin for unlimited artifact storage in the [README](https://github.com/jenkinsci/jclouds-plugin/blob/master/README.md), or learn more about jclouds in the [Getting Started](http://jclouds.apache.org/documentation/quickstart/rackspace/) guide.
