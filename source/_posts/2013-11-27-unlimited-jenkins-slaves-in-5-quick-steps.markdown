@@ -81,6 +81,6 @@ You will be able to see the instance building in the Rackspace Control Panel, bu
 
 Now, you just need to tell your build to use one of these instances, and you're done!
 
-{% zoomable_img /images/2013-11-27-unlimited-jenkins-slaves-in-5-quick-steps/template.png In your build, set "Restrict where this project can be run" to the name of your template. %}
+{% zoomable_img /images/2013-11-27-unlimited-jenkins-slaves-in-5-quick-steps/provision.png In your build, set "Restrict where this project can be run" to the name of your template. %}
 
 That's it for now.  You can can learn how to use the jclouds plugin for unlimited artifact storage in the [README](https://github.com/jenkinsci/jclouds-plugin/blob/master/README.md), or learn more about jclouds in the [Getting Started](http://jclouds.apache.org/documentation/quickstart/rackspace/) guide.
