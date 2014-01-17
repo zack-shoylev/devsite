@@ -1,7 +1,7 @@
 ---
 layout: post
-title: "Unlimited Jenkins slaves in 5 quick steps"
-date: 2013-11-27 18:24
+title: "Unlimited Jenkins Slaves in 5 Quick Steps"
+date: 2014-01-17 11:20
 comments: true
 author: Max Lincoln
 published: true
@@ -14,6 +14,8 @@ categories:
 Have you ever noticed long build queuing times in Jenkins?  If you have long builds and few executors, you can spend more time waiting for resources than actually testing.  If you have an existing Jenkins setup, take a look at the [ClusterStats Plugin](https://wiki.jenkins-ci.org/display/JENKINS/ClusterStats+Plugin) to keep an eye on this problem.
 
 Fortunately Rackspace makes it easy to quickly get more resources when you need them, and decommission them when you don't.  This guide will show you how to quickly setup a new Jenkins instance and configure it to quickly provision unlimited slaves with the [Jenkins jclouds plugin](https://wiki.jenkins-ci.org/display/JENKINS/JClouds+Plugin).
+
+<!--more-->
 
 ## Step 1 - Create a Jenkins Deployment
 
@@ -57,7 +59,7 @@ Your jclouds connection should work now.  Hit "Test Connection" to make sure.
 
 ## Step 3 - Create a instance template
 
-Next, we need to create an instance template that lets JCloud know what kind of hardware we want for our Jenkins Slaves.  I have been selecting an exact Hardware ID and Image ID to make sure I get exactly what I expected.
+Next, we need to create an instance template that lets jclouds know what kind of hardware we want for our Jenkins Slaves.  I have been selecting an exact Hardware ID and Image ID to make sure I get exactly what I expected.
 
 {% zoomable_img /images/2013-11-27-unlimited-jenkins-slaves-in-5-quick-steps/template.png Define the templates Image and Hardware. %}
 
