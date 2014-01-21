@@ -10,8 +10,6 @@ categories:
  - autoscale
 ---
 
-# Cloud Auto Scale - Java Developer Highlights #
-
 One of the big benefits of using the cloud to drive your applications is the
 ability to seamlessly scale to meet user demand. Developers will find it easy
 to configure how their Rackspace cloud scales by utilizing Rackspace's Cloud
