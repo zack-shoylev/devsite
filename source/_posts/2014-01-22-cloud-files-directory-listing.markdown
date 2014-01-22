@@ -4,7 +4,7 @@ title: "Cloud Files directory listing"
 date: 2014-01-22 14:21
 comments: true
 author: Louwrens Boonstra
-published: false
+published: true
 categories:
  - API
  - Cloud Files
