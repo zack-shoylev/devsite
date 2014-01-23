@@ -4,7 +4,7 @@ title: "Introducing boot.rackspace.com"
 date: 2014-01-23 16:00
 comments: true
 author: Antony Messerli
-published: false
+published: true
 categories: 
 - Cloud Servers
 - Cloud Tools
