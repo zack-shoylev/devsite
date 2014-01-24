@@ -1,18 +1,24 @@
 ---
 layout: post
 title: "Data Day Texas 2014"
-date: 2014-01-15 23:25
+date: 2014-01-24 9:00
 comments: true
 author: Zack Shoylev
-published: false
-categories: conferences ddtx14
+published: true
+categories:
+ - conferences
+ - ddtx14
 ---
 
-# Data Day Texas 2014 #
+On Saturday (01/11) I attended Data Day Texas (#ddtx14). As per the
+title, it was a single day of concentrated awesomeness with 4 speaker tracks
+and focusing, and very much so, on Big Data for developers. We had twenty
+Rackers attending, one of us was presenting, and yes, Rackspace sponsored
+the conference this year.
 
-Last Saturday (01/11) I attended Data Day Texas (#ddtx14). As per the title, it was a single day of concentrated awesomeness with 4 speaker tracks and focusing, and very much so, on Big Data for developers. We had twenty Rackers attending, one of us was presenting, and yes, Rackspace sponsored the conference this year.
- 
-While I am sure everybody's takeaway from ddtx14 was different, I was most impressed by two technologies that seem to be gaining steam: Summingbird and Mesos. If you work on big data architecture, you might find them useful. 
+<!--more-->
+
+While I am sure everybody's takeaway from ddtx14 was different, I was most impressed by two technologies that seem to be gaining steam: Summingbird and Mesos. If you work on big data architecture, you might find them useful.
 
 {% img center /images/2014-01-15-ddtx14/ddtx14_4.jpg Summinbird %}
 
