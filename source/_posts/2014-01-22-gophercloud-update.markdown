@@ -1,7 +1,7 @@
 ---
 layout: post
 title: "Gophercloud Update"
-date: 2014-01-22 13:00
+date: 2014-01-27 12:00
 comments: true
 author: Samuel A. Falvo II
 published: true
