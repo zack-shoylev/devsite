@@ -43,7 +43,7 @@ repeatedly managed over time.
 
 It's been a very fun time in Ansible land lately, as Ansible is now a top
 10 Python project on GitHub in terms of both forks and stars, and it gains a
-new contributor about once a month. At Rackspace, Ansible is helping to
+new contributor every one to two days. At Rackspace, Ansible is helping to
 manage customer environments as well as to help orchestrate OpenStack
 deployment in production, whole datacenters at a time -- and we're very
 thankful for contributions from the likes of Matt Martz (who wrote a large
