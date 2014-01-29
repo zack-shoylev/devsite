@@ -262,9 +262,9 @@ The __network_type__ parameter sets the default type of Quantum Tenant Network
 created when it is not specified in the __quantum net-create__ command. The
 different types of Quantum Tenant Networks you can create are __gre__ and __vlan__.
 Both GRE and VLAN based Quantum Tenant Networks can be created and used at the same
- time. This parameter is found in the 
- __/etc/quantum/plugins/openvswitch/ovs_quantum_plugin.ini__ file on the controller 
- and compute nodes.
+time. This parameter is found in the 
+__/etc/quantum/plugins/openvswitch/ovs_quantum_plugin.ini__ file on the controller 
+and compute nodes.
 
 The mysql JSON Block
 --------------------
