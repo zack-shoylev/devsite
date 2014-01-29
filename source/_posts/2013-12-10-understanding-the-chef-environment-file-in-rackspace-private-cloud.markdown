@@ -248,19 +248,23 @@ In our example, there is one JSON block within the quantum JSON block: __ovs__.
 Inside of the ovs JSON block are two parameters: __provider_networks__ and
 __network_type__.
 
-The __provider_networks__ parameter has two variables: __label__ and
-__bridge__. The __label__ parameter is just that, a label for the following
-__bridge__ parameter that points to the particular bridge interface to use for
-Quantum Networking traffic. These parameters are found in the
-__/etc/quantum/plugins/openvswitch/ovs_quantum_plugin.ini__ file on the
+The __provider_networks__ parameter has two variables: __label__ and __bridge__.
+The __label__ parameter is just that, a label for the subsequent __bridge__ 
+parameter that indicates the particular bridge interface where Quantum Provider
+Networks can be created from. In our example, __br-eth1__ is a bridge interface
+for the physical network interface __eth1__. eth1 could be configured as a trunk
+port on the managed network switch it is connected to. Quantum Provider Networks
+could then be created from the VLANs within that trunk. These parameters are found
+in the __/etc/quantum/plugins/openvswitch/ovs_quantum_plugin.ini__ file on the 
 controller and compute nodes.
 
-The __network_type__ parameter sets the default type of Neutron Tenant Network
+The __network_type__ parameter sets the default type of Quantum Tenant Network
 created when it is not specified in the __quantum net-create__ command. The
-different types of Neutron Tenant Networks you can create are __flat__,
-__gre__, and __vlan__. This parameter is found in the
-__/etc/quantum/plugins/openvswitch/ovs_quantum_plugin.ini__ file on the
-controller and compute nodes.
+different types of Quantum Tenant Networks you can create are __gre__ and __vlan__.
+Both GRE and VLAN based Quantum Tenant Networks can be created and used at the same
+ time. This parameter is found in the 
+ __/etc/quantum/plugins/openvswitch/ovs_quantum_plugin.ini__ file on the controller 
+ and compute nodes.
 
 The mysql JSON Block
 --------------------
@@ -313,7 +317,6 @@ will search for a network interface on the controller and compute nodes
 assigned an IP address within the 192.168.236.0/24 subnet; in our case it is
 eth0. The IP address of eth0 is then used as the listening address for each
 OpenStack service mapped to that osops_network label.
-
 
 Below is a rough list of what services map to which label:
 
@@ -388,7 +391,7 @@ nova-network or Quantum Networking.
 
 If you want to dive deeper, there are many other override attributes that can
 be set in the Chef Environment file. You can see all the different attributes
-that can be overrided by logging into your Chef Server (I am assuming the
+that can be overridden by logging into your Chef Server (I am assuming the
 Rackspace Private Cloud Chef Cookbooks are downloaded there), changing into
 the __chef-cookbooks__ directory, changing into the particular Chef Cookbook
 directory you want to change the default attributes of, changing into the
