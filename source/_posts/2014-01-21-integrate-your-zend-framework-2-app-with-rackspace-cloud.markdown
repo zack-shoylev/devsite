@@ -1,10 +1,10 @@
 ---
 layout: post
 title: "Integrate your Zend Framework 2 app with Rackspace Cloud"
-date: 2014-01-20 10:43
+date: 2014-01-29 10:30
 comments: true
 author: Jamie Hannaford 
-published: false
+published: true
 categories: 
  - php-sdk 
  - php-opencloud 
