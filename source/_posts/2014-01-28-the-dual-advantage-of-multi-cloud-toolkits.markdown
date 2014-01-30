@@ -1,7 +1,7 @@
 ---
 layout: post
 title: "The Dual Advantage of Multi-Cloud Toolkits"
-date: 2014-01-28 10:00
+date: 2014-01-30 9:30
 comments: true
 author: Everett Toews
 published: true
