@@ -4,7 +4,7 @@ title: "Libcloud 0.14 Released"
 date: 2014-02-03 14:51
 comments: true
 author: Brian Curtin
-published: false
+published: true
 categories:
 - python
 - libcloud
@@ -15,6 +15,8 @@ categories:
 On 22 January, [Apache Libcloud](https://libcloud.apache.org/index.html) project chair Tomaz Muraus announced the release of Libcloud 0.14, a Python package which abstracts away the many differences among cloud provider APIs, allowing developers to target one interface regardless of the vendor.
 
 # History
+
+{% img right /images/2014-02-03-libcloud-0-dot-14-released/libcloud.png 225 %}
 
 The Libcloud project began in 2009 at Cloudkick, who were later acquired by Rackspace, leading to the [Cloud Monitoring](http://www.rackspace.com/cloud/monitoring/) product. After joining the Apache Incubator in late 2009, Libcloud graduated to a top-level Apache project in May 2011.
 
