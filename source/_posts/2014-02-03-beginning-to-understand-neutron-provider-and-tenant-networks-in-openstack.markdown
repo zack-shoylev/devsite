@@ -11,12 +11,6 @@ categories:
  - Networking
 ---
 
-This is the fifth post by [James Thorne](http://twitter.com/jameswthorne)
-diving deeply into [OpenStack Neutron](https://wiki.openstack.org/wiki/Neutron)
- - the Network-as-a-service system for OpenStack. In this post, James lays out
-the the high level multi-tenant capabilities of Neutron.
-
-<!--more-->
 
 I would wager that most of us are familiar with virtualized networking through
 experience running VMware vSphere. Each node in the VMware vSphere Cluster
@@ -29,6 +23,8 @@ machines are provisioned, one or more of those virtual networks can be
 attached to the virtual machine. The virtual network interfaces within the
 virtual machines can then be assigned IP addresses associated with the subnet
 on that particular VLAN and the virtual machines can begin communicating.
+
+<!--more-->
 
 OpenStack Neutron Networking has the same capabilities. The controller and
 compute nodes will have physical NICs connected to physical switch ports on a
