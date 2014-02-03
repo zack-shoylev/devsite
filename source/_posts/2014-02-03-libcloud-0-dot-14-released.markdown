@@ -4,7 +4,7 @@ title: "Libcloud 0.14 Released"
 date: 2014-02-03 14:51
 comments: true
 author: Brian Curtin
-published: true
+published: false
 categories:
 - python
 - libcloud
