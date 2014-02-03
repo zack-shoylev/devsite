@@ -11,6 +11,13 @@ categories:
  - Networking
 ---
 
+OpenStack is composed of many different projects that provide compute,
+storage, and network resources. The Neutron project provides network
+resources to the OpenStack environment and can be difficult to get started
+with. To help get the gears turning, I will be discussing what Neutron
+Networking is capable of.
+
+<!--more-->
 
 I would wager that most of us are familiar with virtualized networking through
 experience running VMware vSphere. Each node in the VMware vSphere Cluster
@@ -23,8 +30,6 @@ machines are provisioned, one or more of those virtual networks can be
 attached to the virtual machine. The virtual network interfaces within the
 virtual machines can then be assigned IP addresses associated with the subnet
 on that particular VLAN and the virtual machines can begin communicating.
-
-<!--more-->
 
 OpenStack Neutron Networking has the same capabilities. The controller and
 compute nodes will have physical NICs connected to physical switch ports on a
