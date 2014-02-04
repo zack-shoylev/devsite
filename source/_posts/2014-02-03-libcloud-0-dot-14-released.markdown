@@ -4,7 +4,7 @@ title: "Libcloud 0.14 Released"
 date: 2014-02-03 14:51
 comments: true
 author: Brian Curtin
-published: false
+published: true
 categories:
 - python
 - libcloud
@@ -14,9 +14,11 @@ categories:
 
 On 22 January, [Apache Libcloud](https://libcloud.apache.org/index.html) project chair Tomaz Muraus announced the release of Libcloud 0.14, a Python package which abstracts away the many differences among cloud provider APIs, allowing developers to target one interface regardless of the vendor.
 
-# History
+<!--more-->
 
-{% img right /images/2014-02-03-libcloud-0-dot-14-released/libcloud.png 225 %}
+{% img /images/2014-02-03-libcloud-0-dot-14-released/libcloud.png 225 %}
+
+# History
 
 The Libcloud project began in 2009 at Cloudkick, who were later acquired by Rackspace, leading to the [Cloud Monitoring](http://www.rackspace.com/cloud/monitoring/) product. After joining the Apache Incubator in late 2009, Libcloud graduated to a top-level Apache project in May 2011.
 
@@ -54,11 +56,11 @@ If you don't already have an SSH key, there are many guides available around the
 
     from libcloud.compute.types import Provider
     from libcloud.compute.providers import get_driver
-    
+
     # Create the Rackspace driver and connect to it.
     Driver = get_driver(Provider.RACKSPACE)
     rs = Driver("libclouduser", "AbCdEfGhIjKlMnOpQrStUvWxYz", region="ord")
-    
+
     # Import your existing key pair by giving its path.
     # Give it a name - you'll need it when you create the Node!
     key_pair = rs.import_key_pair_from_file(
@@ -79,7 +81,7 @@ The following creates a Rackspace compute driver in the ORD datacenter. This met
 
     from libcloud.compute.types import Provider
     from libcloud.compute.providers import get_driver
-    
+
     # Create the Rackspace driver and connect to it.
     Driver = get_driver(Provider.RACKSPACE)
     rs = Driver("libclouduser", "AbCdEfGhIjKlMnOpQrStUvWxYz", region="ord")
@@ -91,7 +93,7 @@ Before you can create your `Node`, you need to pick a `NodeSize` and `NodeImage`
     # Return lists of `NodeSize` and `NodeImage` objects.
     sizes = rs.list_sizes()
     images = rs.list_images()
-    
+
 Since the Rackspace Cloud is built on OpenStack, the Rackspace compute provider APIs inherit from the OpenStack compute APIs. When you look at the items of the `sizes` list, you'll see that they're `OpenStackNodeSize` objects.
 
     [<OpenStackNodeSize: id=performance1-1, name=1 GB Performance, ram=1024, disk=20, bandwidth=None, price=0.04, driver=Rackspace Cloud (Next Gen), vcpus=1,  ...>,
@@ -124,17 +126,17 @@ Rackspace is among the supported providers for Libcloud's Load Balancer abstract
 Load Balancers are super easy to get setup. The main piece is a list of `Member`s, which we'll build from the `Node`s we created above. We also need to pick the `Algorithm` by which the load balancer directs traffic.
 
 For brevity, the following example assumes `nodes` is a list of compute nodes like you would have gotten from the [`list_nodes()`](https://libcloud.readthedocs.org/en/latest/compute/api.html#libcloud.compute.base.NodeDriver.list_nodes) call in the [Build it!]() section.
- 
+
     from libcloud.loadbalancer.base import Member, Algorithm
     from libcloud.loadbalancer.types import Provider
     from libcloud.loadbalancer.providers import get_driver
-     
+
     Driver = get_driver(Provider.RACKSPACE)
     balancers = Driver("libclouduser", "AbCdEfGhIjKlMnOpQrStUvWxYz")
-    
+
     # Create a list of Members from our list of Nodes.
     members = [Member(n.name, n.public_ips[0], 8080) for n in nodes]
-    
+
     lb = balancers.create_balancer(name="my_lb", algoritm=Algorithm.ROUND_ROBIN,
                                    port=80, protocol="http", members=members)
 
@@ -154,7 +156,7 @@ To get started, you'll need to create a `Zone` for your domain. All other DNS op
 
     Driver = get_driver(Provider.RACKSPACE)
     dns = Driver("libclouduser", "AbCdEfGhIjKlMnOpQrStUvWxYz")
-    
+
     # Create a Zone for a domain, and configure your email address.
     zone = dns.create_zone(domain="example.com",
                            extra={"email": "libcloud@example.com"})
@@ -181,10 +183,10 @@ Libcloud users can access Rackspace Cloud Files and other providers' object stor
 
     # Object upload operates on iterators, like BytesIO
     from io import BytesIO
-    
+
     # Create a new container within Rackspace Cloud Files.
     container = storage.create_container("my_container")
-    
+
     # Upload some data to our new container.
     obj = container.upload_object_via_stream(BytesIO("some_data"),
                                              object_name="my_uploaded_data")
