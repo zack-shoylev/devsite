@@ -3,23 +3,25 @@ layout: post
 title: "Integrate your Zend Framework 2 app with Rackspace Cloud"
 date: 2014-01-29 10:30
 comments: true
-author: Jamie Hannaford 
+author: Jamie Hannaford
 published: true
-categories: 
- - php-sdk 
- - php-opencloud 
- - zf2 
- - zend framework 2 
+categories:
+ - php-sdk
+ - php-opencloud
+ - zf2
+ - zend framework 2
 ---
 [Zend Framework 2](http://zendframework.com/) is an incredibly popular PHP framework that allows you to create web applications in an efficient, quick and robust manner. I could have chosen other web frameworks like [Symfony](http://symfony.com/), [Laravel](http://laravel.com/), [Yii](http://www.yiiframework.com/) or [CodeIgniter](http://ellislab.com/codeigniter); or even frameworks in different languages like Django or Rails, but I'll stick to personal preference for this blog post.
 
 Since the release of v2.0, there has been a wave of exciting features introduced into the codebase - like the service locator, event management, modularization, among many others. In this tutorial, I'll introduce a module I wrote that makes integrating your web app with Rackspace Cloud a piece of cake. After reading, you'll be able to access all the functionality of the API in a manner consistent with the ZF2 framework - saving you time and hassle.
 
+<!-- more -->
+
 ## Installation
 
 If you already have your ZF2 web app up and running, you can skip to Step 2.
 
-### Step 1: Install sample app 
+### Step 1: Install sample app
 
 To save time, I've gone ahead and created [a skeleton app](https://github.com/jamiehannaford/zf2-opencloud-skeleton-app) for you. The app acts as a basic cloud control panel, providing access to your Cloud Servers, Cloud Files containers and your Cloud Databases. To install, you must have the Composer archive file installed. If you haven't, [follow these steps](https://github.com/jamiehannaford/php-opencloud-zf2#step-1-install-composer-if-you-havent-already); otherwise:
 
@@ -68,7 +70,7 @@ All that remains is to edit `./config/autoload/opencloud.local.php` with your cr
 
 ## Play time
 
-For the sake of this tutorial, we'll be playing around with the [skeleton app](https://github.com/jamiehannaford/zf2-opencloud-skeleton-app) in order to see the full benefits of the ZF2 module. 
+For the sake of this tutorial, we'll be playing around with the [skeleton app](https://github.com/jamiehannaford/zf2-opencloud-skeleton-app) in order to see the full benefits of the ZF2 module.
 
 ### Accessing the SDK from your controller
 
@@ -90,7 +92,7 @@ The module offers great flexibility, as well as the full power of the underlying
 - display the details of a container, based on a GET parameter (`containerAction`)
 - display the details of an object based on a GET parameter (`fileAction`)
 
-in a few action methods. 
+in a few action methods.
 
 ### Accessing CloudFiles functionality from your HTML views
 
@@ -100,7 +102,7 @@ Sometimes, having to inject all your dependencies from controller to view can ge
 <? $container = $this->cloudFilesHelper('my_container'); ?>
 ```
 
-The above will retrieve the contents of your container, allowing full access to its contents. 
+The above will retrieve the contents of your container, allowing full access to its contents.
 
 #### Rendering files
 
@@ -184,6 +186,6 @@ The first argument is the number of files you want to retrieve (i.e. the limit);
 
 ## Conclusion
 
-So there you have it. Feel free to install [the module](https://github.com/jamiehannaford/php-opencloud-zf2) and try all this out yourself. We welcome contributions and feedback. If you run into any problems, feel free to submit an issue on Github or tweet me: [@jamiehannaford](https://twitter.com/jamiehannaford). 
+So there you have it. Feel free to install [the module](https://github.com/jamiehannaford/php-opencloud-zf2) and try all this out yourself. We welcome contributions and feedback. If you run into any problems, feel free to submit an issue on Github or tweet me: [@jamiehannaford](https://twitter.com/jamiehannaford).
 
 Happy hacking!
