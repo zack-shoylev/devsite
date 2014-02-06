@@ -47,7 +47,7 @@ resemblance to the virtual networks. For this discussion a very simple
 OpenStack environment has been created consisting of one controller node,
 one network node and one compute node as shown below:
 
-{% img center /images/2014-01-21-software-defined-networks-in-the-havana-release-of-openstack/OpenStacknetwork2tent.png 662 456 %}
+{% img center /images/2014-01-21-software-defined-networks-in-the-havana-release-of-openstack/openstacknetwork2tent.png 662 456 %}
 
 Creation of the networks for the each of tenants named test and test1,
 occur within the compute and network nodes. More specifically this series
