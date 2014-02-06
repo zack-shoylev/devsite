@@ -35,11 +35,13 @@ from the DHCP server and we can contact the VM from within the network:
 
 {% img center /images/2014-01-21-software-defined-networks-in-the-havana-release-of-OpenStack/tenant2.png 433 218 %}
 
+
 A second network exists for another tenant consisting of 2 VMs, a DHCP
 server, a router/gateway to the external world and public (floating) IP
 assigned to one of the VMs. This network is shown below:
 
 {% img center /images/2014-01-21-software-defined-networks-in-the-havana-release-of-OpenStack/tenant1.png 431 130 %}
+
 
 These virtual networks are created on physical hardware that has no
 resemblance to the virtual networks. For this discussion a very simple
