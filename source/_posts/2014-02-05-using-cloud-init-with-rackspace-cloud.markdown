@@ -4,7 +4,7 @@ title: "Using Cloud-init with Rackspace cloud"
 date: 2014-02-05 09:07
 comments: true
 author: Trey Hoehne
-published: true
+published: false
 categories: 
 ---
 
