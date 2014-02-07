@@ -283,7 +283,7 @@ The __allow_remote_root__ parameter set to __true__ allows remote root
 connections to the MySQL service.
 
 The __root_network_acl__ defines the network where the root user can login
-from. With this set to __%__, which is a wildcard in MySQL, the root user of
+from. With this set to __%__, which is a wild card in MySQL, the root user of
 the MySQL service can be logged into from any host.
 
 The osops_networks JSON Block
