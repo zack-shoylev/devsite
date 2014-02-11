@@ -1,11 +1,15 @@
 ---
 layout: post
 title: "Using Cloud-init with Rackspace cloud"
-date: 2014-02-05 09:07
+date: 2014-02-11 10:30
 comments: true
 author: Trey Hoehne
-published: false
-categories: 
+published: true
+categories:
+ - Cloud-init
+ - Cloud
+ - Configuration
+ - Linux
 ---
 
 
@@ -27,12 +31,14 @@ stacks, but might lack the advanced customization you need. Using a “golden
 image” requires you to deploy a new server to customize and capture
 any changes you make. 
 
-What if you want something simple that's easy to use but is powerful enough to compliment your existing configuration management? 
+What if you want something simple that's easy to use but is powerful enough to compliment your existing configuration management?
 
 Enter cloud-init, a project by Canonical that is designed to work
-across cloud providers and public/private clouds. It's easy to 
+across cloud providers and public/private clouds. It's easy to
 use, and can be a great alternative or complement to your
 existing configuration management. 
+
+<!-- more -->
 
 # Using cloud-init
 
@@ -84,8 +90,8 @@ images. 
 * Scientific Linux 6.x +
 * Ubuntu 12.04 +
 * Arch and Gentoo coming soon
- 
-# Examining the cloud-config script 
+
+# Examining the cloud-config script
 
 The first module in the configuration file is `packages`. As the name
 implies, any distribution specific packages listed here will be
@@ -107,7 +113,7 @@ into the server, and we'll accomplish that by using a feature called
 config-drive. Additional information about config-drive can be read
 about in the [API docs](http://docs.rackspace.com/servers/api/v2/cs-devguide/content/config_drive_ext.html), but just know for the purpose
 of this blog that it's a read only drive that is attached to your server
-on build and used by cloud-init as a data source for user supplied files. 
+on build and used by cloud-init as a data source for user supplied files.
 
 Now that we have our configuration file setup we'll inject it into our server with the nova (or in
 this example the [supernova](https://github.com/major/supernova) client:
@@ -117,7 +123,7 @@ this example the [supernova](https://github.com/major/supernova) client:
  This attaches the config-drive to our server at boot by specifying
 `--configuration-drive=true`, then `--user-data cloud-config` is letting
 nova know that we're going to pass it the following user-data file which
-will need to go inside of config-drive. 
+will need to go inside of config-drive.
 
 If everything worked we should be able to list our server and ping the
 public IP assigned to the newly created server.
@@ -138,12 +144,12 @@ running through your cloud config. 
 # Troubleshooting
 
 This is a good segue into what happens if something goes wrong and you
-need to figure out what exploded. 
+need to figure out what exploded.
 
-Log files can typically be found in `/var/log/cloud-init.log`. 
+Log files can typically be found in `/var/log/cloud-init.log`.
 
 The copy of your cloud-config is stored here:
-`/var/lib/cloud/instance/cloud-config.txt`. 
+`/var/lib/cloud/instance/cloud-config.txt`.
 
 The `/var/lib/cloud` directory also has other useful information, such as
 files that let cloud-init know it's already run once so you can rest
@@ -188,7 +194,7 @@ Ubuntu image.
 	   device: '/dev/xvdf1'
 	   partition: 'auto'
 
-	 - label: None 
+	 - label: None
 	   filesystem: 'ext3'
 	   device: '/dev/xvdg1'
 	   partition: 'auto'
@@ -212,7 +218,7 @@ Ubuntu image.
 	# complete.  This must be an array, and must have 7 fields.
 
 	mount_default_fields: [ None, None, "ext3", "defaults,noatime", "0","2" ]
-	
+
 (For the four data disk scenario, device labeling starts with 'xvde'
 label and ends alphabetically with 'xvdh'.)
 
@@ -225,7 +231,7 @@ distribution by default, so if you want to use something exotic you'll
 need to add it either via cloud-init or by using a golden image that
 already has the filesystem installed. The 'device' is the partition that we
 want to format, and 'partition' set to 'auto' will cause it skip that
-device if the file system we specified is already there. 
+device if the file system we specified is already there.
 
 After we've setup the file system that we want it's time to mount it.
 This follows the same pattern of one section per
@@ -235,7 +241,7 @@ specify default values for each device. In this example we specifiy
 additional entries for the first device 'xvde1'. Rather than add the
 specification for each device, this information can be set in the
 `mount_defaults` section to save time and space. Feel free to read the `fs_setup` and `mounts`
-documentation for a full list of features. 
+documentation for a full list of features.
 
 Note that cloud-init will format your data disks one at a time, so disk size and number of are a factor. With
 disks as large as 300GB  this can take some time to format; however your
