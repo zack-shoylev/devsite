@@ -36,16 +36,16 @@ In this scenario, each of the following Chef Environment files represent an
 OpenStack environment where the controller and compute nodes each use three
 network interfaces (eth0, eth1, and eth2).
 
-eth0 on each node will be connected to a managed network switch as an
-__access__ port on a unique VLAN with network subnet 192.168.236.0/24; the
+__eth0__ on each node will be connected to a managed network switch as an
+__access__ port on a unique VLAN with network subnet __192.168.236.0/24__; the
 OpenStack APIs and services will listen on this network interface.
 
-eth1 on each node will be connected to a managed network switch as an
-__access__ port on a unique VLAN with network subnet 192.168.240.0/24;
+__eth1__ on each node will be connected to a managed network switch as an
+__access__ port on a unique VLAN with network subnet __192.168.240.0/24__;
 OpenStack instances will communicate on this network interface through
 GRE tunnels.
 
-eth2 on each node will also be connected to a managed network switch but as
+__eth2__ on each node will also be connected to a managed network switch but as
 a __trunk__ port containing all of the VLANs you want available in the
 OpenStack environment; Neutron Provider Networks will be created from these
 VLANs and will communicate over this network interface.
@@ -187,7 +187,7 @@ the following command:
 
 There isn't much going on here.
 
-When using Rackspace Private Cloud, the  __override__attributes__ JSON
+When using Rackspace Private Cloud, the  __override_attributes__ JSON
 block is the main part to configure in the Chef Environment file. Inside
 this JSON block is where you will override the default attributes already
 set in the Chef Cookbooks to match your environment.
