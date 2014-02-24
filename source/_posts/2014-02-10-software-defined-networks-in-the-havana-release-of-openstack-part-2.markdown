@@ -1,11 +1,15 @@
 ---
 layout: post
 title: "Software Defined Networks in the Havana release of Openstack – Part 2"
-date: 2014-02-10 09:45
+date: 2014-02-24 09:30
 comments: true
 author: Phil Hopkins
-published: false
-categories: 
+published: true
+categories:
+ - OpenStack
+ - Havana
+ - SDN
+ - Neutron
 ---
 Software Defined Networks in the Havana release of Openstack – Part 2
 
@@ -13,12 +17,14 @@ In the [first article](http://developer.rackspace.com/blog/software-defined-netw
 
 Discussion will then continue with the first half of the iptables chains that are interjected between the VM and the Open vSwitch process (OVS) on the compute node. In order to keep these articles in bite sized chunks we will end this section after looking at the first two iptables chains, those starting with neutron – which manage the security group rules, the next article will continue through the iptables chains looking at those starting with nova and will conclude by reviewing how two different types of packets will progress through these chains.
 
+<!--more-->
+
 In order to apply the Neutron security group rules that are be created for each VM, iptables are used on the compute node to filter traffic going to and from the VMs. This changed from the Grizzly release where security group rules were managed by the Neutron network processes rather than that of the Nova processes. This change implemented improved security filtering, providing both ingress and egress filters on each VM.  In order to allow iptables to filter traffic to and from the VMs, the network path out of the VMs has changed. Using Neutron security groups causes the nova-compute service to build the path from the VM to the OVS process as shown in the following diagram:
 
-{% img center /images/software-defined-networks-in-the-havana-release-of-openstack-pt2/computenode1.png 744 504 %
+{% img center /images/software-defined-networks-in-the-havana-release-of-openstack-part-2/computenode1.png 744 504 %}
 
-Looking at VM1, when it is created the VM's eth0 interface is connected to a Linux tap device tapxxx which is plugged into a newly created Linux bridge, qbrxxx. Into this bridge one end of a virtual Ethernet pair (qvbxxx) is attached and the other half of the veth pair (qvoxxx) is placed into the OVS process. The setup is more complicated than the older Nova security group configuration, which plugged the tap interface directly into the OVS process. This  setup has the advantage that packets can be filtered when passing into or out of the Linux bridge. The packets now transverse the iptables FORWARD chain on the compute node and filters can be applied into this chain. This is a big improvement to Nova security group rules since this technique will filter any packets passing into or out of a specific VM. Formerly using Nova security group rules, iptables filtering occurred within the network namespace on the network node. Traffic going between VMs on the same subnet would not pass through the network node or 
-be filtered which could potentially allow a compromised VM to attack other VMs on the same subnet. 
+Looking at VM1, when it is created the VM's eth0 interface is connected to a Linux tap device tapxxx which is plugged into a newly created Linux bridge, qbrxxx. Into this bridge one end of a virtual Ethernet pair (qvbxxx) is attached and the other half of the veth pair (qvoxxx) is placed into the OVS process. The setup is more complicated than the older Nova security group configuration, which plugged the tap interface directly into the OVS process. This  setup has the advantage that packets can be filtered when passing into or out of the Linux bridge. The packets now transverse the iptables FORWARD chain on the compute node and filters can be applied into this chain. This is a big improvement to Nova security group rules since this technique will filter any packets passing into or out of a specific VM. Formerly using Nova security group rules, iptables filtering occurred within the network namespace on the network node. Traffic going between VMs on the same subnet would not pass through the network node or
+be filtered which could potentially allow a compromised VM to attack other VMs on the same subnet.
 
 Please note that although most packets passing through the Linux bridge to or from the VMs will principally pass through the FORWARD chain, packets can occur that get directed to the INPUT or OUTPUT chains. These chains have rules that will use the same sub-chains that the FORWARD table uses, resulting in the same filters being used regardless of a packet's flow through the iptables processing.
 
@@ -31,7 +37,7 @@ root@controller:~# neutron port-list
 +--------------------------------------+------+-------------------+---------------------------------------------------------------------------------+
 | 67c49753-bf85-4eae-a5a3-faa48fdab983 |      | fa:16:3e:dc:be:eb | {"subnet_id": "fc54a4af-450d-405e-9337-fbdb7e94e008", "ip_address": "10.1.0.2"} |
 ```
- 
+
 The xxx used in the above drawing will be the first 10 characters of the UUID or 67c49753-bf for this VM. This information will be needed when looking at the packet flow through the iptables rules created on the compute node. As we will see some of the chains are named by this VM's port identifier so having this information will enable us to identify which rules apply the which VM.
 
 The complete iptables rules on the compute node with these three VMs are very long, in order to simplify this discussion only the FORWARD chain will be reviewed and will be limited to the rules for the above mentioned VM. The various iptables chains shown have been edited to show only the rules that apply to this VM.
@@ -45,14 +51,14 @@ Considering the trimmed output of the `iptables -L -n -v --line-numbers` command
 root@openstack-ubu-compute:~# iptables -L -n -v --line-numbers
 
 Chain FORWARD (policy ACCEPT 0 packets, 0 bytes)
-num   pkts bytes target                    prot opt in     out     source               destination         
-1    12489 1110K neutron-filter-top        all  --  *      *       0.0.0.0/0            0.0.0.0/0           
-2    12489 1110K neutron-openvswi-FORWARD  all  --  *      *       0.0.0.0/0            0.0.0.0/0           
-3        2   616 nova-filter-top           all  --  *      *       0.0.0.0/0            0.0.0.0/0           
-4        0     0 nova-compute-FORWARD      all  --  *      *       0.0.0.0/0            0.0.0.0/0     
+num   pkts bytes target                    prot opt in     out     source               destination
+1    12489 1110K neutron-filter-top        all  --  *      *       0.0.0.0/0            0.0.0.0/0
+2    12489 1110K neutron-openvswi-FORWARD  all  --  *      *       0.0.0.0/0            0.0.0.0/0
+3        2   616 nova-filter-top           all  --  *      *       0.0.0.0/0            0.0.0.0/0
+4        0     0 nova-compute-FORWARD      all  --  *      *       0.0.0.0/0            0.0.0.0/0
 ```
 
-The FORWARD chain has a default policy of ACCEPT and references four chains. The match conditions for each of these rules are source 0.0.0.0/0 and destination 0.0.0.0/0, all IP protocols and any TCP or UDP ports if specified. These conditions will match any packet. As such packets entering the FORWARD chain will be processed by each successive chain until an ACCEPT or DROP target is encountered. If not the default policy of ACCEPT will be applied. Notice that at the time the iptables were examined from the information given in the pkts statistics column that no packets had made it through to the point of being directed to the nova-compute-FORWARD chain. 
+The FORWARD chain has a default policy of ACCEPT and references four chains. The match conditions for each of these rules are source 0.0.0.0/0 and destination 0.0.0.0/0, all IP protocols and any TCP or UDP ports if specified. These conditions will match any packet. As such packets entering the FORWARD chain will be processed by each successive chain until an ACCEPT or DROP target is encountered. If not the default policy of ACCEPT will be applied. Notice that at the time the iptables were examined from the information given in the pkts statistics column that no packets had made it through to the point of being directed to the nova-compute-FORWARD chain.
 
 There are four chains referenced in the rules for the FORWARD chain. The two that start with Neutron are managed by the neutron security group rules process. Default security group rules allow all outgoing traffic, VMs on the network can communicate with each other (i.e. VM1 And VM2 can communicate without restrictions), all inbound traffic is blocked and ARP and DHCP request/reply packets between devices on this network are allowed. Additionally two security group rules have been added to allow inbound ICMP traffic and tcp traffic on port 22.
 
@@ -60,8 +66,8 @@ The neutron-filter-top chain:
 
 ```bash
 Chain neutron-filter-top (2 references)
-num   pkts bytes target     prot opt in     out     source               destination         
-1    3534K  668M neutron-openvswi-local  all  --  *      *       0.0.0.0/0            0.0.0.0/0  
+num   pkts bytes target     prot opt in     out     source               destination
+1    3534K  668M neutron-openvswi-local  all  --  *      *       0.0.0.0/0            0.0.0.0/0
 ```
 
 sends all packets to the neutron-openvswi-local chain. However the neutron-openvswi-local does not have any rules so the packet will return back to the FORWARD chain. In this situation this set of chains does not affect any packets.
@@ -70,18 +76,18 @@ In the chain neutron-openvswi-FORWARD the real work starts. Looking at this chai
 
 ```bash
 Chain neutron-openvswi-FORWARD (1 references)
-num   pkts bytes target                        prot opt in     out     source               destination         
+num   pkts bytes target                        prot opt in     out     source               destination
 1     3598  283K neutron-openvswi-sg-chain  all  --  *      *       0.0.0.0/0            0.0.0.0/0            PHYSDEV match --physdev-out tap67c49753-bf --physdev-is-bridged
 2     3615  394K neutron-openvswi-sg-chain  all  --  *      *       0.0.0.0/0            0.0.0.0/0            PHYSDEV match --physdev-in tap67c49753-bf --physdev-is-bridged
 ```
 
 Rules one and two in this chain will send packets that match the conditions `--physdev-out tap67c49753-bf --physdev-is-bridged` or `--physdev-in tap67c49753-bf --physdev-is-bridged`, these rules send the packets passing through a Linux bridge coming from or going to the device – tap67c49753-bf, to the chain neutron-openvswi-sg-chain. The interface tap67c49753-bf  is the interface attached to VM1, which we are considering in this example.
 
-Continuing with the chain neutron-openvswi-sg-chain which is called by the previous chain: 
+Continuing with the chain neutron-openvswi-sg-chain which is called by the previous chain:
 
 ```bash
 Chain neutron-openvswi-sg-chain (6 references)
-num   pkts bytes target                        prot opt in     out     source               destination         
+num   pkts bytes target                        prot opt in     out     source               destination
 1     3598  283K neutron-openvswi-i67c49753-b  all  --  *      *       0.0.0.0/0            0.0.0.0/0            PHYSDEV match --physdev-out tap67c49753-bf --physdev-is-bridged
 2     3615  394K neutron-openvswi-o67c49753-b  all  --  *      *       0.0.0.0/0            0.0.0.0/0            PHYSDEV match --physdev-in tap67c49753-bf --physdev-is-bridged
 3    11069 1012K ACCEPT     all  --  *      *       0.0.0.0/0            0.0.0.0/0
@@ -93,25 +99,25 @@ Now the chain  neutron-openvswi-i67c49753-b which processes the packets coming o
 
 ```bash
 Chain neutron-openvswi-i67c49753-b (1 references)
-num   pkts bytes target     prot opt in     out     source               destination         
+num   pkts bytes target     prot opt in     out     source               destination
 1        0     0 DROP       all  --  *      *       0.0.0.0/0            0.0.0.0/0            state INVALID
 2     3586  280K RETURN     all  --  *      *       0.0.0.0/0            0.0.0.0/0            state RELATED,ESTABLISHED
-3        2   168 RETURN     icmp --  *      *       0.0.0.0/0            0.0.0.0/0           
-4        0     0 RETURN     all  --  *      *       10.1.0.4             0.0.0.0/0           
+3        2   168 RETURN     icmp --  *      *       0.0.0.0/0            0.0.0.0/0
+4        0     0 RETURN     all  --  *      *       10.1.0.4             0.0.0.0/0
 5        4   240 RETURN     tcp  --  *      *       0.0.0.0/0            0.0.0.0/0            tcp dpt:22
 6        2   702 RETURN     udp  --  *      *       10.1.0.3             0.0.0.0/0            udp spt:67 dpt:68
-7        4  1256 neutron-openvswi-sg-fallback  all  --  *      *       0.0.0.0/0            0.0.0.0/0  
+7        4  1256 neutron-openvswi-sg-fallback  all  --  *      *       0.0.0.0/0            0.0.0.0/0
 ```
 
-This chain performs the checks for the security group rules. All packets in the invalid state are dropped (rule 1). Packets in the related or established state, packets related to an established flow are returned back to the previous chain (rule 2). ICMP packets are returned (rule 3). Rule 3 was created by the addition to the default security group to allow ICMP packets. All packets from VM2 (IP 10.1.0.4) are returned (rule4). This rule allows communication between the other VM on this network and VM1. There is a corresponding rule in the chain for VM2. Continuing with rule 5 which allows communication on port 22, which is here because of the addition to the security group to allow port 22 (SSH) communication. Rule 6 allows DHCP responses from the DHCP server. Lastly any packets not matching the rules in this chain will be sent to the chain neutron-openvswi-sg-fallback. In summary incoming packets to VM1 that are ICMP packets, packets from the other VM on the network (IP – 10.1.0.4), port 22 (ssh) packets 
+This chain performs the checks for the security group rules. All packets in the invalid state are dropped (rule 1). Packets in the related or established state, packets related to an established flow are returned back to the previous chain (rule 2). ICMP packets are returned (rule 3). Rule 3 was created by the addition to the default security group to allow ICMP packets. All packets from VM2 (IP 10.1.0.4) are returned (rule4). This rule allows communication between the other VM on this network and VM1. There is a corresponding rule in the chain for VM2. Continuing with rule 5 which allows communication on port 22, which is here because of the addition to the security group to allow port 22 (SSH) communication. Rule 6 allows DHCP responses from the DHCP server. Lastly any packets not matching the rules in this chain will be sent to the chain neutron-openvswi-sg-fallback. In summary incoming packets to VM1 that are ICMP packets, packets from the other VM on the network (IP – 10.1.0.4), port 22 (ssh) packets
 and packets in the related/established state are allowed, everything else is sent to the chain neutron-openvswi-sg-fallback.
 
 The chain neutron-openvswi-sg-fallback has one rule that will drop any packets entering this chain:
 
 ```bash
 Chain neutron-openvswi-sg-fallback (6 references)
-num   pkts bytes target                        prot opt in     out     source               destination         
-1     1227 70668 DROP 
+num   pkts bytes target                        prot opt in     out     source               destination
+1     1227 70668 DROP
 ```
 
 So for a packet to continue to this VM it must have matched one of the rules in the chain neutron-openvswi-i67c49753-b or it is dropped.
@@ -120,27 +126,27 @@ Remember from the above that packets coming out of VM1 were directed to the chai
 
 ```bash
 Chain neutron-openvswi-o67c49753-b (2 references)
-num   pkts bytes target     prot opt in     out     source               destination         
+num   pkts bytes target     prot opt in     out     source               destination
 1        3   936 RETURN     udp  --  *      *       0.0.0.0/0            0.0.0.0/0            udp spt:68 dpt:67
-2     3612  393K neutron-openvswi-s67c49753-b  all  --  *      *       0.0.0.0/0            0.0.0.0/0           
+2     3612  393K neutron-openvswi-s67c49753-b  all  --  *      *       0.0.0.0/0            0.0.0.0/0
 3        0     0 DROP       udp  --  *      *       0.0.0.0/0            0.0.0.0/0            udp spt:67 dpt:68
 4        0     0 DROP       all  --  *      *       0.0.0.0/0            0.0.0.0/0            state INVALID
 5     3536  388K RETURN     all  --  *      *       0.0.0.0/0            0.0.0.0/0            state RELATED,ESTABLISHED
-6       76  4842 RETURN     all  --  *      *       0.0.0.0/0            0.0.0.0/0           
-7        0     0 neutron-openvswi-sg-fallback  all  --  *      *       0.0.0.0/0            0.0.0.0/0  
+6       76  4842 RETURN     all  --  *      *       0.0.0.0/0            0.0.0.0/0
+7        0     0 neutron-openvswi-sg-fallback  all  --  *      *       0.0.0.0/0            0.0.0.0/0
 ```
 
-Looking at this chain rule by rule, first rule 1 will allow DHCP request packets coming from the VM. Rule 2 will send all packets to the chain neutron-openvswi-s67c49753-b. Rule 3 will prevent a VM from acting as a DHCP server since it will drop any packets coming from UDP source port 67 going to UDP port 68 (usually a response to a DHCP request). Rule 4 will drop packets coming from the VM in an invalid state. Rule 5 returns packets that are in a related/established state to the calling chain. Rule 6 will return any packets coming out of the VM to this point. Finally rule 7 will send any packets that might have escaped the other rules to the chain neutron-openvswi-s67c49753-b which will drop those packets. In summary, packets coming out of the VM that are responding to DHCP requests are dropped. All packets are then sent to the chain neutron-openvswi-s67c49753-b, which is considered next. Packets in the invalid state will be dropped. Packets that are DHCP requests, packets in the related/established state 
-and all other packets are returned to the calling chain. 
+Looking at this chain rule by rule, first rule 1 will allow DHCP request packets coming from the VM. Rule 2 will send all packets to the chain neutron-openvswi-s67c49753-b. Rule 3 will prevent a VM from acting as a DHCP server since it will drop any packets coming from UDP source port 67 going to UDP port 68 (usually a response to a DHCP request). Rule 4 will drop packets coming from the VM in an invalid state. Rule 5 returns packets that are in a related/established state to the calling chain. Rule 6 will return any packets coming out of the VM to this point. Finally rule 7 will send any packets that might have escaped the other rules to the chain neutron-openvswi-s67c49753-b which will drop those packets. In summary, packets coming out of the VM that are responding to DHCP requests are dropped. All packets are then sent to the chain neutron-openvswi-s67c49753-b, which is considered next. Packets in the invalid state will be dropped. Packets that are DHCP requests, packets in the related/established state
+and all other packets are returned to the calling chain.
 
 The chain neutron-openvswi-s67c49753-b:
 
 ```bash
 Chain neutron-openvswi-s67c49753-b (1 references)
-num   pkts bytes target     prot opt in     out     source               destination         
+num   pkts bytes target     prot opt in     out     source               destination
 1     3239  362K RETURN     all  --  *      *       10.1.0.2             0.0.0.0/0            MAC FA:16:3E:DC:BE:EB
 2        0     0 DROP       all  --  *      *       0.0.0.0/0            0.0.0.0/0                         all  --  *      *       0.0.0.0/0            0.0.0.0/0
-``` 
+```
 
 Rule one will return all packets coming out of the VM with IP, 10.1.0.2 (the IP assigned to the VM) and with MAC address, FA:16:3E:DC:BE:EB, the MAC address that OpenStack assigned to the VM will be returned to the calling chain. Any packets coming out of the VM that don't match the proper MAC and IP addresses will be dropped. It is this rule that prevents a VM from changing its IP or spoofing its MAC address.
 
