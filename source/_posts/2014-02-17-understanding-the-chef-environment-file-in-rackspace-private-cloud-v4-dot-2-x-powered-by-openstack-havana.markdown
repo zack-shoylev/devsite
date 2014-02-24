@@ -259,7 +259,7 @@ Provider Networks for each VLAN in the trunk. OpenStack instances can then be
 attached to these Neutron Provider Networks.
 
 The __network_type__ attribute sets the default type of Neutron Tenant Network
-created when it is not specified in the __neutron net-create__ command. The
+created when it is not specified in the `neutron net-create` command. The
 different types of Neutron Tenant Networks you can create are __gre__ and __vlan__. Both GRE and VLAN based Neutron Tenant Networks can be created and used at the same time, but if you set __network_type__ to __vlan__, __gre__ Neutron Tenant Networks cannot be created. This attribute is found in the __/etc/neutron/plugins/openvswitch/ovs_neutron_plugin.ini__ file on the controller and compute nodes.
 
 By default, if GRE tunnels are used for Neutron traffic, each node's GRE
@@ -376,16 +376,16 @@ address within the specified network subnet. That IP address is then used as
 the listening IP address for each OpenStack service mapped to that specific
 attribute.
 
-The __neutron__ attribute is not tied to any OpenStack services and has been
+The __neutron__ attribute is not tied to any OpenStack services, and has been
 added only so the GRE tunnels communicate on the __192.168.240.0/24__ network
 and not the __192.168.236.0/24__ network which is assigned to the __nova__
-attribute and is what the GRE tunnels connect to by default.
+attribute.
 
 Below is a rough list of what services map to the default __nova__,
 __public__, and __management__ attributes:
 
 __rabbitmq-server__, __rsyslog__, and __ntpd__ listen on all interfaces and
-do not map to any label.
+do not map to any attribute.
 
 #### nova
 
