@@ -342,13 +342,11 @@ what virtual router ID is tied to that VIP, and what __osops_network__ is
 tied to that VIP, __public__ in this case.
 
 By default Rackspace Private Cloud uses three VIPs: one for rabbitmq, a second
-for mysql, and a third for certain OpenStack services. The certain OpenStack
-services can use the same VIP because each service is listening on its own
-port. This three VIP setup allows mysql and rabbitmq to run on their own
-servers while the OpenStack services need to all run on the same server.
-If you want a particular OpenStack service to run on its own dedicated
-server, you can simply add another VIP and assign that particular OpenStack
-service that VIP.
+for mysql, and a third for the OpenStack services that need to be load balanced.
+The OpenStack services that need to be load balanced can use the same VIP because
+each service is listening on its own port. This three VIP setup allows mysql and
+rabbitmq to run on their own servers while the OpenStack services need to all run 
+on the same server.
 
 The osops_networks JSON Block
 -----------------------------
@@ -394,7 +392,7 @@ do not map to any label.
 The following services were found by running the following command on the Chef
 Server (the command assumes the Chef Cookbooks are in root's home directory):
 
-    grep -r '\["network"\] = "nova"' /root/chef-cookbooks
+    fgrep -r '["network"] = "nova"' /root/chef-cookbooks
 
 * keystone-admin-api
 * nova-xvpvnc-proxy
@@ -406,7 +404,7 @@ Server (the command assumes the Chef Cookbooks are in root's home directory):
 The following services were found by running the following command on the Chef
 Server (the command assumes the Chef Cookbooks are in root's home directory):
 
-    grep -r '\["network"\] = "public"' /root/chef-cookbooks
+    fgrep -r '["network"] = "public"' /root/chef-cookbooks
 
 * ceilometer-api
 * cinder-api
@@ -429,7 +427,7 @@ Server (the command assumes the Chef Cookbooks are in root's home directory):
 The following services were found by running the following command on the Chef
 Server (the command assumes the Chef Cookbooks are in root's home directory):
 
-    grep -r '\["network"\] = "management"' /root/chef-cookbooks
+    fgrep -r '["network"] = "management"' /root/chef-cookbooks
 
 * ceilometer-internal-api
 * ceilometer-admin-api
