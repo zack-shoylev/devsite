@@ -27,15 +27,18 @@ Typical Chef Environments
 -------------------------
 
 Below are two typical Chef Environment files to install Rackspace Private
-Cloud v4.1.x with nova-network or Quantum Networking.
+Cloud v4.1.x, one with nova-network and one with Quantum Networking.
 
-Each Chef Environment file will differ slightly depending on which OpenStack
-Networking model you chose. Each of the following Chef Environment files
-represent an OpenStack environment with a single controller node and single
-compute node where the controller and compute nodes each have two NICs (eth0
-and eth1). eth0 on each node will be assigned an IP address in the
-192.168.236.0/24 subnet and eth1 will be active but will be un-configured;
-Chef will configure it during the chef-client run.
+The Chef Environment file will differ slightly depending on which OpenStack
+Networking model you chose. 
+
+In this scenario, each of the following Chef Environment files represent an OpenStack environment where the controller and compute nodes each use three network interfaces (eth0, eth1, and eth2).
+
+__eth0__ on each node will be connected to a managed network switch as an __access__ port on a unique VLAN with network subnet __192.168.236.0/24__; the OpenStack APIs and services will listen on this network interface.
+
+__eth1__ on each node will be connected to a managed network switch as an __access__ port. If you are using __nova-network__ the network interface will be active but left un-configured because Chef will configure it. If you are using __Quantum Networking__ the network interface will be on a unique VLAN with network subnet __192.168.240.0/24__; OpenStack instances will communicate on this network interface through GRE tunnels.
+
+__eth2__ on each node will also be connected to a managed network switch but as a __trunk__ port containing all of the VLANs you want available in the OpenStack environment; Depending on which OpenStack Networking model you use, nova-networks or Quantum Provider Networks will be created from these VLANs and will communicate over this network interface.
 
 #### Rackspace Private Cloud v4.1.x using nova-network Chef Environment File:
 
@@ -94,11 +97,12 @@ Chef will configure it during the chef-client run.
                 "ovs": {
                     "provider_networks": [
                         {
-                            "label": "ph-eth1",
-                            "bridge": "br-eth1"
+                            "label": "ph-eth2",
+                            "bridge": "br-eth2"
                         }
                     ],
-                    "network_type": "gre"
+                    "network_type": "gre",
+                    "network": "quantum"
                 }
             },
             "mysql": {
@@ -108,13 +112,14 @@ Chef will configure it during the chef-client run.
             "osops_networks": {
                 "nova": "192.168.236.0/24",
                 "public": "192.168.236.0/24",
-                "management": "192.168.236.0/24"
+                "management": "192.168.236.0/24",
+                "quantum": "192.168.240.0/24"
             }
         }
     }
 
-#### Default Chef Environment File:
-
+The default JSON Block
+----------------------
 
     {
         "name": "rpc-grizzly",
@@ -126,19 +131,21 @@ Chef will configure it during the chef-client run.
         "override_attributes": {}
     }
 
-Above is a new Chef Environment file. There isn't much going on here.
+Above is what you would see if you created a new Chef Environment file with the following command:
 
-When using Rackspace Private Cloud, the main part of the Chef Environment
-file exists within the __override_attributes__ JSON block. Inside the
-__override_attributes__ JSON block is where you will override the default
-attributes in the Chef Cookbooks to match your environment. So, let's break
-it all down.
+    knife environment create rpc-grizzly -d "Rackspace Private Cloud"
+
+There isn't much going on here.
+
+When using Rackspace Private Cloud, the  __override_attributes__ JSON block is the main part to configure in the Chef Environment file. Inside this JSON block is where you will override the default attributes already set in the Chef Cookbooks to match your environment. 
+
+So, let's break down the various JSON blocks within the __override_attributes__ JSON block that apply to this scenario.
 
 The nova JSON Block
 -------------------
 
-Below are two different nova JSON blocks, one for nova-network and one for
-Quantum Networking. One or the other will be used depending on which
+Below are two different __nova__ JSON blocks, one for __nova-network__ and one for
+__Quantum Networking__. One or the other will be used depending on which
 OpenStack Networking model you want to use.
 
 #### Using nova-network
@@ -160,17 +167,18 @@ OpenStack Networking model you want to use.
         }
     },
 
-Above is the nova JSON block if you are using nova-network.
+Above is the __nova__ JSON block if you are using __nova-network__.
 
-In our example, there are two JSON blocks within the nova JSON block:
+In our scenario, there are two JSON blocks within the nova JSON block:
 __network__ and __networks__.
 
-Inside the network JSON block are two parameters: __provider__ and
+Inside the network JSON block are two attributes: __provider__ and
 __public_interface__.
 
-The __provider__ parameter specifies what OpenStack Networking model to use.
-In this case __nova-network__ will be used instead of Quantum Networking.
-The __public_interface__ parameter specifies what network interface on the
+The __provider__ attribute specifies what OpenStack Networking model to use.
+In this case __nova-network__ will be used instead of __Quantum Networking__.
+
+The __public_interface__ attribute specifies what network interface on the
 compute nodes nova-network floating IP addresses will be assigned to. This
 parameter can be found in the __/etc/nova/nova.conf__ file on the controller
 and compute nodes.
@@ -180,30 +188,30 @@ The __networks__ JSON block will accept two JSON blocks: a JSON block labeled
 __public__, as shown above, and an optional JSON block labeled __private__.
 The __public__ and __private__ JSON blocks are labeled this way because the
 __public__ JSON block is meant to setup a nova-network that allows outbound
-network access from the instances and the __private__ JSON block is meant to
+network access from the OpenStack instances and the __private__ JSON block is meant to
 setup a nova-network that only allows instance-to-instance communication.
-Now, __public__ and __private__ are just labels, you could setup a private
+__public__ and __private__ are just labels, you could setup a private
 network in the __public__ JSON block or a public network in the __private__
 JSON block. However, adhering to the intended convention will make everything
-easier to understand. A more appropriate name for the __public__ label would
-be __fixed__ because an instance will always be assigned, or __"fixed"__, an
-IP address from this nova-network. In addition, the __public__ label is
-commonly confused with the public label in the __osops_networks__ JSON block,
-, which you will read about later, and has no relation to it.
+easier to understand. A more appropriate name for the __public__ attribute would
+be __fixed__ because an OpenStack instance will always be assigned, or __"fixed"__, an
+IP address from the nova-network you specified. In addition, the __public__ attribute is
+commonly confused with the __public__ attribute in the __osops_networks__ JSON block, 
+which you will read about later, and has no relation to it.
 
 When the chef-client command is run on the compute node, it will use the
-parameters in the __public__ JSON block, and the __private__ JSON block if
-you set it up, to create a nova-network using the __nova-manage network create__
-command. A bridge interface named __br-eth1__ will be created and the physical
+attributes in the __public__ JSON block, and the __private__ JSON block if
+you set it up, to create a nova-network using the `nova-manage network create`
+command. A Linux bridge interface named __br-eth1__ will be created and the physical
 network interface, __eth1__, will be attached to it. In addition, a dnsmasq
 process will be spawned serving IP addresses in the __192.168.100.0/24__
 subnet from __192.168.168.100.2 - 192.168.100.254__; __192.168.100.1__ is
 skipped because this is usually the gateway IP address for the network
-terminated elsewhere on a router or firewall. OpenStack instances will have
+terminated on a router or firewall elsewhere in the network. OpenStack instances will have
 their virtual network interfaces attached to the __br-eth1__ bridge interface
 so they can communicate on the __192.168.100.0/24__ network.
 
-#### Using Quantum
+#### Using Quantum Networking
 
     "nova": {
         "network": {
@@ -211,19 +219,18 @@ so they can communicate on the __192.168.100.0/24__ network.
         }
     },
 
-Above is the nova JSON block if you are using Quantum Networking.
+Above is the __nova__ JSON block if you are using __Quantum Networking__.
 
-In our example, there is one JSON block within the nova JSON block: __network__.
+The __nova__ JSON block has one attribute: __network__.
 
-Inside the network JSON block is one parameter: __provider__.
+Inside the __network__ JSON block is one attribute: __provider__.
 
-The __provider__ parameter specifies what OpenStack Networking mode to use.
-In this case __quantum__ will be used instead of nova-network. By specifying
-__quantum__ as the OpenStack Networking model, Chef knows to install the
-necessary additional components such as __quantum-server__.
-
-Be aware that when using Quantum Networking, there are additional steps
-required after running __chef-client__ on each node.
+The __provider__ attribute specifies what OpenStack Networking model to 
+use. The two possible values are __nova-network__ and __quantum__, but 
+in this scenario __quantum__ will be used. When using Quantum Networking,
+there are additional configuration steps required after running 
+__chef-client__ on each node. Some of these configuration steps are 
+mentioned in the following section.
 
 The quantum JSON Block
 ----------------------
@@ -232,62 +239,56 @@ The quantum JSON Block
         "ovs": {
             "provider_networks": [
                 {
-                    "label": "ph-eth1",
-                    "bridge": "br-eth1"
+                    "label": "ph-eth2",
+                    "bridge": "br-eth2"
                 }
             ],
-            "network_type": "gre"
+            "network_type": "gre",
+            "network": "quantum"
         }
     },
 
-Above is the quantum JSON block. This would only be in the Chef Environment
+Above is the __quantum__ JSON block. This would only be in the Chef Environment
 file if you are using Quantum Networking.
 
-In our example, there is one JSON block within the quantum JSON block: __ovs__.
+The __quantum__ JSON block has one attribute: __ovs__.
 
-Inside of the ovs JSON block are two parameters: __provider_networks__ and
-__network_type__.
+Inside of the __ovs__ JSON block are three attributes: __provider_networks__, __network_type__, and __network__.
 
-The __provider_networks__ parameter has two variables: __label__ and __bridge__.
-The __label__ parameter is just that, a label for the subsequent __bridge__ 
-parameter that indicates the particular bridge interface where Quantum Provider
-Networks can be created from. In our example, __br-eth1__ is a bridge interface
-for the physical network interface __eth1__. eth1 could be configured as a trunk
-port on the managed network switch it is connected to. Quantum Provider Networks
-could then be created from the VLANs within that trunk. These parameters are found
-in the __/etc/quantum/plugins/openvswitch/ovs_quantum_plugin.ini__ file on the 
-controller and compute nodes.
+The __provider_networks__ attribute is an array and contains two attributes: __label__ and __bridge__. The __label__ attribute contains a value that specifies the name of a label which points to the Open vSwitch Bridge created in the subsequent attribute, __bridge__. 
 
-The __network_type__ parameter sets the default type of Quantum Tenant Network
-created when it is not specified in the __quantum net-create__ command. The
-different types of Quantum Tenant Networks you can create are __gre__ and __vlan__.
-Both GRE and VLAN based Quantum Tenant Networks can be created and used at the same
-time. This parameter is found in the 
-__/etc/quantum/plugins/openvswitch/ovs_quantum_plugin.ini__ file on the controller 
-and compute nodes.
+The __bridge__ attribute contains a value that specifies the name of the Open vSwitch Bridge interface that the `ovs-vsctl add-br` command will create when the __chef-client__ command is run on each node. These attributes are found in the __/etc/quantum/plugins/openvswitch/ovs_quantum_plugin.ini__ file on the controller and compute nodes. As mentioned above, __eth2__ is the network interface that is connected to a managed network switch as a trunk port containing all of the VLANs you want available in the OpenStack environment. __eth2__ is connected to the __br-eth2__ Open vSwitch Bridge by running `ovs-vsctl add-port br-eth2 eth2` on each node after __chef-client__ is run. At this point, the `quantum net-create` command can be used to create Quantum Provider Networks for each VLAN in the trunk. OpenStack instances can then be attached to these Quantum Provider Networks.
+
+The __network_type__ attribute sets the default type of Quantum Tenant Network created when it is not specified in the `quantum net-create` command. The different types of Quantum Tenant Networks you can create are __gre__ and __vlan__. Both GRE and VLAN based Quantum Tenant Networks can be created and used at the same time, but if you set __network_type__ to __vlan__, __gre__ Quantum Tenant Networks cannot be created. This attribute is found in the __/etc/quantum/plugins/openvswitch/ovs_quantum_plugin.ini__ file on the controller and compute nodes.
+
+By default, if GRE tunnels are used for Quantum traffic, each node's GRE tunnel will communicate on whatever network is assigned to the __nova__ __osops_network__ attribute. In this scenario, the __nova__ __osops_network__ attribute is tied to eth0 on each node. However, the Quantum traffic should be kept separate from the traffic on eth0 and eth1 will be used. So, the __network__ attribute has been added to the __quantum__ JSON block to point to the __quantum__ __osops_network__ attribute which will configure the GRE tunnels to communicate on network __192.168.240.0/24__ on eth1 on each node.
 
 The mysql JSON Block
 --------------------
 
     "mysql": {
-      "allow_remote_root": true,
-      "root_network_acl": "%"
+        "allow_remote_root": true,
+        "root_network_acl": "%"
     },
 
-Above is the mysql JSON block.
+Above is the __mysql__ JSON block.
 
-In our example, the mysql JSON block has two parameters:
-__allow_remote_root__ and __root_network_acl__.
+The __mysql__ JSON block has two attributes: __allow_remote_root__ and __root_network_acl__.
 
-The __allow_remote_root__ parameter set to __true__ allows remote root
-connections to the MySQL service.
+The __allow_remote_root__ attribute with a value of __true__ allows remote root connections to the MySQL service.
 
-The __root_network_acl__ defines the network where the root user can login
-from. With this set to __%__, which is a wild card in MySQL, the root user of
-the MySQL service can be logged into from any host.
+The __root_network_acl__ attribute defines the network where the MySQL root user can login from. With this attribute set to value __%__, which is a wild card in MySQL, the MySQL root user can log into the mysql service from any host.
 
 The osops_networks JSON Block
 -----------------------------
+
+Below are two different __osops__networks__ JSON blocks, one for __nova-network__ and one for
+__Quantum Networking__. One or the other will be used depending on which
+OpenStack Networking model you want to use.
+
+The nova-network __osops_network__ JSON block does not have the __quantum__ attribute because it does not need it.
+
+#### Using nova-network
 
             "osops_networks": {
                 "nova": "192.168.236.0/24",
@@ -297,97 +298,98 @@ The osops_networks JSON Block
         }
     }
 
-Above is the osops_networks JSON block.
+#### Using Quantum Networking
 
-Inside this block are three labels: __nova__, __public__, and __management__.
+            "osops_networks": {
+                "nova": "192.168.236.0/24",
+                "public": "192.168.236.0/24",
+                "management": "192.168.236.0/24",
+                "quantum": "192.168.240.0/24"
+            }
+        }
+    }
 
-There are additional labels that can be specified but these are the
-minimum needed.
+The __osops_networks__ JSON block has three default attributes: __nova__, __public__, and __management__.
 
-Each label maps to certain OpenStack services and each label is expecting a
-subnet, not a specific IP address. When __chef-client__ is run on a node, the
-Chef Cookbooks will search for a network interface assigned an IP address
-within the specified subnet. That IP address is then used as the listening
-address for each OpenStack service mapped to that osops_network label.
+If you are using Quantum Networking, the __quantum__ attribute has been added. Additional attributes can also be added, such as __cinder__, for additional configuration.
 
-In our example, assume eth0 on the controller node is assigned IP address
-192.168.236.10 and eth0 on the compute node is assigned IP address
-192.168.236.11. When __chef-client__ is run on a node, the Chef Cookbooks
-will search for a network interface on the controller and compute nodes
-assigned an IP address within the 192.168.236.0/24 subnet; in our case it is
-eth0. The IP address of eth0 is then used as the listening address for each
-OpenStack service mapped to that osops_network label.
+The three default attributes, __nova__, __public__, and __management__, map to specific OpenStack services and each attribute's value is expecting a network subnet, not a specific IP address. When __chef-client__ is run on each node, the Chef Cookbooks will search for a network interface assigned an IP address within the specified network subnet. That IP address is then used as the listening IP address for each OpenStack service mapped to that specific attribute.
 
-Below is a rough list of what services map to which label:
+The __quantum__ attribute is not tied to any OpenStack services, and has been added only so the GRE tunnels communicate on the __192.168.240.0/24__ network and not the __192.168.236.0/24__ network which is assigned to the __nova__ attribute.
 
-__rabbitmq-server, rsyslog, and ntpd__ listen on all interfaces and do not map to
-any label.
+Below is a rough list of what services map to the default __nova__, __public__, and __management__ attributes:
 
-__nova__
+__rabbitmq-server__, __rsyslog__, and __ntpd__ listen on all interfaces and do not map to
+any attribute.
 
-The following services were found by running the following command on the Chef
-Server (the command assumes the Chef Cookbooks are in root's home directory):
+#### nova
 
-    grep -r '\["network"\] = "nova"' /root/chef-cookbooks
+The following services were found by running the following command on the Chef Server (the command assumes the Chef Cookbooks are in root's home directory):
+
+    fgrep -r '["network"] = "nova"' /root/chef-cookbooks
 
 * keystone-admin-api
 * nova-xvpvnc-proxy
 * nova-novnc-proxy
 * nova-novnc-server
 
-__public__
+#### public
 
-The following services were found by running the following command on the Chef
-Server (the command assumes the Chef Cookbooks are in root's home directory):
+The following services were found by running the following command on the Chef Server (the command assumes the Chef Cookbooks are in root's home directory):
 
-    grep -r '\["network"\] = "public"' /root/chef-cookbooks
+    fgrep -r '["network"] = "public"' /root/chef-cookbooks
 
-* graphite-api
-* keystone-service-api
+* ceilometer-api
+* cinder-api
 * glance-api
 * glance-registry
+* heat-cloudwatch_api
+* heat-cfn_api
+* heat-base_api
+* horizon-dash
+* horizon-dash_ssl
+* keystone-service-api
 * nova-api
 * nova-ec2-admin
 * nova-ec2-public
 * nova-volume
 * quantum-api
-* cinder-api
-* ceilometer-api
-* horizon-dash
-* horizon-dash_ssl
 
-__management__
+#### management
 
-The following services were found by running the following command on the Chef
-Server (the command assumes the Chef Cookbooks are in root's home directory):
+The following services were found by running the following command on the Chef Server (the command assumes the Chef Cookbooks are in root's home directory):
 
-    grep -r '\["network"\] = "management"' /root/chef-cookbooks
+    fgrep -r '["network"] = "management"' /root/chef-cookbooks
 
-* graphite-statsd
-* graphite-carbon-line-receiver
-* graphite-carbon-pickle-receiver
-* graphite-carbon-cache-query
-* memcached
-* collectd
-* mysql
-* keystone-internal-api
-* glance-admin-api
-* glance-internal-api
-* nova-internal-api
-* nova-admin-api
-* cinder-internal-api
-* cinder-admin-api
-* cinder-volume
 * ceilometer-internal-api
 * ceilometer-admin-api
 * ceilometer-central
+* cinder-internal-api
+* cinder-admin-api
+* cinder-volume
+* collectd
+* glance-admin-api
+* glance-internal-api
+* statsd
+* graphite-api
+* carbon-line-receiver
+* carbon-pickle-receiver
+* carbon-cache-query
+* heat-cfn_internal_api
+* heat-base_internal_api
+* heat-base_admin_api
+* keystone-internal-api
+* memcached-cache
+* mysql
+* nova-internal-api
+* nova-admin-api
 
 Diving Deeper
 -------------
 
 I have gone through two typical Chef Environment files that can be used to
 install Rackspace Private Cloud v4.1.x powered by OpenStack Grizzly with
-nova-network or Quantum Networking.
+nova-network and with Quantum Networking.
 
 If you want to dive deeper, there are many other override attributes that can
 be set in the Chef Environment file. You can see all the different attributes
