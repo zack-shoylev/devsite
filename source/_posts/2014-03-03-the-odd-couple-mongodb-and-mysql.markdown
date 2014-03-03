@@ -1,18 +1,39 @@
-# The Odd Couple: MongoDB and MySQL
+---
+layout: post
+title: "The Odd Couple: MongoDB and MySQL"
+date: 2014-03-03 13:53
+comments: true
+author: Alex Brandt
+published: true
+categories:
+ - MongoDB
+ - MySQL
+ - Guest Posts
 
-[craigslist case study]: http://www.mongodb.com/customers/craigslist "Craigslist Case Study"
-[mongodb]: http://www.mongodb.org/ "MongoDB"
-[nosql distilled]: http://books.google.com/books/about/NoSQL_Distilled.html?id=AyY1a6-k3PIC&hl=en "NoSQL Distilled"
-[objectrocket]: http://objectrocket.com "ObjectRocket"
-[postgresql up and running]: http://books.google.com/books?id=Q8jkIZkMTPcC&dq=postgresql&source=gbs_navlinks_s "PostgreSQL: Up and Running"
-[pymongo]: https://github.com/mongodb/mongo-python-driver "PyMongo"
-[seven databases in seven weeks]: http://books.google.com/books?id=lA3QygAACAAJ&dq=seven+databases+in+seven+weeks&hl=en&sa=X&ei=Qt7WUszZHfPQsATunoGgAw "Seven Databases in Seven Weeks"
-[sqlalchemy]: http://www.sqlalchemy.org/ "SQLAlchemy"
+---
 
-The choices and combinations we have available during datastore selection prove that we're no longer in the one-size-fits-all datastore world.
-Today, there are compelling reasons to mix and match your SQL datastores (such as MySQL, PostgreSQL, Oracle or SQLServer) with your NoSQL datastores (MongoDB, CouchDB, and Neo4J among others).
-While Oracle may still be the preferred system of record for enterprises, it's no longer the only game in town.
-Developers are starting to use combinations of SQL and NoSQL to solve their problems—sometimes against the wishes of DBAs or IT Departments.
+The choices and combinations we have available during datastore selection
+prove that we're no longer in the one-size-fits-all datastore world.
+
+Today, there are compelling reasons to mix and match your SQL datastores
+(such as MySQL, PostgreSQL, Oracle or SQLServer) with your NoSQL datastores
+(MongoDB, CouchDB, and Neo4J among others).
+While Oracle may still be the preferred system of record for enterprises, it's
+no longer the only game in town.
+
+Developers are starting to use combinations of SQL and NoSQL to solve their
+problems—sometimes against the wishes of DBAs or IT Departments.
+
+<!-- more -->
+
+* [craigslist case study](http://www.mongodb.com/customers/craigslist)
+* [mongodb](http://www.mongodb.org/)
+* [nosql distilled](http://books.google.com/books/about/NoSQL_Distilled.html?id=AyY1a6-k3PIC&hl=en)
+* [objectrocket](http://objectrocket.com)
+* [postgresql up and running](http://books.google.com/books?id=Q8jkIZkMTPcC&dq=postgresql&source=gbs_navlinks_s)
+* [pymongo](https://github.com/mongodb/mongo-python-driver)
+* [seven databases in seven weeks](http://books.google.com/books?id=lA3QygAACAAJ&dq=seven+databases+in+seven+weeks&hl=en&sa=X&ei=Qt7WUszZHfPQsATunoGgAw)
+* [sqlalchemy](http://www.sqlalchemy.org/)
 
 ## Choosing the Right Tool for the Job
 
@@ -20,7 +41,7 @@ There are five broad categories of datastores in today's world: column-family, d
 In more practical terms this means we might use Cypher, JSON, SQL or a number of other query languages to access our data from within the same application.
 Using these different datastores and their different languages is becoming more prominent as developers look for better tools to laser in solutions to their persistence needs.
 
-Sadalage and Fowler note the necessity of polyglot persistence in [**NoSQL Distilled**][nosql distilled] by saying:
+Sadalage and Fowler note the necessity of polyglot persistence in [NoSQL Distilled](http://books.google.com/books/about/NoSQL_Distilled.html?id=AyY1a6-k3PIC&hl=en) by saying:
 
 --
 
@@ -50,7 +71,7 @@ Below, I discuss one use case, CraigsList data archival with MongoDB, and specul
 MongoDB has become a favored NoSQL alternative to MySQL.
 Its many benefits include scalability, auto-sharding and availability of native bindings for today’s popular programming languages.
 The core differentiator between MongoDB and relational datastores is the way MongoDB thinks about and stores data.
-Rather than using a collection of tables with foreign key constraints to enforce relationships, data in MongoDB is represented as a collection of documents. 
+Rather than using a collection of tables with foreign key constraints to enforce relationships, data in MongoDB is represented as a collection of documents.
 
 The documents are analogous (not identical) to rows or tuples in relational data structures.
 The categorization and nomenclature of a document datastore comes directly from the data being stored as JSON documents grouped into collections.
@@ -58,7 +79,7 @@ The depth of these documents is unlimited and fully inspectable with queries or 
 Usually a good representation of data for MongoDB can be arrived at by denormalizing data that would be appropriate for a relational database.
 Of course, the particular queries you want to make should guide this process.
 
-More information about the nuances of MongoDB can be found on [MongoDB's website][mongodb].
+More information about the nuances of MongoDB can be found on [MongoDB's website](http://www.mongodb.org/).
 
 ### MySQL
 
@@ -67,14 +88,14 @@ The functionality it provides has allowed applications to model data for nearly 
 These days when people think of a relational database they probably think of MySQL.
 
 MySQL provides us with an implementation of the classic relational data model.
-Using type theory and set theory, it was developed in the 1970s by E.F. Codd. 
+Using type theory and set theory, it was developed in the 1970s by E.F. Codd.
 Being able to be programmatically normalized, planned or introspected, make relational data systems extremely popular.
 In fact, these datastores continue to be favored as they solve the problem of modeling data in a general manner.
 
 ### CraigsList
 
 One well-known online business that employs both a MongoDB and MySQL datastore is CraigsList.
-Their side-by-side adoption of the two datastores is outlined in a [MongoDB Case Study][craigslist case study], but below is a thumbnail sketch.
+Their side-by-side adoption of the two datastores is outlined in a [MongoDB Case Study](http://www.mongodb.com/customers/craigslist), but below is a thumbnail sketch.
 
 Due to regulatory requirements, Craigslist has to retain digital records of its classifieds.
 With over a million new classifieds per day, that's a significant amount of data for CraigsList to retain.
@@ -95,7 +116,7 @@ In our example, let's imagine CraigsList requires a new piece of information fro
 Because the schema must be updated, CraigsList would want to reduce the size of the affected data to minimize the pain of the update.
 
 After a few of these archival and migration cycles, CraigsList will have built a hefty collection of heterogeneous data that requires a schemaless datastore if it is to reside in a single location.
-MongoDB fits this bill very well.  
+MongoDB fits this bill very well.
 
 An example schema for classifieds would look something like the following (shamelessly re-implemented from [craigslist-clone](https://github.com/railslist/craigslist-clone)):
 
@@ -129,7 +150,7 @@ We want to use the ``created_at`` and ``updated_at`` fields to decide when we're
 
 Let's pretend Craigslist's classifieds policy states that a classified will remain available on the website for two weeks.
 After this time, they want the classified to still be available but not necessarily active (in MySQL).
-To accomplish this we can use a combination of [SQLAlchemy][sqlalchemy] and [pymongo][pymongo]:
+To accomplish this we can use a combination of [SQLAlchemy](http://www.sqlalchemy.org/) and [pymongo](https://github.com/mongodb/mongo-python-driver):
 
 First, we need to get the data out of our MySQL instance.
 We will utilize SQLAlchemy to accomplish this and have it introspect our schema (making this code far more re-usable for this purpose).
@@ -191,11 +212,12 @@ Thus, we need to translate that key (quite a simple process): ``classified['_id'
 While SQL and NoSQL datastores are often portrayed as an all or nothing proposition, it turns out that they can be used together to solve complex problems.
 Through this example, we saw that very little code is required for a system that utilizes both a MongoDB and MySQL datastore.
 In fact, this could be driven by cron rather than being daemonized.
- 
+
 The difficulty in utilizing multiple datastores doesn't necessarily lie in the development of translation code or migration code, but the administration of the additional systems does increase the difficulty.
 Maintaining one datastore already requires expertise (DBAs or admins with datastore knowledge), and this demand for expertise increases as you introduce more datastores.
- 
+
 The business must decide if running multiple datastores is valuable.
 There are technologies that will help mitigate these challenges.
-In addition to automation techonolgies such as Chef and Salt, this challenge can be mitigated by taking advantage of service vendors such as [ObjectRocket][objectrocket], the managed MongoDB service by Rackspace.
+
+In addition to automation techonolgies such as Chef and Salt, this challenge can be mitigated by taking advantage of service vendors such as [ObjectRocket](http://objectrocket.com), the managed MongoDB service by Rackspace.
 Regardless of the increased complexity, if a problem would benefit from the use of multiple datastores, don't let assumptions stop you from exploring those solutions.
