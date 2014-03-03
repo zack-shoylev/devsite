@@ -26,7 +26,7 @@ problems—sometimes against the wishes of DBAs or IT Departments.
 
 <!-- more -->
 
-## Choosing the Right Tool for the Job
+### Choosing the Right Tool for the Job
 
 There are five broad categories of datastores in today's world: column-family, document, graph, key-value and relational.  Polyglot persistence literally means using many languages to store or persist your data.
 In more practical terms this means we might use Cypher, JSON, SQL or a number of other query languages to access our data from within the same application.
@@ -34,16 +34,12 @@ Using these different datastores and their different languages is becoming more 
 
 Sadalage and Fowler note the necessity of polyglot persistence in [NoSQL Distilled](http://books.google.com/books/about/NoSQL_Distilled.html?id=AyY1a6-k3PIC&hl=en) by saying:
 
---
-
 > Different databases are designed to solve different problems.
 > Using a single database engine for all of the requirements usually leads to non-performant solutions; storing transactional data, caching session information, traversing graph [sic] of customers and the products their friends bought are essentially different problems.
 
 > Let's think of data relationships.
 > RDBMS solutions are good at enforcing that relationships exist.
 > If we want to discover relationships, or have to find data from different tables that belong to the same object, then the use of RDBMS starts being difficult.
-
---
 
 Datastore choice comes down to two criteria:
 
@@ -55,9 +51,9 @@ As Sadalage and Fowler state above, relational datastores excel at enforcing rel
 
 Below, I discuss one use case, CraigsList data archival with MongoDB, and speculate about how they may have accomplished this.
 
-## The Players: MongoDB, MySQL and CraigsList
+### The Players: MongoDB, MySQL and CraigsList
 
-### MongoDB
+#### MongoDB
 
 MongoDB has become a favored NoSQL alternative to MySQL.
 Its many benefits include scalability, auto-sharding and availability of native bindings for today’s popular programming languages.
@@ -72,7 +68,7 @@ Of course, the particular queries you want to make should guide this process.
 
 More information about the nuances of MongoDB can be found on [MongoDB's website](http://www.mongodb.org/).
 
-### MySQL
+#### MySQL
 
 The classic that everyone knows and loves, MySQL has been around since the dawn of time (in computing timescales) and is easily the most widely used DBMS.
 The functionality it provides has allowed applications to model data for nearly a decade and act as a system of record around many business purposes.
@@ -83,7 +79,7 @@ Using type theory and set theory, it was developed in the 1970s by E.F. Codd.
 Being able to be programmatically normalized, planned or introspected, make relational data systems extremely popular.
 In fact, these datastores continue to be favored as they solve the problem of modeling data in a general manner.
 
-### CraigsList
+#### CraigsList
 
 One well-known online business that employs both a MongoDB and MySQL datastore is CraigsList.
 Their side-by-side adoption of the two datastores is outlined in a [MongoDB Case Study](http://www.mongodb.com/customers/craigslist), but below is a thumbnail sketch.
@@ -97,7 +93,7 @@ By using MongoDB for archived data, CraigsList was able to effectively segment i
 As a thought experiment, I want to speculate about one possible implementation for using MongoDB and MySQL side-by-side in a CraigsList-esque application.
 It highly unlikely that this is how CraigsList is actually doing their data storage, but it is an interesting way to look at how multiple datastores could work together for a familiar, highly transactional, website.
 
-## How is it Done?
+### How is it Done?
 
 Developers and engineers inevitably run into problems when they perform a schema update on a bulky SQL database.
 This can be avoided by simply having less data to "fix up" after the schema update is applied.
@@ -198,7 +194,7 @@ The only problem now is how SQLAlchemy and MongoDB specify their IDs.
 SQLAlchemy uses a key of `id` whereas MongoDB uses a key of `_id`.
 Thus, we need to translate that key (quite a simple process): ``classified['_id'] = classified.pop('id')``.
 
-## Conclusion
+### Conclusion
 
 While SQL and NoSQL datastores are often portrayed as an all or nothing proposition, it turns out that they can be used together to solve complex problems.
 Through this example, we saw that very little code is required for a system that utilizes both a MongoDB and MySQL datastore.
