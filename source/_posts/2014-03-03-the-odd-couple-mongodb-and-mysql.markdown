@@ -1,7 +1,7 @@
 ---
 layout: post
 title: "The Odd Couple: MongoDB and MySQL"
-date: 2014-03-03 13:53
+date: 2014-03-03 14:10
 comments: true
 author: Alex Brandt
 published: true
@@ -25,15 +25,6 @@ Developers are starting to use combinations of SQL and NoSQL to solve their
 problems—sometimes against the wishes of DBAs or IT Departments.
 
 <!-- more -->
-
-* [craigslist case study](http://www.mongodb.com/customers/craigslist)
-* [mongodb](http://www.mongodb.org/)
-* [nosql distilled](http://books.google.com/books/about/NoSQL_Distilled.html?id=AyY1a6-k3PIC&hl=en)
-* [objectrocket](http://objectrocket.com)
-* [postgresql up and running](http://books.google.com/books?id=Q8jkIZkMTPcC&dq=postgresql&source=gbs_navlinks_s)
-* [pymongo](https://github.com/mongodb/mongo-python-driver)
-* [seven databases in seven weeks](http://books.google.com/books?id=lA3QygAACAAJ&dq=seven+databases+in+seven+weeks&hl=en&sa=X&ei=Qt7WUszZHfPQsATunoGgAw)
-* [sqlalchemy](http://www.sqlalchemy.org/)
 
 ## Choosing the Right Tool for the Job
 
