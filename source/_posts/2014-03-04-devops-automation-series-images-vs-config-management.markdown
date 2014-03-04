@@ -99,14 +99,11 @@ more dynamic and flexible with your deployments.
 
 ### Upcoming DevOps Webinar!
 
-Are you interested in learning more about how you can automate your application and infrastructure using DevOps? Join this webinar featuring the Rackspace DevOps Automation Team and learn how to effectively deliver applications on API-driven infrastructure. We will cover:
+Are you interested in learning more about how you can automate your
+application and infrastructure using DevOps? Join this webinar featuring the
+Rackspace DevOps Automation Team and learn how to effectively deliver applications
+on API-driven infrastructure.
 
-* GitHub Flow: Branching, Merging and Pull Requests.
-* Automated Testing
-* Using Jenkins as a Continuous Integration server.
-* Eliminating Environment Drift with Chef.
-* Automating Deployments with Chef.
-
-The presenters will be: Ryan Richard, DevOps Team Lead & Kyle Kelley, Developer Support Engineer
+* Date/Time: Tue, April 1, 2014
 
 [Sign up now!](https://cc.readytalk.com/r/y0s9wosu5lp4&eom)
