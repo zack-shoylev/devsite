@@ -1,10 +1,10 @@
 ---
 layout: post
 title: "Exploring Apache jclouds with Groovy: A Python Developers point of view"
-date: 2014-02-17 15:49:25 +0000
+date: 2014-03-05 11:00
 comments: true
 author: John Yi
-published: false
+published: true
 categories:
 - jclouds
 - sdk
@@ -14,36 +14,52 @@ categories:
 - python
 
 ---
-One of the most powerful features of Python is the REPL (Run, Evaluate, Print, and Loop) This allows developers
-to run their code and get quick feedback. Developers are able test out new ideas and try
-out different things without the cycle of modifiying, compiling, and running the source code.
-Another feature of Python's REPL is the introspection
-capabilities. This allows developers to easily and dynamically explore libraries.
-In the Java world there are a number of options to do this.
-Java developers rely on their Integrated Development Environments (IDEs) to provide features
-like object introspection, code completion, on the fly code analysis,
-and quick access to help documentation. However most Python developers are not familiar with the
-various Java IDEs and would need time to learn how to use their features.
-They also may need to learn the Java language itself for a project. This is where Groovy makes a lot of sense. 
-Groovy is a dynamic language like Python but has a Java like language syntax. It also has
-seamless integration to existing Java classes and libraries making it easy to use with existing Java code.
-Apache jclouds has become the defacto library
-of multicloud infrastructures for Java developers. (The Python equivalent being libcloud
-https://libcloud.readthedocs.org/en/latest/) 
-This blog will focus on exploring jclouds using Groovy.
-To make the setup easy, I'll specify a very opinionated setup
-running Ubuntu 12.04 with OpenJDK 7 patch 51. The code samples were created using the Ubuntu 12.04
-image from Rackspace - [Ubuntu 12.04 LTS (Precise Pangolin) (PVHVM) (28b21a55-b686-4e8e-be9b-b6df2aaf60b8)]
+
+One of the most powerful features of Python is the REPL (Run, Evaluate, Print,
+and Loop) This allows developers to run their code and get quick feedback.
+Developers are able test out new ideas and try out different things without
+the cycle of modifiying, compiling, and running the source code.
+
+Another feature of Python's REPL is the introspection capabilities. This allows
+developers to easily and dynamically explore libraries.
+
+In the Java world there are a number of options to do this. This post explores
+some of those; and how to leverage groovy and jclouds to achieve the same speed
+of development.
+
+<!--more-->
+
+Java developers rely on their Integrated Development Environments (IDEs) to
+provide features like object introspection, code completion, on the fly code
+analysis, and quick access to help documentation. However most Python
+developers are not familiar with the various Java IDEs and would need time to
+learn how to use their features.
+
+They also may need to learn the Java language itself for a project. This is
+where Groovy makes a lot of sense.
+
+Groovy is a dynamic language like Python but has a Java like language syntax.
+It also has seamless integration to existing Java classes and libraries making
+it easy to use with existing Java code.
+
+Apache [jclouds](http://jclouds.apache.org/) has become the defacto library of
+multicloud infrastructures for Java developers. (The Python equivalent being
+[libcloud](https://libcloud.readthedocs.org/en/latest/))
+
+
+To make the setup easy, I'll specify a very opinionated setup running Ubuntu
+12.04 with OpenJDK 7 patch 51. The code samples were created using the Ubuntu
+12.04 image from Rackspace - [Ubuntu 12.04 LTS (Precise Pangolin) (PVHVM) (28b21a55-b686-4e8e-be9b-b6df2aaf60b8)]
 however the precise64 virtualbox from Vagrant should work as well. Finally
 your environment should have access to the internet. So let's set this up:
 
 ```
 apt-get update
 apt-get -y install openjdk-7-jdk zip unzip maven
-```  
+```
 
-Groovy has a environment manager called gvm that is similiar in concept to the Ruby environment manager
-rvm. I've found this to be quite useful:
+Groovy has a environment manager called gvm that is similiar in concept to the
+Ruby environment manager rvm. I've found this to be quite useful:
 
 ```
 export JAVA_HOME=/etc/alternatives/java
@@ -66,17 +82,19 @@ gvm install groovy
 ```
 
 Great, so now groovy is installed and we'll want to start diving into the jclouds code.
-The easiest thing to start exploring is the jclouds-examples repo. Because the examples
-already give us a lot of scaffolding code we can easily start exploring without to much typing. So let's
-first clone the jclouds-example repo from github. 
+The easiest thing to start exploring is the
+[jclouds-examples](https://github.com/jclouds/jclouds-examples) repo. Because
+the examples already give us a lot of scaffolding code we can easily start
+exploring without to much typing. So let's first clone the jclouds-example
+repo from github.
 
 ```
-git clone https://github.com/jclouds/jclouds-examples.git 
+git clone https://github.com/jclouds/jclouds-examples.git
 cd jclouds-examples/rackspace
 ```
 
-Next we'll need to pull down all our dependent libraries. Maven is to a Java developer
-what pip is to a Python developer.
+Next we'll need to pull down all our dependent libraries. Maven is to a Java
+developer what pip is to a Python developer.
 
 ```
 mvn dependency:copy-dependencies "-DoutputDirectory=./lib"
@@ -91,6 +109,7 @@ javac -classpath "lib/*:src/main/java/:src/main/resources/" src/main/java/org/jc
 
 So let's explore something that isn't to trival, creating a cloud server and
 then adding some block storage to it.
+
 We'll explore the example CreateVolumeAndAttach.java. So all we have to do at this point
 is fire up groovy's REPL with the appropriate classpath set and import this package.
 
@@ -104,12 +123,12 @@ groovy:000> import org.jclouds.examples.rackspace.cloudblockstorage.CreateVolume
 ```
 
 It helps to be looking
-at the source here so point your browser to https://github.com/jclouds/jclouds-examples/blob/master/rackspace/src/main/java/org/jclouds/examples/rackspace/cloudblockstorage/CreateVolumeAndAttach.java
+at the source here so point your browser to [CreateVolumeAndAttach.java](https://github.com/jclouds/jclouds-examples/blob/master/rackspace/src/main/java/org/jclouds/examples/rackspace/cloudblockstorage/CreateVolumeAndAttach.java)
 
 Also, you'll need to grab your username and api_key. Instructions on how to do that are here:
-http://jclouds.apache.org/documentation/quickstart/rackspace/
+[http://jclouds.apache.org/documentation/quickstart/rackspace/](http://jclouds.apache.org/documentation/quickstart/rackspace/)
 
-``` 
+```
 cvs = new CreateVolumeAndAttach("groovy","beaf5678fffeeedddccc")
 ```
 
@@ -121,13 +140,16 @@ alias to it. (A little snake_case for the Pythonista in me.)
 compute_service = cvs.computeService
 ```
 
-So let's go ahead and create our first cloud server. We'll create the Template object first. Templates
-are jclouds way of abstracting the cloud instance configurations to make
-it more portable to use with other clouds. Some common elements that clouds share are things like
-Images, Hardware, and Location. To make allowances for different options for booting images
-jclouds also defines Options within the same Template object. Here on the Rackspace cloud
-we'll use performance1-1 for our flavor and the image that matches the regex ".*CentOS 6.4.*"
-So let's try this out. We'll need to import some packages to bring them into our namespace.
+So let's go ahead and create our first cloud server. We'll create the Template
+object first. Templates are jclouds way of abstracting the cloud instance
+configurations to make it more portable to use with other clouds. Some common
+elements that clouds share are things like Images, Hardware, and Location. To
+make allowances for different options for booting images
+jclouds also defines Options within the same Template object.
+
+Here on the Rackspace cloud we'll use performance1-1 for our flavor and the
+image that matches the regex ".*CentOS 6.4.*" So let's try this out. We'll
+need to import some packages to bring them into our namespace.
 
 ```
 import static org.jclouds.examples.rackspace.cloudblockstorage.Constants.*;
@@ -141,7 +163,7 @@ org.jclouds.examples.rackspace.cloudblockstorage.Constants.*
 however any string defining a valid zone (i.e. "IAD", "ORD", "DFW", "SYD") would work.
 Next let's create the cloud server. Because the method createNodesInGroup blocks till
 the cloud server is created, let's put the method call createNodesInGroup
-in its own thread so that we don't have to wait for it to finish. 
+in its own thread so that we don't have to wait for it to finish.
 
 ```
 node_create = Thread.start {
@@ -178,8 +200,8 @@ volumeAttachment = cvs.volumeAttachmentApi.attachVolumeToServerAsDevice(volume.g
 ```
 
 At this point you should be able to see the volume attached to the server in the cloud control panel.
-First we'll create a groovy password generator from stackoverflow.com
-(http://stackoverflow.com/questions/8138164/groovy-generate-random-string-from-given-character-set)
+First we'll create a groovy password generator [from stackoverflow.com](http://stackoverflow.com/questions/8138164/groovy-generate-random-string-from-given-character-set)
+
 Then we'll change the admin password to the secret password that we just generated.
 
 ```
@@ -225,11 +247,11 @@ Maximum filesystem blocks=4294967296
 800 block groups
 32768 blocks per group, 32768 fragments per group
 8192 inodes per group
-Superblock backups stored on blocks: 
-	32768, 98304, 163840, 229376, 294912, 819200, 884736, 1605632, 2654208, 
+Superblock backups stored on blocks:
+	32768, 98304, 163840, 229376, 294912, 819200, 884736, 1605632, 2654208,
 	4096000, 7962624, 11239424, 20480000, 23887872
 
-Writing inode tables: done                            
+Writing inode tables: done
 Creating journal (32768 blocks): done
 Writing superblocks and filesystem accounting information: done
 
@@ -239,6 +261,8 @@ This filesystem will be automatically checked every 29 mounts or
 , exitStatus=0}
 ```
 
-So there you go. Again the purpose of using Groovy here is to learn jclouds in a Java context.
-You can of course explore jclouds with Jython and JRuby but hopefully this will
-give the Python/Ruby developer yet another option when exploring and hacking for profit.
+So there you go. Again the purpose of using Groovy here is to learn jclouds
+in a Java context. You can of course explore jclouds with Jython and JRuby but
+hopefully this will give the Python/Ruby developer yet another option when
+exploring and hacking!
+
