@@ -2,7 +2,7 @@
 layout: post
 title: "Balloon Mapping and Outreach"
 date: 2014-03-11 15:30
-comments: true
+comments: false
 author: Anne Gentle, Dana Bauer
 published: true
 categories:
