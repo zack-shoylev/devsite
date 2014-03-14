@@ -22,16 +22,16 @@ about five feet in diameter, attached a digital camera, and lauched our mapping 
 <!--more-->
 
 
-{% img center /images/balloonfly.jpg %}
-
-Dana answered the data and maps by explaining we were
+We answered the data and maps by explaining we were
 demonstrating open source tools that kids can use to
 collect environmental data or other data in their communities. How about
 counting the number of healthy trees on their block? Could you put the tree data on top of a street map?
 Would you need to collect more information
 about the health of the trees? Is that data? Yes.
 
-These techniques came from an open science community called the <a
+{% img center /images/balloonfly.jpg %}
+
+The balloon mapping techniques were developed by an open science community called the <a
 href="http://publiclab.org/">public lab</a>, and you can buy your own <a
 href="http://store.publiclab.org/collections/mapping">balloon and kite mapping kit</a> from their site.
 
