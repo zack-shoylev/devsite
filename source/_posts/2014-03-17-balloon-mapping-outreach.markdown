@@ -4,7 +4,7 @@ title: "Balloon Mapping and Outreach"
 date: 2014-03-17 9:30
 comments: true
 author: Anne Gentle, Dana Bauer
-published: false
+published: true
 categories:
 - Community
 - outreach
@@ -40,7 +40,7 @@ Rackspace hackday Anne put together a [Python script](https://gist.github.com/an
 uploads all the photos from the camera rig (after bringing it to the
 ground) to Rackspace Cloud Files, then makes a [gallery page](http://b663f2e2acd8e525729a-b149944209b187022b4db26ecc44f059.r41.cf2.rackcdn.com/index.html) of all the photos on the fly.
 
-While we were assembling the tools for the launch,  Anne's seven-year-old asked Dana, "Are you a good
+While we were assembling the tools for the balloon launch,  Anne's seven-year-old asked Dana, "Are you a good
 hacker or a bad hacker?" Dana was explaining how she used a cranberry juice
 bottle to make the body of the camera rig and a soda bottle to make a stabilizing tail. It was a
 serious question and deserves an answer. (Though to tell the truth, he
