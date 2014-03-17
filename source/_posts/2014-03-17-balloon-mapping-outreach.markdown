@@ -13,8 +13,8 @@ categories:
 "What's the difference between data and a map?" This question came from
 an inquisitive fifth grader at the University of Texas on a gorgeous
 February Saturday in Austin. We brought a group of Rackers, some kites,
-and a huge red balloon to ["Introduce a Girl to Engineering
-Day,"](https://www.engr.utexas.edu/wep/k12/girlday) presented by the UT Women in Engineering Program (WEP). We inflated the balloon to
+and a huge red balloon to ["Introduce a Girl to Engineering Day,"](https://www.engr.utexas.edu/wep/k12/girlday) 
+presented by the UT Women in Engineering Program (WEP). We inflated the balloon to
 about five feet in diameter, attached a digital camera, and launched our mapping rig 100 feet in air above campus.
 
 {% img center /images/camerarig.jpg %}
