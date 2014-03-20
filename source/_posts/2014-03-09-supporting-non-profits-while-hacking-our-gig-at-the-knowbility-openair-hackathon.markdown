@@ -1,10 +1,10 @@
 ---
 layout: post
 title: "Supporting Non-profits While Hacking: Our Gig at the Knowbility OpenAIR Hackathon"
-date: 2014-03-09 19:49
+date: 2014-03-20 10:00
 comments: true
 author: Emmanuel Ankutse
-published: false
+published: true
 categories:
  - Volunteer
  - Accessibilty
@@ -13,7 +13,7 @@ categories:
  - OpenAIR
  - Knowbility
  - Food Policy Council
- - Support Non-profit 
+ - Support Non-profit
 ---
 
 
@@ -33,7 +33,7 @@ Prior to this engagement, I had never thought about the need for the wider ac
 
 I also came face-to-face with the shameful fact about how easy it is to ignore the needs of this segment of Internet users and just develop for the mainstream. The additional work it takes to make websites accessible and usable to users who need assistive technologies is well worth it and should be part of every web developer's goals. Making websites accessible has tremendous impact in all walks of life including education.
 
-There are guidelines, standards, documented best practices and tools to help developers build and test accessible websites. One such guideline is the [WCAG](http://www.w3.org/TR/WCAG20/) (Web Content Accessibility Guidelines) 2.0 standards. [WAVE](http://wave.webaim.org/) is one of many online tools out there that can check you website for accessibility. 
+There are guidelines, standards, documented best practices and tools to help developers build and test accessible websites. One such guideline is the [WCAG](http://www.w3.org/TR/WCAG20/) (Web Content Accessibility Guidelines) 2.0 standards. [WAVE](http://wave.webaim.org/) is one of many online tools out there that can check you website for accessibility.
 
 ### How Does OpenAIR Work?
 The way things work for the OpenAIR Hackathon is that Knowbility lines up a number of non-profit organizations who need websites developed or need their websites upgraded and with the goal of making the websites accessible. Knowbility, through the OpenAIR Hackathon, matches such non-profit organizations with Hackathon participants (Teams) and announces these pairings at a Kickoff event. Knowbility also makes available a mentor for each development team and the non-profit they are paired up with. 
@@ -50,9 +50,9 @@ Here is [video](https://plus.google.com/110940688391799368102/posts) from the fi
 OpenAIR is going to get even more exciting and international going forward. This past Fall, there were a couple of teams that were either completely based outside the US or that had team members based outside the US. OpenAIR organizers are planning to make it an International competition. Why not? This is all about Accessibility of the Internet! 
 
 ### How to Get Involved
-Participating in such a contest while providing much needed services to a non-profit organization was very satisfying to me. I had no previous experience of production UI web development so I learned a lot through the training and from my Rackspace teammates. I would do this again! 
+Participating in such a contest while providing much needed services to a non-profit organization was very satisfying to me. I had no previous experience of production UI web development so I learned a lot through the training and from my Rackspace teammates. I would do this again!
 
 Hope you can participate sometime and contribute to making the web more accessible. For more information, check the OpenAIR site:
 
--   [OpenAIR has begun!](http://www.air-rallies.org.php54-1.dfw1-2.websitetestlink.com/) 
--   [Dev Team Information](http://www.air-rallies.org.php54-1.dfw1-2.websitetestlink.com/dev-team-information) 
+-   [OpenAIR has begun!](http://www.air-rallies.org.php54-1.dfw1-2.websitetestlink.com/)
+-   [Dev Team Information](http://www.air-rallies.org.php54-1.dfw1-2.websitetestlink.com/dev-team-information)
