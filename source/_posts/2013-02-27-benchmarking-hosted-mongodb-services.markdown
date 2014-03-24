@@ -5,14 +5,14 @@ date: 2013-02-27 09:00
 comments: true
 author: Paul Querna
 published: true
-categories: 
+categories:
 - Cloud Databases
 - ObjectRocket
 ---
 
 When we started investigating the hosted MongoDB space, we quickly found that most of the companies involved were just hosting MongoDB on top of AWS instances. We were intrigued by the different approach taken by ObjectRocket.  Instead of using AWS primitives, they built their service on their own hardware in neighboring data centers, and utilized AWS DirectConnect to provide low latency connectivity.
 
-In order to validate that ObjectRocket’s architectural choices made a difference, Rackspace conducted tests comparing ObjectRocket with two providers that offer MongoDB on generic cloud environments. We chose to compare ObjectRocket’s performance to the hosted providers on AWS. Further, we chose a $150 price point per month for comparison’s sake. SoftLayer’s offering was not included in the comparison because their least expensive MongoDB option costs around $650. 
+In order to validate that ObjectRocket’s architectural choices made a difference, Rackspace conducted tests comparing ObjectRocket with two providers that offer MongoDB on generic cloud environments. We chose to compare ObjectRocket’s performance to the hosted providers on AWS. Further, we chose a $150 price point per month for comparison’s sake. SoftLayer’s offering was not included in the comparison because their least expensive MongoDB option costs around $650.
 <!--More-->
 As with any benchmark, sticks can be thrown, but we believe this represents a good baseline of the performance differences between the vendors.
 
@@ -41,7 +41,7 @@ This workload exercises the ability for a data store to handle high in-place upd
 
 {% img center /images/2013-02-27-benchmarking-hosted-mongodb-services/session-store-throughput.png "Session Store, Throughput (Higher is better)" %}
 
-ObjectRocket’s system met the desired throughput to over 3,000 ops/s, and showed no signs of breaking down while the AWS hosted providers began to degrade at either 1,000 ops/s or 1,500 ops/s. 
+ObjectRocket’s system met the desired throughput to over 3,000 ops/s, and showed no signs of breaking down while the AWS hosted providers began to degrade at either 1,000 ops/s or 1,500 ops/s.
 
 Because this is a 50% write workload, the MongoDB Lock contention became a problem on all of the platforms.
 
@@ -51,7 +51,7 @@ To get a full picture of the latency differences, we created a zoomed-in graph o
 
 {% img center /images/2013-02-27-benchmarking-hosted-mongodb-services/session-read-latency-zoomed.png "Session Store, Read Latency (lower is better)" %}
 
-ObjectRocket produced a consistent latency of 2ms regardless of target throughput. Hosted AWS Provider #1 sustained consistency around 20ms. Hosted AWS Provider #2 quickly spiked to 200ms of latency under load. 
+ObjectRocket produced a consistent latency of 2ms regardless of target throughput. Hosted AWS Provider #1 sustained consistency around 20ms. Hosted AWS Provider #2 quickly spiked to 200ms of latency under load.
 
 {% img center /images/2013-02-27-benchmarking-hosted-mongodb-services/session-update-latency.png "Session Store, Update Latency (lower is better)" %}
 
@@ -74,3 +74,14 @@ ObjectRocket delivered consistent 2ms results until above 6,500 ops/s, past whic
 Don't just take our word for it, ObjectRocket is currently [offering 30 day free trials](http://objectrocket.com/pricing) so you can test out your own application and workloads.
 
 P.S.: Rackspace is always hiring outstanding developers. For more information on software developer jobs at Rackspace, visit our [careers page](http://jobs.rackspace.com/go/software-developer-jobs/247407/)
+
+### Disclaimer
+
+*This Comparative Service Portfolio outlines general information
+regarding our services and services of our competitor. The information
+contained in this document is obtained from public sources and is as
+accurate as possible, but may not be 100% comprehensive. The
+information was last updated on February 27, 2013.. ALL STATEMENTS AND
+INFORMATION ARE PROVIDED "AS IS", FOR INFORMATIONAL PURPOSES ONLY, AND
+ARE PRESENTED WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED. OUR
+PRODUCT/SERVICES OFFERINGS ARE SUBJECT TO CHANGE WITHOUT NOTICE.*
