@@ -5,7 +5,11 @@ date: 2014-03-27 00:11
 comments: true
 author: Brian Rosmaita
 published: false
-categories: Cloud Servers, Cloud Images
+categories:
+- Cloud Servers
+- Cloud Images
+- Images
+- OpenStack
 ---
 
 Rackspace has just launched Cloud Images, a public OpenStack Images
@@ -79,8 +83,8 @@ of the product and what it can do.
 
 ## References
 
-- Rackspace Cloud Images Developer Guide: [http://docs.rackspace.com/images/api/v2/ci-devguide/content/index.html]
-- Image Sharing Overview: [http://docs.rackspace.com/images/api/v2/ci-devguide/content/image-sharing.html]
-- boot.rackspace.com: [http://developer.rackspace.com/blog/introducing-boot-dot-rackspace-dot-com.html]
-- Preparing an Image for the Rackspace Cloud: [http://www.rackspace.com/knowledge_center/article/preparing-an-image-for-import-into-the-rackspace-open-cloud]
-- Cloud Images FAQ: (http://www.rackspace.com/knowledge_center/article/cloud-images-frequently-asked-questions)
+- Rackspace Cloud Images Developer Guide: http://docs.rackspace.com/images/api/v2/ci-devguide/content/index.html
+- Image Sharing Overview: http://docs.rackspace.com/images/api/v2/ci-devguide/content/image-sharing.html
+- boot.rackspace.com: http://developer.rackspace.com/blog/introducing-boot-dot-rackspace-dot-com.html
+- Preparing an Image for the Rackspace Cloud: http://www.rackspace.com/knowledge_center/article/preparing-an-image-for-import-into-the-rackspace-open-cloud
+- Cloud Images FAQ: http://www.rackspace.com/knowledge_center/article/cloud-images-frequently-asked-questions
