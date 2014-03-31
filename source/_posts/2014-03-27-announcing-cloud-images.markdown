@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "Using Cloud Images for Fun and Profit"
+title: "Developing with Cloud Images for Fun and Profit"
 date: 2014-03-27 00:11
 comments: true
 author: Brian Rosmaita
