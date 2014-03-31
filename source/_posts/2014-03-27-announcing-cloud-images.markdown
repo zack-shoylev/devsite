@@ -11,6 +11,7 @@ categories:
 - Images
 - OpenStack
 ---
+{% img right /images/2014-03-27-announcing-cloud-images/Rackspace_Cloud_Images_vert_clr.png %}
 
 Rackspace has just launched Cloud Images, a public OpenStack Images
 API v2 endpoint in the Rackspace open cloud.  Why should you care?
