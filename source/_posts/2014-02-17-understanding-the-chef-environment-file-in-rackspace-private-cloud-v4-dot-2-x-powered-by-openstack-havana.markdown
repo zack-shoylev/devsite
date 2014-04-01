@@ -384,8 +384,8 @@ attribute.
 Below is a rough list of what services map to the default __nova__,
 __public__, and __management__ attributes:
 
-__rabbitmq-server__, __rsyslog__, and __ntpd__ listen on all interfaces and
-do not map to any attribute.
+__rsyslog__ and __ntpd__ do not map to any attribute. __rsyslog__ binds 
+to __0.0.0.0__ and __ntpd__ binds to all interfaces.
 
 #### nova
 
@@ -449,6 +449,7 @@ Server (the command assumes the Chef Cookbooks are in root's home directory):
 * keystone-internal-api
 * memcached-cache
 * mysql
+* rabbitmq-server
 * nova-internal-api
 * nova-admin-api
 
