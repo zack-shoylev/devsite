@@ -1,21 +1,24 @@
 ---
 layout: post
 title: "Developing with Cloud Images for Fun and Profit"
-date: 2014-03-27 00:11
+date: 2014-04-01 11:00
 comments: true
 author: Brian Rosmaita
-published: false
+published: true
 categories:
 - Cloud Servers
 - Cloud Images
 - Images
 - OpenStack
 ---
-{% img right /images/2014-03-27-announcing-cloud-images/Rackspace_Cloud_Images_vert_clr.png %}
 
 Rackspace has just launched Cloud Images, a public OpenStack Images
 API v2 endpoint in the Rackspace open cloud.  Why should you care?
 Well, this product creates several opportunities for developers.
+
+<!--more-->
+
+{% img /images/2014-03-27-announcing-cloud-images/Rackspace_Cloud_Images_vert_clr.png %}
 
 ## API only
 
