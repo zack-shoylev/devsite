@@ -1,17 +1,19 @@
 ---
 layout: post
 title: "Zero downtime deployments with pkgcloud and Cloud Load Balancers"
-date: 2014-04-01 07:58
+date: 2014-04-02 11:00
 comments: true
 author: Ken Perkins
-published: false
-categories: 
+published: true
+categories:
  - cloud load balancers
  - pkgcloud
  - node.js
 ---
 
 I've been spending a lot of time working on more practical examples with [pkgcloud][0], and one of the ones that I think will appeal broadly is the ability to deploy your code as part of a zero-downtime deployment strategy.
+
+<!--more-->
 
 ### What are Zero-Downtime deployments?
 
@@ -73,13 +75,13 @@ function ensureStatus(loadBalancerId, callback) {
             callback(err);
             return;
         }
-        
+
         // We don't want to to do anything if we're not in a known state to begin with
         if (lb.status !== 'ACTIVE') {
             callback(new Error('Load Balancer status not active'));
             return;
         }
-        
+
         // check the status of each nodes. We want all of our nodes enabled
         // before we begin rotating nodes in and out
         if (_.any(lb.nodes, function(node) {
@@ -88,9 +90,9 @@ function ensureStatus(loadBalancerId, callback) {
             callback(new Error('All nodes must be condition:ENABLED to deploy');
             return;
         }
-        
+
         // If you want to any app specific validation, you could call out to that here
-        
+
         // If we meet a minimum validation, lets callback with no errors
         callback();
     });
@@ -98,7 +100,7 @@ function ensureStatus(loadBalancerId, callback) {
 ```
 
 Next, we'll need a function that allows us to update a node to a specific condition. We'll use this function for both rotating in, as well as rotating out.
- 
+
 ```javascript
 function updateNodeCondition(lb, node, newCondition) {
 
@@ -168,7 +170,7 @@ function rotateOutAndDeploy(ips, lb, callback {
         },
         function(cb) {
             // we're going to assume you have a callback based function to
-            // deploy your code here. This could be an ssh command, or anything 
+            // deploy your code here. This could be an ssh command, or anything
             // where you actually push the code and restart your services
             deploy(ips, cb);
         }
@@ -183,7 +185,7 @@ Finally, we need to be able to rotate back in.
 ```javascript
 function rotateIn(ips, lb, callback {
     async.forEach(ips, function(address, next) {
-        // we don't need a multi-step process here, so we can 
+        // we don't need a multi-step process here, so we can
         // just invoke the returned function with cb directly
         updateNodeStatus(address, lb, 'ACTIVE')(next);
     }, callback);
@@ -204,7 +206,7 @@ function deploy(loadBalancerId, poolA, poolB, callback) {
                 next(err);
                 callback;
             }
-            
+
             lb = loadBalancer;
             next();
         },
@@ -221,7 +223,7 @@ function deploy(loadBalancerId, poolA, poolB, callback) {
             callback(err);
             return;
         }
-        
+
         console.log('W00t! Successful Deployment');
         callback();
     });
@@ -232,7 +234,7 @@ That's it! While it may seem like a number of steps, each of them are rather foc
 
 ### Final Thoughts
 
-I hope this example sets you on the path towards Zero-downtime deployments. When you have confidence that you can ship code at any time of day without a significant impact to your existing users, it can be a great enabler. 
+I hope this example sets you on the path towards Zero-downtime deployments. When you have confidence that you can ship code at any time of day without a significant impact to your existing users, it can be a great enabler.
 
 [0]: https://github.com/pkgcloud/pkgcloud
 [1]: https://www.google.com/search?q=zero+downtime+deployments
