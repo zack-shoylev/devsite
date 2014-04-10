@@ -1,7 +1,7 @@
 ---
 layout: post
 title: "Zero downtime deployments with pkgcloud and Cloud Load Balancers"
-date: 2014-04-02 11:00
+date: 2014-04-10 12:00
 comments: true
 author: Ken Perkins
 published: true
